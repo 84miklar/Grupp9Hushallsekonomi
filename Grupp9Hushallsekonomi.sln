@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Grupp9Hushallsekonomi", "Grupp9Hushallsekonomi\Grupp9Hushallsekonomi.csproj", "{F9ADBE12-DB43-42CD-87AD-47E17C4FA547}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Grupp9Hushallsekonomi", "Grupp9Hushallsekonomi\Grupp9Hushallsekonomi.csproj", "{F9ADBE12-DB43-42CD-87AD-47E17C4FA547}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HushallsEkonomiTest", "HushallsEkonomiTest\HushallsEkonomiTest.csproj", "{93414896-CA8A-49FF-982B-0AAD424AEE39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F9ADBE12-DB43-42CD-87AD-47E17C4FA547}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9ADBE12-DB43-42CD-87AD-47E17C4FA547}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9ADBE12-DB43-42CD-87AD-47E17C4FA547}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93414896-CA8A-49FF-982B-0AAD424AEE39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93414896-CA8A-49FF-982B-0AAD424AEE39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93414896-CA8A-49FF-982B-0AAD424AEE39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93414896-CA8A-49FF-982B-0AAD424AEE39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
