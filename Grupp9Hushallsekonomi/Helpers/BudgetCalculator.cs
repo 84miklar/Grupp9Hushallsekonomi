@@ -8,7 +8,7 @@ namespace Grupp9Hushallsekonomi
 {
     public class BudgetCalculator
     {
-        List<IAccount> listOfEconomy = new List<IAccount>();
+        public List<IAccount> listOfEconomy = new List<IAccount>();
         Outcome outcome = new Outcome();
         Income income = new Income();
         public void SeparateIncomeAndOutcome(List<IAccount>listOfEconomy)
@@ -29,11 +29,18 @@ namespace Grupp9Hushallsekonomi
         {
             return income.Money - outcome.Money;
         }
-        public void FillListWithIncome()
+        public double FillListWithIncome()
         {
+            double totalIncome = 0;
             listOfEconomy.Add(new Income { Money = 14500, Name = "Salary" });
+            //listofEconomy(x => +x.Money).Sum();
+            foreach (var income in listOfEconomy)
+            {
+                totalIncome += income.Money; 
+            }
+            return totalIncome;
         }
-        public void FillListWithOutcome()
+        public double FillListWithOutcome()
         {
             listOfEconomy.Add(new Outcome { Money = 8900, Name = "Rent" });
             listOfEconomy.Add(new Outcome { Money = 2000, Name = "Food" });
@@ -45,6 +52,12 @@ namespace Grupp9Hushallsekonomi
             listOfEconomy.Add(new Outcome { Money = 1000, Name = "Pension" });
             listOfEconomy.Add(new Outcome { Money = 350, Name = "Gym" });
             listOfEconomy.Add(new Outcome { Money = 75, Name = "Home Insurance" });
+            double totalOutcome = 0;
+            foreach (var outcome in listOfEconomy)
+            {
+                totalOutcome += outcome.Money;
+            }
+            return totalOutcome;
         }
         public double Savings(double moneyLeft)
         {

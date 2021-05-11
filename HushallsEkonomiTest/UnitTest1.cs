@@ -1,18 +1,27 @@
 using Grupp9Hushallsekonomi;
+using Grupp9Hushallsekonomi.Interface;
 using NUnit.Framework;
 
 namespace HushallsEkonomiTest
 {
     public class Tests
     {
+        BudgetCalculator bc = new BudgetCalculator();
+        [SetUp]
+        public void SetUp()
+        {
+            bc.FillListWithIncome();
+            bc.FillListWithOutcome();
+
+        }
         [Test]
         public void CheckIncome_NegativeResult_01()
         {
-            var income = new Income();
-            var actual = income.Salary = 0;
-            var expected = 0;
+            var income = bc.FillListWithIncome();
+            var actual = income <= 0;
 
-            Assert.AreEqual(actual, expected);
+
+            Assert.IsFalse(actual);
         }
     }
 }
