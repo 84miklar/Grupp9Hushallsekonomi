@@ -4,8 +4,9 @@ using System.Text;
 
 namespace Grupp9Hushallsekonomi.Interface
 {
-    interface IAccount
+    public interface IAccount
     {
         public double Money { get; set; }
+        public string Name { get; set; }
     }
 }
