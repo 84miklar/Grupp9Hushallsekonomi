@@ -31,11 +31,30 @@ namespace Grupp9Hushallsekonomi
         }
         public void FillListWithIncome()
         {
-            listOfEconomy.Add(new Income { Money = 14500 });
+            listOfEconomy.Add(new Income { Money = 14500, Name = "Salary" });
         }
         public void FillListWithOutcome()
         {
-            listOfEconomy.Add(new Outcome { Money = 14500 });
+            listOfEconomy.Add(new Outcome { Money = 8900, Name = "Rent" });
+            listOfEconomy.Add(new Outcome { Money = 2000, Name = "Food" });
+            listOfEconomy.Add(new Outcome { Money = 89, Name = "Netflix" });
+            listOfEconomy.Add(new Outcome { Money = 99, Name = "Phone" });
+            listOfEconomy.Add(new Outcome { Money = 199, Name = "Broadband" });
+            listOfEconomy.Add(new Outcome { Money = 600, Name = "Consumables" });
+            listOfEconomy.Add(new Outcome { Money = 45, Name = "Bank Fee" });
+            listOfEconomy.Add(new Outcome { Money = 1000, Name = "Pension" });
+            listOfEconomy.Add(new Outcome { Money = 350, Name = "Gym" });
+            listOfEconomy.Add(new Outcome { Money = 75, Name = "Home Insurance" });
+        }
+        public double Savings(double moneyLeft)
+        {
+            double savingsProcentage = 0.1;
+            if (moneyLeft > 0)
+            {
+                double savings = moneyLeft * savingsProcentage;
+                listOfEconomy.Add(new Outcome { Money = savings, Name = "Savings" });
+            }
+            return moneyLeft;
         }
     }
 }
