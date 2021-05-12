@@ -11,6 +11,10 @@ namespace Grupp9Hushallsekonomi
         public List<IAccount> listOfEconomy = new List<IAccount>();
         Outcome outcome = new Outcome();
         Income income = new Income();
+        /// <summary>
+        /// Metod som separerar Income och Outcome från en lista av IAccount.
+        /// </summary>
+        /// <param name="listOfEconomy"></param>
         public void SeparateIncomeAndOutcome(List<IAccount>listOfEconomy)
         {
             foreach (var item in listOfEconomy)
@@ -25,10 +29,18 @@ namespace Grupp9Hushallsekonomi
                 }
             }
         }
+        /// <summary>
+        /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
+        /// </summary>
+        /// <returns></returns>
         public double Withdraw()
         {
             return income.Money - outcome.Money;
         }
+        /// <summary>
+        /// Metod som lägger till inkomst till IAccountlistan listOfEconomy
+        /// </summary>
+        /// <returns></returns>
         public double FillListWithIncome()
         {
             double totalIncome = 0;
@@ -40,6 +52,10 @@ namespace Grupp9Hushallsekonomi
             }
             return totalIncome;
         }
+        /// <summary>
+        /// Metod som lägger till utgifter till IAccountlistan lListOfEconomy
+        /// </summary>
+        /// <returns></returns>
         public double FillListWithOutcome()
         {
             listOfEconomy.Add(new Outcome { Money = 8900, Name = "Rent" });
@@ -59,6 +75,11 @@ namespace Grupp9Hushallsekonomi
             }
             return totalOutcome;
         }
+        /// <summary>
+        /// Metod som räknar ut och lägger till 10% av pengarna på kontot som sparande.
+        /// </summary>
+        /// <param name="moneyLeft"></param>
+        /// <returns></returns>
         public double Savings(double moneyLeft)
         {
             double savingsProcentage = 0.1;
