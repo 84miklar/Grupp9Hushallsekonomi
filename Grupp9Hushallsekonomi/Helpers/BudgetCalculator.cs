@@ -16,19 +16,30 @@ namespace Grupp9Hushallsekonomi
         /// Metod som separerar Income och Outcome från en lista av IAccount.
         /// </summary>
         /// <param name="listOfEconomy"></param>
-        public void SeparateIncomeAndOutcome(List<IAccount> listOfEconomy)
+        public List<IAccount> SeparateIncomeAndOutcome(List<IAccount> listOfEconomy)
         {
-            foreach (var item in listOfEconomy)
+            // null check empty check
+            if (listOfEconomy != null)
             {
-                if (item is Outcome)
+
+                foreach (var item in listOfEconomy)
                 {
-                    outcome.Money += item.Money;
+                    if (item != null)
+                    {
+
+                        if (item is Outcome)
+                        {
+                            outcome.Money += item.Money;
+                        }
+                        if (item is Income)
+                        {
+                            income.Money += item.Money;
+                        }
+                    }
                 }
-                if (item is Income)
-                {
-                    income.Money += item.Money;
-                }
+                return listOfEconomy;
             }
+            return null;
         }
         /// <summary>
         /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
