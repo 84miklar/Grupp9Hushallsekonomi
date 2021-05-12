@@ -9,7 +9,7 @@ namespace Grupp9Hushallsekonomi
 {
     public class BudgetCalculator
     {
-        public List<IAccount> listOfEconomy = new List<IAccount>();
+        public static List<IAccount> listOfEconomy = new List<IAccount>();
         Outcome outcome = new Outcome();
         Income income = new Income();
         /// <summary>
@@ -33,50 +33,27 @@ namespace Grupp9Hushallsekonomi
         /// <summary>
         /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
         /// </summary>
-        /// <returns></returns>
+        /// <returns>pengar kvar på kontot</returns>
         public double Withdraw()
         {
             return income.Money - outcome.Money;
         }
+
         /// <summary>
-        /// Metod som lägger till inkomst till IAccountlistan listOfEconomy
+        /// Metod som räknar ihop summan av alla inkomster
         /// </summary>
-        /// <returns></returns>
-        public double FillListWithIncome()
+        /// <returns>summan av alla inkomster</returns>
+        public double SumOfIncome()
         {
-            listOfEconomy.Add(new Income { Money = 14500, Name = "Salary" });
-            return listOfEconomy.Where(n=>n!=null).Where(x => x is Income).Sum(m => m.Money);
-            
-            //double totalIncome = 0;
-            //foreach (var income in listOfEconomy)
-            //{
-            //    totalIncome += income.Money;
-            //}
-            //return totalIncome;
+            return listOfEconomy.Where(n => n != null).Where(x => x is Income).Sum(m => m.Money);
         }
         /// <summary>
-        /// Metod som lägger till utgifter till IAccountlistan lListOfEconomy
+        /// Metod som räknar ihop summan av alla utgifter
         /// </summary>
-        /// <returns></returns>
-        public double FillListWithOutcome()
+        /// <returns>summan av alla utgifter</returns>
+        public double SumOfOutcome()
         {
-            listOfEconomy.Add(new Outcome { Money = 8900, Name = "Rent" });
-            listOfEconomy.Add(new Outcome { Money = 2000, Name = "Food" });
-            listOfEconomy.Add(new Outcome { Money = 89, Name = "Netflix" });
-            listOfEconomy.Add(new Outcome { Money = 99, Name = "Phone" });
-            listOfEconomy.Add(new Outcome { Money = 199, Name = "Broadband" });
-            listOfEconomy.Add(new Outcome { Money = 600, Name = "Consumables" });
-            listOfEconomy.Add(new Outcome { Money = 45, Name = "Bank Fee" });
-            listOfEconomy.Add(new Outcome { Money = 1000, Name = "Pension" });
-            listOfEconomy.Add(new Outcome { Money = 350, Name = "Gym" });
-            listOfEconomy.Add(new Outcome { Money = 75, Name = "Home Insurance" });
-            return listOfEconomy.Where(n => n !=null).Where(x => x is Outcome).Sum(m => m.Money);
-            //double totalOutcome = 0;
-            //foreach (var outcome in listOfEconomy)
-            //{
-            //    totalOutcome += outcome.Money;
-            //}
-            //return totalOutcome;
+            return listOfEconomy.Where(n => n != null).Where(x => x is Outcome).Sum(m => m.Money);
         }
         /// <summary>
         /// Metod som räknar ut och lägger till 10% av pengarna på kontot som sparande.

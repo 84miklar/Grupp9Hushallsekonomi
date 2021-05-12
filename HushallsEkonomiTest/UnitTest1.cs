@@ -1,6 +1,8 @@
 using Grupp9Hushallsekonomi;
+using Grupp9Hushallsekonomi.Helpers;
 using Grupp9Hushallsekonomi.Interface;
 using NUnit.Framework;
+using System.Linq;
 
 namespace HushallsEkonomiTest
 {
@@ -10,14 +12,15 @@ namespace HushallsEkonomiTest
         [SetUp]
         public void SetUp()
         {
-            bc.FillListWithIncome();
-            bc.FillListWithOutcome();
+            Seeder seeder = new Seeder();
+            seeder.FillListWithIncome();
+            seeder.FillListWithOutcome();
 
         }
         [Test]
         public void CheckIncome_NegativeResult_01()
         {
-            var income = bc.FillListWithIncome();
+            var income = bc.SumOfIncome();
             var actual = income <= 0;
 
 
