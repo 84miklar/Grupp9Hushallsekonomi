@@ -3,6 +3,7 @@ using Grupp9Hushallsekonomi.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Grupp9Hushallsekonomi
 {
@@ -15,7 +16,7 @@ namespace Grupp9Hushallsekonomi
         /// Metod som separerar Income och Outcome från en lista av IAccount.
         /// </summary>
         /// <param name="listOfEconomy"></param>
-        public void SeparateIncomeAndOutcome(List<IAccount>listOfEconomy)
+        public void SeparateIncomeAndOutcome(List<IAccount> listOfEconomy)
         {
             foreach (var item in listOfEconomy)
             {
@@ -43,14 +44,15 @@ namespace Grupp9Hushallsekonomi
         /// <returns></returns>
         public double FillListWithIncome()
         {
-            double totalIncome = 0;
             listOfEconomy.Add(new Income { Money = 14500, Name = "Salary" });
-            //listofEconomy(x => +x.Money).Sum();
-            foreach (var income in listOfEconomy)
-            {
-                totalIncome += income.Money; 
-            }
-            return totalIncome;
+            return listOfEconomy.Where(n=>n!=null).Where(x => x is Income).Sum(m => m.Money);
+            
+            //double totalIncome = 0;
+            //foreach (var income in listOfEconomy)
+            //{
+            //    totalIncome += income.Money;
+            //}
+            //return totalIncome;
         }
         /// <summary>
         /// Metod som lägger till utgifter till IAccountlistan lListOfEconomy
@@ -68,12 +70,13 @@ namespace Grupp9Hushallsekonomi
             listOfEconomy.Add(new Outcome { Money = 1000, Name = "Pension" });
             listOfEconomy.Add(new Outcome { Money = 350, Name = "Gym" });
             listOfEconomy.Add(new Outcome { Money = 75, Name = "Home Insurance" });
-            double totalOutcome = 0;
-            foreach (var outcome in listOfEconomy)
-            {
-                totalOutcome += outcome.Money;
-            }
-            return totalOutcome;
+            return listOfEconomy.Where(n => n !=null).Where(x => x is Outcome).Sum(m => m.Money);
+            //double totalOutcome = 0;
+            //foreach (var outcome in listOfEconomy)
+            //{
+            //    totalOutcome += outcome.Money;
+            //}
+            //return totalOutcome;
         }
         /// <summary>
         /// Metod som räknar ut och lägger till 10% av pengarna på kontot som sparande.
