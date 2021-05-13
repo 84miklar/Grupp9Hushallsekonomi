@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Grupp9Hushallsekonomi.Helpers;
 
 namespace Grupp9Hushallsekonomi
 {
@@ -12,35 +13,54 @@ namespace Grupp9Hushallsekonomi
         public static List<IAccount> listOfEconomy = new List<IAccount>();
         Outcome outcome = new Outcome();
         Income income = new Income();
+        Logger log = new Logger();
         /// <summary>
         /// Metod som separerar Income och Outcome från en lista av IAccount.
         /// </summary>
         /// <param name="listOfEconomy"></param>
-        public List<IAccount> SeparateIncomeAndOutcome(List<IAccount> listOfEconomy)
+        public void SeparateIncomeAndOutcome(List<IAccount> listOfEconomy)
         {
-            // null check empty check
-            if (listOfEconomy != null)
+            foreach (var item in listOfEconomy)
             {
-
-                foreach (var item in listOfEconomy)
+                if (item is Outcome)
                 {
-                    if (item != null)
-                    {
+                    outcome.Money += item.Money;
+                }
+                if (item is Income)
+                {
+                    income.Money += item.Money;
+                }
+            }
+        }
 
-                        if (item is Outcome)
-                        {
-                            outcome.Money += item.Money;
-                        }
-                        if (item is Income)
-                        {
-                            income.Money += item.Money;
-                        }
+        /// <summary>
+        /// Metod där varje utgift jämförs med kvarvarande inkomst innan den dras av.
+        /// True = utgift dras av och loggas till budgetrapport.
+        /// False = Oavdragen utgift loggas till budgetrapport och felmeddelande.
+        /// </summary>
+        /// <param name="listOfEconomy"></param>
+        public void WithdrawEachOutcome(List<IAccount> listOfEconomy)
+        {
+            if(listOfEconomy != null)
+            {
+                foreach (Outcome bill in listOfEconomy)
+                {
+                    if (bill.Money <= income.Money)
+                    {
+                        income.Money -= bill.Money;
+                        //TODO: Logga bill.Name och bill.Money i budgetrapport.
+                        log.BudgetLog();
+                    }
+                    else
+                    {
+                        //TODO: Logga i felmeddelanden och i budgetrapporten att summa inte dragits.
+                        log.ErrorLog();
+                        log.BudgetLog();
                     }
                 }
-                return listOfEconomy;
             }
-            return null;
         }
+
         /// <summary>
         /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
         /// </summary>
