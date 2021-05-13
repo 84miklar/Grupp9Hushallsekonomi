@@ -40,7 +40,7 @@ namespace HushallsEkonomiTest
         [Test]
         public void WithdrawEachOutcome_PositiveResult_01()
         {
-            var expected = bc.totalIncome.Money - bc.totalOutcome.Money;
+            var expected = bc.Withdraw();
             var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(expected, actual);
         }
