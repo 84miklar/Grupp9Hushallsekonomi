@@ -11,54 +11,61 @@ namespace Grupp9Hushallsekonomi
     public class BudgetCalculator
     {
         public static List<IAccount> listOfEconomy = new List<IAccount>();
-        Outcome outcome = new Outcome();
-        Income income = new Income();
+        public Outcome totalOutcome = new Outcome();
+        public Income totalIncome = new Income();
         Logger log = new Logger();
         /// <summary>
         /// Metod som separerar Income och Outcome från en lista av IAccount.
         /// </summary>
         /// <param name="listOfEconomy"></param>
-        public void SeparateIncomeAndOutcome(List<IAccount> listOfEconomy)
+        public List<IAccount> SeparateIncomeAndOutcome(List<IAccount> listOfEconomy)
         {
-            foreach (var item in listOfEconomy)
+            if (listOfEconomy != null)
             {
-                if (item is Outcome)
+                foreach (var item in listOfEconomy)
                 {
-                    outcome.Money += item.Money;
+                    if (item is Outcome)
+                    {
+                        totalOutcome.Money += item.Money;
+                    }
+                    if (item is Income)
+                    {
+                        totalIncome.Money += item.Money;
+                    }
                 }
-                if (item is Income)
-                {
-                    income.Money += item.Money;
-                }
+                return listOfEconomy;
             }
+            return null;
         }
 
         /// <summary>
         /// Metod där varje utgift jämförs med kvarvarande inkomst innan den dras av.
-        /// True = utgift dras av och loggas till budgetrapport.
+        /// True = Utgift dras av och loggas till budgetrapport.
         /// False = Oavdragen utgift loggas till budgetrapport och felmeddelande.
         /// </summary>
         /// <param name="listOfEconomy"></param>
-        public void WithdrawEachOutcome(List<IAccount> listOfEconomy)
+        public double WithdrawEachOutcome(List<IAccount> listOfEconomy)
         {
-            if(listOfEconomy != null)
+            if (listOfEconomy != null)
             {
-                foreach (Outcome bill in listOfEconomy)
+                foreach (var item in listOfEconomy)
                 {
-                    if (bill.Money <= income.Money)
+                    if (item is Outcome && item.Money <= totalIncome.Money)
                     {
-                        income.Money -= bill.Money;
+                        totalIncome.Money -= item.Money;
                         //TODO: Logga bill.Name och bill.Money i budgetrapport.
                         log.BudgetLog();
                     }
-                    else
+                    else if (item is Outcome && item.Money > totalIncome.Money)
                     {
                         //TODO: Logga i felmeddelanden och i budgetrapporten att summa inte dragits.
                         log.ErrorLog();
                         log.BudgetLog();
                     }
                 }
+                return totalIncome.Money;
             }
+            return totalIncome.Money;
         }
 
         /// <summary>
@@ -67,7 +74,7 @@ namespace Grupp9Hushallsekonomi
         /// <returns>pengar kvar på kontot</returns>
         public double Withdraw()
         {
-            return income.Money - outcome.Money;
+            return totalIncome.Money - totalOutcome.Money;
         }
 
         /// <summary>

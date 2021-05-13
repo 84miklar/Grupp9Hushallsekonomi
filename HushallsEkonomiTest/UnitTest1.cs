@@ -16,6 +16,7 @@ namespace HushallsEkonomiTest
             Seeder seeder = new Seeder();
             seeder.FillListWithIncome();
             seeder.FillListWithOutcome();
+            bc.SeparateIncomeAndOutcome(BudgetCalculator.listOfEconomy);
 
         }
         [Test]
@@ -35,15 +36,13 @@ namespace HushallsEkonomiTest
             Assert.IsNull(result);
            
         }
-        [Test]
-        public void CheckIncome_NegativeResult_03()
-        {
-            Income income = new Income();
-            BudgetCalculator.listOfEconomy.Add(income);
-            var result = bc.SeparateIncomeAndOutcome(BudgetCalculator.listOfEconomy);
-            var expected = BudgetCalculator.listOfEconomy.Contains(null);
-            Assert.AreEqual(result, expected);
 
+        [Test]
+        public void WithdrawEachOutcome_PositiveResult_01()
+        {
+            var expected = bc.totalIncome.Money - bc.totalOutcome.Money;
+            var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
+            Assert.AreEqual(expected, actual);
         }
     }
 }
