@@ -20,7 +20,7 @@ namespace HushallsEkonomiTest
 
         }
         [Test]
-        public void CheckIncome_NegativeResult_01()
+        public void SumOfIncome_NegativeResult_01_01()
         {
             var income = bc.SumOfIncome();
             var actual = income <= 0;
@@ -29,13 +29,21 @@ namespace HushallsEkonomiTest
             Assert.IsFalse(actual);
         }
         [Test]
-        public void CheckIncome_NegativeResult_02()
+        public void SeparateIncomeAndOutcome_NegativeResult_01_02()
         {
             BudgetCalculator.listOfEconomy = null;
             var result = bc.SeparateIncomeAndOutcome(BudgetCalculator.listOfEconomy);
             Assert.IsNull(result);
            
         }
+        [Test]
+        public void SumOfIncome_NegativeResult_01_02()
+        {
+            var actual = bc.SumOfIncome();
+            var expected = double.MaxValue;
+            Assert.AreNotEqual(actual, expected);
+        }
+
 
         [Test]
         public void WithdrawEachOutcome_PositiveResult_01()
