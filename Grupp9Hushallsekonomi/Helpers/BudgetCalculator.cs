@@ -110,29 +110,14 @@ namespace Grupp9Hushallsekonomi
         {
             return listOfEconomy.Where(n => n != null).Where(x => x is Outcome).Sum(m => m.Money);
         }
-        /// <summary>
-        /// Metod som räknar ut och lägger till 10% av pengarna på kontot som sparande.
-        /// </summary>
-        /// <param name="moneyLeft"></param>
-        /// <returns></returns>
-        //public double Savings(double moneyLeft)
-        //{
-        //    double savingsProcentage = 0.1;
-        //    if (moneyLeft > 0)
-        //    {
-        //        double savings = moneyLeft * savingsProcentage;
-        //        listOfEconomy.Add(new Outcome { Money = savings, Name = "Savings" });
-        //    }
-        //    return moneyLeft;
-        //}
-        public bool Savings()
+        public bool Savings(List<Savings>savingsList)
         {
 
             var moneyLeft = totalIncome.Money;
             const double maxPercentage = 1;
-            if (moneyLeft > 0 && savings != null)
+            if (moneyLeft > 0 && savingsList != null)
             {
-                foreach (var saving in savings)
+                foreach (var saving in savingsList)
                 {
                     var result = moneyLeft * saving.SavingsPercantage;
 

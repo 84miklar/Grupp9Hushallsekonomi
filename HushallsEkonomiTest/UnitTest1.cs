@@ -80,7 +80,7 @@ namespace HushallsEkonomiTest
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
             bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
-            var actual = bc.Savings();
+            var actual = bc.Savings(BudgetCalculator.savings);
             Assert.IsTrue(actual);
         }
         [Test]
@@ -90,7 +90,7 @@ namespace HushallsEkonomiTest
             seed.FillListWithSavings();
             bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
             bc.totalIncome.Money = 0;
-            var actual = bc.Savings();
+            var actual = bc.Savings(BudgetCalculator.savings);
             Assert.IsFalse(actual);
         }
         [Test]
@@ -100,9 +100,17 @@ namespace HushallsEkonomiTest
             seed.FillListWithSavings();
             bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
             BudgetCalculator.savings.Add(new Savings("Error", 1.1));
-            var actual = bc.Savings();
+            var actual = bc.Savings(BudgetCalculator.savings);
             var expected = bc.totalIncome.Money >= 0;
             Assert.AreEqual(actual, expected);
+        }
+        [Test]
+        public void Savings_ChecksIfListIsNull()
+        {
+            List<Savings> nullList = new List<Savings>();
+            nullList = null;
+            var actual = bc.Savings(nullList);
+            Assert.IsFalse(actual);
         }
 
         [TearDown]
