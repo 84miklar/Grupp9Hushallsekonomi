@@ -129,7 +129,7 @@ namespace Grupp9Hushallsekonomi
         {
 
             var moneyLeft = totalIncome.Money;
-            if (moneyLeft > 0)
+            if (moneyLeft > 0 && savings != null)
             {
 
                 foreach (var saving in savings)
