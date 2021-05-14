@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Grupp9Hushallsekonomi.Helpers;
+using System.Data.SqlTypes;
 
 namespace Grupp9Hushallsekonomi
 {
     public class BudgetCalculator
     {
         public static List<IAccount> listOfEconomy = new List<IAccount>();
+        public static List<Savings> savings = new List<Savings>();
         public Outcome totalOutcome = new Outcome();
         public Income totalIncome = new Income();
         Logger log = new Logger();
@@ -106,15 +108,36 @@ namespace Grupp9Hushallsekonomi
         /// </summary>
         /// <param name="moneyLeft"></param>
         /// <returns></returns>
-        public double Savings(double moneyLeft)
+        //public double Savings(double moneyLeft)
+        //{
+        //    double savingsProcentage = 0.1;
+        //    if (moneyLeft > 0)
+        //    {
+        //        double savings = moneyLeft * savingsProcentage;
+        //        listOfEconomy.Add(new Outcome { Money = savings, Name = "Savings" });
+        //    }
+        //    return moneyLeft;
+        //}
+        public bool Savings()
         {
-            double savingsProcentage = 0.1;
+
+            var moneyLeft = Withdraw();
             if (moneyLeft > 0)
             {
-                double savings = moneyLeft * savingsProcentage;
-                listOfEconomy.Add(new Outcome { Money = savings, Name = "Savings" });
+
+                foreach (var saving in savings)
+                {
+                    var result = moneyLeft * saving.SavingsPercantage;
+
+                    if (moneyLeft > result)
+                    {
+                        moneyLeft -= result;
+                    }
+                }
+                return true;
             }
-            return moneyLeft;
+            return false;
+
         }
     }
 }

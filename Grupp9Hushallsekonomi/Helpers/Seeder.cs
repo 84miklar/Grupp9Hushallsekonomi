@@ -31,5 +31,11 @@ namespace Grupp9Hushallsekonomi.Helpers
             BudgetCalculator.listOfEconomy.Add(new Outcome { Money = 350, Name = "Gym" });
             BudgetCalculator.listOfEconomy.Add(new Outcome { Money = 75, Name = "Home Insurance" });
         }
+        public void FillListWithSavings()
+        {
+            BudgetCalculator.savings.Add(new Savings("Car", 0.1));
+            BudgetCalculator.savings.Add(new Savings("Boat",0.1));
+
+        }
     }
 }
