@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Grupp9Hushallsekonomi.Helpers;
+using System.Security.Cryptography;
 
 namespace Grupp9Hushallsekonomi
 {
@@ -83,6 +84,12 @@ namespace Grupp9Hushallsekonomi
         /// <returns>summan av alla inkomster</returns>
         public double SumOfIncome()
         {
+            //var query = (from x 
+            //             in listOfEconomy 
+            //             where x is Income 
+            //             && x != null 
+            //             select x.Money ).Sum();
+
             return listOfEconomy.Where(n => n != null).Where(x => x is Income).Sum(m => m.Money);
         }
         /// <summary>
