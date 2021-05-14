@@ -83,6 +83,27 @@ namespace HushallsEkonomiTest
             var actual = bc.Savings();
             Assert.IsTrue(actual);
         }
+        [Test]
+        public void Savings_ChecksUnsuccessfullWithdraw()
+        {
+            Seeder seed = new Seeder();
+            seed.FillListWithSavings();
+            bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
+            bc.totalIncome.Money = 0;
+            var actual = bc.Savings();
+            Assert.IsFalse(actual);
+        }
+        [Test]
+        public void Savings_ChecksIfPrecentageIsOverMaxPercentage()
+        {
+            Seeder seed = new Seeder();
+            seed.FillListWithSavings();
+            bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
+            BudgetCalculator.savings.Add(new Savings("Error", 1.1));
+            var actual = bc.Savings();
+            var expected = bc.totalIncome.Money >= 0;
+            Assert.AreEqual(actual, expected);
+        }
 
         [TearDown]
         public void Clear()

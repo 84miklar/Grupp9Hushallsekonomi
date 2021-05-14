@@ -129,17 +129,25 @@ namespace Grupp9Hushallsekonomi
         {
 
             var moneyLeft = totalIncome.Money;
+            const double maxPercentage = 1;
             if (moneyLeft > 0 && savings != null)
             {
-
                 foreach (var saving in savings)
                 {
                     var result = moneyLeft * saving.SavingsPercantage;
 
-                    if (moneyLeft > result)
+                    if (moneyLeft > result && saving.SavingsPercantage <= maxPercentage)
                     {
+
                         moneyLeft -= result;
+                        boughtItems.Add(saving.Name);
+                        boughtItems.Add(result.ToString());
                     }
+                    else
+                    {
+                        errorMessages.Add($"Not enough money for {saving.Name}");
+                    }
+                   
                 }
                 return true;
             }
