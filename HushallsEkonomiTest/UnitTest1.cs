@@ -1,4 +1,5 @@
 using Grupp9Hushallsekonomi;
+using Grupp9Hushallsekonomi.Account;
 using Grupp9Hushallsekonomi.Helpers;
 using Grupp9Hushallsekonomi.Interface;
 using NUnit.Framework;
@@ -55,13 +56,23 @@ namespace HushallsEkonomiTest
         }
         
         [Test]
-        public void WithdrawEachOutcome_NegativeResult_01()
+        public void WithdrawEachOutcome_CheckIfListIsNull()
         {
             var expected = bc.Withdraw();
             List<IAccount> nullList = new List<IAccount>();
             nullList = null;
             var actual = bc.WithdrawEachOutcome(nullList);
             Assert.AreNotEqual(expected, actual);
+        }
+        
+        [TestCase(double.MaxValue)]
+        [Test]
+        public void WithdrawEachOutcome_CheckOutcomeLargerThanIncome(double outcome)
+        {
+            var expected = bc.Withdraw();
+            BudgetCalculator.listOfEconomy.Add(new Outcome() { Name = "VeryLargeBill", Money = outcome });
+            var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
+            Assert.AreEqual(actual, expected);
         }
 
         [TearDown]
