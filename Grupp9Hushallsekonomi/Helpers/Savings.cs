@@ -13,5 +13,11 @@ namespace Grupp9Hushallsekonomi.Helpers
             Name = name;
             SavingsPercantage = percantage;
         }
+        public double CalculatePercentageToMoney(double income)
+        {
+            double maxPrecentage = 1.0;
+            var actualPrecentage = maxPrecentage - SavingsPercantage;
+            return income * actualPrecentage;
+        }
     }
 }

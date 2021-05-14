@@ -22,6 +22,7 @@ namespace Grupp9Hushallsekonomi
         Logger log = new Logger();
         public List<string> errorMessages = new List<string>();
         public List<string> boughtItems = new List<string>();
+        public double totalSavings = 0;
         /// <summary>
         /// Metod som separerar Income och Outcome från en lista av IAccount.
         /// </summary>
@@ -134,12 +135,16 @@ namespace Grupp9Hushallsekonomi
                     {
 
                         moneyLeft -= result;
+                        totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
                         boughtItems.Add(saving.Name);
                         boughtItems.Add(result.ToString());
+                        log.BudgetLog(boughtItems);
+                        
                     }
                     else
                     {
                         errorMessages.Add($"Not enough money for {saving.Name}");
+                        log.ErrorLog(errorMessages);
                     }
                    
                 }
