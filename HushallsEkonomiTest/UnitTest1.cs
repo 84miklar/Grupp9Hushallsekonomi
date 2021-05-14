@@ -64,5 +64,13 @@ namespace HushallsEkonomiTest
             Assert.AreNotEqual(expected, actual);
         }
 
+        [TearDown]
+        public void Clear()
+        {
+            BudgetCalculator.listOfEconomy.Clear();
+            bc.totalIncome.Money = 0;
+            bc.totalOutcome.Money = 0;
+        }
+
     }
 }
