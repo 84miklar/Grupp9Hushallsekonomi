@@ -10,6 +10,9 @@ using System.Data.SqlTypes;
 
 namespace Grupp9Hushallsekonomi
 {
+    /// <summary>
+    /// Calculator for handling Income and outcome
+    /// </summary>
     public class BudgetCalculator
     {
         public static List<IAccount> listOfEconomy = new List<IAccount>();
@@ -110,6 +113,12 @@ namespace Grupp9Hushallsekonomi
         {
             return listOfEconomy.Where(n => n != null).Where(x => x is Outcome).Sum(m => m.Money);
         }
+        /// <summary>
+        /// Checks If saving withdraw is possible
+        /// </summary>
+        /// <param name="savingsList"></param>
+        /// <returns>True if savings is withdrawn
+        /// False if list is null</returns>
         public bool Savings(List<Savings>savingsList)
         {
 
