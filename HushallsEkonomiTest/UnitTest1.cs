@@ -74,6 +74,15 @@ namespace HushallsEkonomiTest
             var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(actual, expected);
         }
+        [Test]
+        public void Savings_ChecksSuccessfullWithdraw()
+        {
+            Seeder seed = new Seeder();
+            seed.FillListWithSavings();
+            bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
+            var actual = bc.Savings();
+            Assert.IsTrue(actual);
+        }
 
         [TearDown]
         public void Clear()

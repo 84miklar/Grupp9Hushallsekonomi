@@ -128,7 +128,7 @@ namespace Grupp9Hushallsekonomi
         public bool Savings()
         {
 
-            var moneyLeft = Withdraw();
+            var moneyLeft = totalIncome.Money;
             if (moneyLeft > 0)
             {
 
