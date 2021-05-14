@@ -5,6 +5,7 @@ using Grupp9Hushallsekonomi.Interface;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace HushallsEkonomiTest
 {
@@ -36,7 +37,7 @@ namespace HushallsEkonomiTest
             nullList = null;
             var result = bc.SeparateIncomeAndOutcome(nullList);
             Assert.IsNull(result);
-           
+
         }
         [Test]
         public void SumOfIncome_NegativeResult_01_02()
@@ -54,7 +55,7 @@ namespace HushallsEkonomiTest
             var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(expected, actual);
         }
-        
+
         [Test]
         public void WithdrawEachOutcome_CheckIfListIsNull()
         {
@@ -64,7 +65,7 @@ namespace HushallsEkonomiTest
             var actual = bc.WithdrawEachOutcome(nullList);
             Assert.AreNotEqual(expected, actual);
         }
-        
+
         [TestCase(double.MaxValue)]
         [Test]
         public void WithdrawEachOutcome_CheckOutcomeLargerThanIncome(double outcome)
@@ -111,6 +112,15 @@ namespace HushallsEkonomiTest
             nullList = null;
             var actual = bc.Savings(nullList);
             Assert.IsFalse(actual);
+        }
+        [Test]
+        [TestCase(1000, 500)]
+        [TestCase(0,0)]
+        public void CalculatePercentageToMoney_CheckPercentageValue(double income, double expected)
+        {
+            Savings savings = new Savings("test", 0.5);
+            var actual = savings.CalculatePercentageToMoney(income);
+            Assert.AreEqual(actual, expected);
         }
 
         [TearDown]
