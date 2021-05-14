@@ -31,8 +31,9 @@ namespace HushallsEkonomiTest
         [Test]
         public void SeparateIncomeAndOutcome_NegativeResult_01_02()
         {
-            BudgetCalculator.listOfEconomy = null;
-            var result = bc.SeparateIncomeAndOutcome(BudgetCalculator.listOfEconomy);
+            List<IAccount> nullList = new List<IAccount>();
+            nullList = null;
+            var result = bc.SeparateIncomeAndOutcome(nullList);
             Assert.IsNull(result);
            
         }
@@ -52,5 +53,16 @@ namespace HushallsEkonomiTest
             var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(expected, actual);
         }
+        
+        [Test]
+        public void WithdrawEachOutcome_NegativeResult_01()
+        {
+            var expected = bc.Withdraw();
+            List<IAccount> nullList = new List<IAccount>();
+            nullList = null;
+            var actual = bc.WithdrawEachOutcome(nullList);
+            Assert.AreNotEqual(expected, actual);
+        }
+
     }
 }
