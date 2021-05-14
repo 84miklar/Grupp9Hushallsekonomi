@@ -15,6 +15,8 @@ namespace Grupp9Hushallsekonomi
         public Outcome totalOutcome = new Outcome();
         public Income totalIncome = new Income();
         Logger log = new Logger();
+        public List<string> errorMessages = new List<string>();
+        public List<string> boughtItems = new List<string>();
         /// <summary>
         /// Metod som separerar Income och Outcome från en lista av IAccount.
         /// </summary>
@@ -49,19 +51,25 @@ namespace Grupp9Hushallsekonomi
         {
             if (listOfEconomy != null)
             {
-                foreach (var item in listOfEconomy)
+                foreach (var bill in listOfEconomy)
                 {
-                    if (item is Outcome && item.Money <= totalIncome.Money)
+                    if (bill is Outcome && bill.Money <= totalIncome.Money)
                     {
-                        totalIncome.Money -= item.Money;
+                        totalIncome.Money -= bill.Money;
                         //TODO: Logga bill.Name och bill.Money i budgetrapport.
-                        log.BudgetLog();
+                        boughtItems.Add(bill.Name);
+                        boughtItems.Add(bill.Money.ToString());
+                        log.BudgetLog(boughtItems);
+                        boughtItems.Clear();
                     }
-                    else if (item is Outcome && item.Money > totalIncome.Money)
+                    else if (bill is Outcome && bill.Money > totalIncome.Money)
                     {
                         //TODO: Logga i felmeddelanden och i budgetrapporten att summa inte dragits.
-                        log.ErrorLog();
-                        log.BudgetLog();
+                        errorMessages.Add($"Not enough money on account to buy {bill.Name}");
+                        boughtItems.Add($"{bill.Name} {bill.Money} not successfull transaction!");
+                        log.ErrorLog(errorMessages);
+                        log.BudgetLog(boughtItems);
+                        errorMessages.Clear();
                     }
                 }
                 return totalIncome.Money;
