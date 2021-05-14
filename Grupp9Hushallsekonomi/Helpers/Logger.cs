@@ -20,7 +20,7 @@ namespace Grupp9Hushallsekonomi.Helpers
         public void BudgetLog(List<string> boughtItems)
         {
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            var budgetLog = Path.Combine(desktop, "ErrorMessages.log");
+            var budgetLog = Path.Combine(desktop, "BudgetLog.log");
             File.AppendAllText(budgetLog, DateTime.Now + ":\r");
             File.AppendAllLines(budgetLog, boughtItems);
             File.AppendAllText(budgetLog, "\n");
