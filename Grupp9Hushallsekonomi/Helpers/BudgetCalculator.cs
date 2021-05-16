@@ -61,27 +61,71 @@ namespace Grupp9Hushallsekonomi
                 {
                     if (bill is Outcome && bill.Money <= totalIncome.Money)
                     {
-                        totalIncome.Money -= bill.Money;
-                        //TODO: Logga bill.Name och bill.Money i budgetrapport.
-                        boughtItems.Add(bill.Name);
-                        boughtItems.Add(bill.Money.ToString());
-                        log.BudgetLog(boughtItems);
-                        boughtItems.Clear();
+                        SuccessfulReduceIncomeWithOutcome(bill);
                     }
                     else if (bill is Outcome && bill.Money > totalIncome.Money)
                     {
-                        //TODO: Logga i felmeddelanden och i budgetrapporten att summa inte dragits.
-                        errorMessages.Add($"Not enough money on account to buy {bill.Name}");
-                        boughtItems.Add($"{bill.Name} {bill.Money} not successfull transaction!");
-                        log.ErrorLog(errorMessages);
-                        log.BudgetLog(boughtItems);
-                        errorMessages.Clear();
+                        UnsuccessfullReduceIncomeWithOutcome(bill);
                     }
                 }
                 return totalIncome.Money;
             }
             return totalIncome.Money;
         }
+
+        private void UnsuccessfullReduceIncomeWithOutcome(IAccount bill)
+        {
+            AddStringToErrorMessagesList($"Not enough money on account to buy {bill.Name}");
+            AddStringToBoughtItemsList($"{bill.Name} {bill.Money} not successfull transaction!");
+            AddErrorMessagesToLogger();
+            AddBoughtItemsToLogger();
+            errorMessages.Clear();
+        }
+
+        private void AddStringToErrorMessagesList(string textToLog)
+        {
+            errorMessages.Add(textToLog);
+        }
+
+        /// <summary>
+        /// Method for reducing the income with an outcome.
+        /// </summary>
+        /// <param name="bill"></param>
+        private void SuccessfulReduceIncomeWithOutcome(IAccount bill)
+        {
+            totalIncome.Money -= bill.Money;
+            AddStringToBoughtItemsList(bill.Name);
+            AddStringToBoughtItemsList(bill.Money.ToString());
+            AddBoughtItemsToLogger();
+            boughtItems.Clear();
+        }
+
+        /// <summary>
+        /// Method for sending boughtItems list to logger.
+        /// </summary>
+        private void AddErrorMessagesToLogger()
+        {
+            log.ErrorLog(errorMessages);
+        }
+
+        /// <summary>
+        /// Method for sending boughtItems list to logger.
+        /// </summary>
+        private void AddBoughtItemsToLogger()
+        {
+            log.BudgetLog(boughtItems);
+        }
+
+        /// <summary>
+        /// Method for adding a string to the boughtItems list,
+        /// like bill.Name and bill.Money.ToString()"
+        /// </summary>
+        /// <param name="textToLog"></param>
+        private void AddStringToBoughtItemsList(string textToLog)
+        {
+            boughtItems.Add(textToLog);
+        }
+      
 
         /// <summary>
         /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
