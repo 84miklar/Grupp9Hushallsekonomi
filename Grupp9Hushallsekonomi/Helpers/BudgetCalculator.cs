@@ -86,16 +86,17 @@ namespace Grupp9Hushallsekonomi
         /// Metod som räknar ihop summan av alla inkomster
         /// </summary>
         /// <returns>summan av alla inkomster</returns>
-        public double SumOfIncome()
+        public double SumOfIncome(List<IAccount> listToSum)
         {
             //var query = (from x 
             //             in listOfEconomy 
             //             where x is Income 
             //             && x != null 
             //             select x.Money ).Sum();
+            //
             try
             {
-                return listOfEconomy.Where(n => n != null).Where(x => x is Income).Sum(m => m.Money);
+                return listToSum.Where(x => x is Income).Sum(m => m.Money);
             }
             catch (Exception ex)
             {
@@ -109,11 +110,11 @@ namespace Grupp9Hushallsekonomi
         /// Metod som räknar ihop summan av alla utgifter
         /// </summary>
         /// <returns>summan av alla utgifter</returns>
-        public double SumOfOutcome()
+        public double SumOfOutcome(List<IAccount> listToSum)
         {
             try
             {
-                return listOfEconomy.Where(n => n != null).Where(x => x is Outcome).Sum(m => m.Money);
+                return listToSum.Where(x => x is Outcome).Sum(m => m.Money);
             }
             catch (Exception ex)
             {
