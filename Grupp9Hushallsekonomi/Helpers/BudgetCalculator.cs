@@ -32,19 +32,17 @@ namespace Grupp9Hushallsekonomi
         public bool Savings(List<Savings> savingsList)
         {
             var moneyLeft = totalIncome.Money;
-            const double maxPercentage = 1;
             if (moneyLeft > 0 && savingsList != null)
             {
                 foreach (var saving in savingsList)
                 {
-                    var result = moneyLeft * saving.SavingsPercantage;
 
-                    if (moneyLeft > result && saving.SavingsPercantage <= maxPercentage)
+                    if (saving.IsSavingPossible(moneyLeft))
                     {
-                        moneyLeft -= result;
+                        moneyLeft -= saving.SumLeftAfterSaving(moneyLeft);
                         totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
                         AddStringToBoughtItemsList(saving.Name);
-                        AddStringToBoughtItemsList(result.ToString());
+                        AddStringToBoughtItemsList(saving.SumLeftAfterSaving(moneyLeft).ToString());
                         AddBoughtItemsListToLogger();
                     }
                     else

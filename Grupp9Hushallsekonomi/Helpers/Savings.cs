@@ -6,6 +6,7 @@ namespace Grupp9Hushallsekonomi.Helpers
 {
     public class Savings
     {
+        public const double MaxPercentage = 1;
         public double SavingsPercantage { get; set; }
         public string Name { get; set; }
         public Savings(string name, double percantage)
@@ -15,9 +16,35 @@ namespace Grupp9Hushallsekonomi.Helpers
         }
         public double CalculatePercentageToMoney(double income)
         {
-            double maxPrecentage = 1.0;
-            var actualPrecentage = maxPrecentage - SavingsPercantage;
-            return income * actualPrecentage;
+            if (income > 0)
+            {
+
+                var actualPrecentage = MaxPercentage - SavingsPercantage;
+                return income * actualPrecentage;
+            }
+            return 0;
+        }
+        public double SumLeftAfterSaving(double income)
+        {
+            if (income > 0)
+            {
+
+                return income - CalculatePercentageToMoney(income);
+            }
+            return 0;
+        }
+        public bool IsSavingPossible(double income)
+        {
+            if (income > 0)
+            {
+
+                var sumAfterSaving = SumLeftAfterSaving(income);
+                if (sumAfterSaving >= 0 && SavingsPercantage <= MaxPercentage)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

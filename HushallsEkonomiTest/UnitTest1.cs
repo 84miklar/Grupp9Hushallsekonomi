@@ -136,12 +136,23 @@ namespace HushallsEkonomiTest
         [Test]
         [TestCase(1000, 500)]
         [TestCase(0,0)]
+        [TestCase(-10,0)]
         public void CalculatePercentageToMoney_CheckPercentageValue(double income, double expected)
         {
             Savings savings = new Savings("test", 0.5);
             var actual = savings.CalculatePercentageToMoney(income);
             Assert.AreEqual(actual, expected);
         }
+        [Test]
+        [TestCase(1000, 500)]
+        [TestCase(0, 0)]
+        [TestCase(-10, 0)]
+        public void SumLeftAfterSaving_CheckSumLeft(double income, double expected)
+        {
+            Savings savings = new Savings("test", 0.5);
+            var actual = savings.SumLeftAfterSaving(income);
+            Assert.AreEqual(actual, expected);
+        } 
 
         [TearDown]
         public void Clear()
