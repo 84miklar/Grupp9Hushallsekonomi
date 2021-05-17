@@ -152,7 +152,24 @@ namespace HushallsEkonomiTest
             Savings savings = new Savings("test", 0.5);
             var actual = savings.SumLeftAfterSaving(income);
             Assert.AreEqual(actual, expected);
-        } 
+        }
+        [Test]
+        [TestCase(1000)]
+        public void IsSavingPossible_Success(double income)
+        {
+            var saving = new Savings("test", 0.5);
+            var actual = saving.IsSavingPossible(income);
+            Assert.IsTrue(actual);
+        }
+        [Test]
+        [TestCase(-5)]
+        [TestCase(0)]
+        public void IsSavingPossible_Fail(double income)
+        {
+            var saving = new Savings("test", 0.5);
+            var actual = saving.IsSavingPossible(income);
+            Assert.IsFalse(actual);
+        }
 
         [TearDown]
         public void Clear()
