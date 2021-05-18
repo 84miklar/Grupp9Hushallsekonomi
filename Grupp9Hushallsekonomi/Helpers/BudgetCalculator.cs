@@ -173,9 +173,7 @@ namespace Grupp9Hushallsekonomi
             log.ErrorLog(errorMessages);
         }
 
-            var sum = listOfEconomy.Where(n => n != null).Where(x => x is Income).Sum(m => m.Money);
-            return Math.Abs(sum);
-        }
+       
         /// <summary>
         /// Method for adding a string to the boughtItems list,
         /// like bill.Name and bill.Money.ToString()"
