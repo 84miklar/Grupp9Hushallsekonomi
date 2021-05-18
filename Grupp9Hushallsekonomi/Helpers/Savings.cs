@@ -16,22 +16,25 @@ namespace Grupp9Hushallsekonomi.Helpers
         }
         public double CalculatePercentageToMoney(double income)
         {
-            if (income > 0)
-            {
+            var actualPrecentage = MaxPercentage - SavingsPercantage;
+            return income > 0 ? income * actualPrecentage : 0;
+            //if (income > 0)
+            //{
 
-                var actualPrecentage = MaxPercentage - SavingsPercantage;
-                return income * actualPrecentage;
-            }
-            return 0;
+            //    var actualPrecentage = MaxPercentage - SavingsPercantage;
+            //    return income * actualPrecentage;
+            //}
+            //return 0;
         }
         public double SumLeftAfterSaving(double income)
         {
-            if (income > 0)
-            {
+           return income > 0 ? income - CalculatePercentageToMoney(income) : 0;
+            //if (income > 0)
+            //{
 
-                return income - CalculatePercentageToMoney(income);
-            }
-            return 0;
+            //    return income - CalculatePercentageToMoney(income);
+            //}
+            //return 0;
         }
         public bool IsSavingPossible(double income)
         {
