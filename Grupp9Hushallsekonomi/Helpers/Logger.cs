@@ -59,7 +59,7 @@
         /// <summary>
         /// Method for sending boughtItems list to logger.
         /// </summary>
-        public void AddBoughtItemsListToLogger()
+        private void AddBoughtItemsListToLogger()
         {
             BudgetLog(boughtItems);
         }
@@ -67,7 +67,7 @@
         /// <summary>
         /// Method for sending boughtItems list to logger.
         /// </summary>
-        public void AddErrorMessagesListToLogger()
+        private void AddErrorMessagesListToLogger()
         {
             ErrorLog(errorMessages);
         }
@@ -80,6 +80,7 @@
         public void AddStringToBoughtItemsList(string textToLog)
         {
             boughtItems.Add(textToLog);
+            AddBoughtItemsListToLogger();
         }
 
         /// <summary>
@@ -90,6 +91,7 @@
         public void AddStringToErrorMessagesList(string textToLog)
         {
             errorMessages.Add(textToLog);
+            AddErrorMessagesListToLogger();
         }
     }
 }

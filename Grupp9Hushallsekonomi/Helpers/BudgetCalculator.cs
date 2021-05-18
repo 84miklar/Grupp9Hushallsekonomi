@@ -55,7 +55,6 @@
             catch (Exception ex)
             {
                 log.AddStringToErrorMessagesList(ex.ToString());
-                log.AddErrorMessagesListToLogger();
                 return 0;
             }
         }
@@ -73,7 +72,6 @@
             catch (Exception ex)
             {
                 log.AddStringToErrorMessagesList(ex.ToString());
-                log.AddErrorMessagesListToLogger();
                 return 0;
             }
         }
@@ -122,7 +120,6 @@
             totalIncome.Money -= bill.Money;
             log.AddStringToBoughtItemsList(bill.Name);
             log.AddStringToBoughtItemsList(bill.Money.ToString());
-            log.AddBoughtItemsListToLogger();
             log.boughtItems.Clear();
         }
 
@@ -134,8 +131,6 @@
         {
             log.AddStringToErrorMessagesList($"Not enough money on account to buy {bill.Name}");
             log.AddStringToBoughtItemsList($"{bill.Name} {bill.Money} not successfull transaction!");
-            log.AddErrorMessagesListToLogger();
-            log.AddBoughtItemsListToLogger();
             log.errorMessages.Clear();
         }
     }
