@@ -13,7 +13,7 @@
     public class BudgetCalculator
     {
         public static List<IAccount> listOfEconomy = new List<IAccount>();
-        public static List<Savings> savings = new List<Savings>();
+        public static List<Saving> savings = new List<Saving>();
         public static Income totalIncome = new Income();
         public static Expense totalExpense = new Expense();
         Logger log = new Logger();
@@ -76,15 +76,6 @@
                 log.AddErrorMessagesListToLogger();
                 return 0;
             }
-        }
-
-        /// <summary>
-        /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
-        /// </summary>
-        /// <returns>pengar kvar på kontot</returns>
-        public double Withdraw()
-        {
-            return totalIncome.Money - totalExpense.Money;
         }
 
         /// <summary>

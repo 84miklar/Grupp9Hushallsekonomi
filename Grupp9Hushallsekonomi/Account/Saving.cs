@@ -6,7 +6,7 @@
     /// <summary>
     /// Class to handle all the savings.
     /// </summary>
-    public class Savings
+    public class Saving
     {
         /// <summary>
         /// Savings maximum value possible.
@@ -23,12 +23,12 @@
         /// </summary>
         public string Name { get; set; }
 
-        public Savings(string name, double percantage)
+        public Saving(string name, double percantage)
         {
             Name = name;
             SavingsPercantage = percantage;
         }
-        public Savings() { }
+        public Saving() { }
 
         /// <summary>
         /// Turns the percentage value of a saving into money value.
@@ -78,7 +78,7 @@
         /// <param name="savingsList"></param>
         /// <returns>True if savings is withdrawn
         /// False if list is null</returns>
-        public bool CheckSavings(List<Savings> savingsList)
+        public bool CheckSavings(List<Saving> savingsList)
         {
             double totalSavings = 0;
             var log = new Logger();
@@ -98,7 +98,7 @@
         /// <param name="log"></param>
         /// <param name="moneyLeft"></param>
         /// <returns>true if saving is withdrawn from expenses.</returns>
-        private static bool CheckifSavingIsPossibleAndLog(List<Savings> savingsList, ref double totalSavings, Logger log, ref double moneyLeft)
+        private static bool CheckifSavingIsPossibleAndLog(List<Saving> savingsList, ref double totalSavings, Logger log, ref double moneyLeft)
         {
             foreach (var saving in savingsList)
             {
@@ -120,7 +120,7 @@
         /// </summary>
         /// <param name="log"></param>
         /// <param name="saving"></param>
-        private static void SavingIsNotPossible(Logger log, Savings saving)
+        private static void SavingIsNotPossible(Logger log, Saving saving)
         {
             log.AddStringToErrorMessagesList($"Not enough money for {saving.Name}");
             log.AddErrorMessagesListToLogger();
@@ -136,7 +136,7 @@
         /// <param name="log"></param>
         /// <param name="moneyLeft"></param>
         /// <param name="saving"></param>
-        private static void SavingIsPossible(ref double totalSavings, Logger log, ref double moneyLeft, Savings saving)
+        private static void SavingIsPossible(ref double totalSavings, Logger log, ref double moneyLeft, Saving saving)
         {
             moneyLeft -= saving.SumLeftAfterSaving(moneyLeft);
             totalSavings += saving.CalculatePercentageToMoney(moneyLeft);

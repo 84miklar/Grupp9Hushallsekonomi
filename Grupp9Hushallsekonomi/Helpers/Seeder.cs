@@ -36,8 +36,8 @@
         /// </summary>
         public void FillListWithSavings()
         {
-            BudgetCalculator.savings.Add(new Savings("Car", 0.1));
-            BudgetCalculator.savings.Add(new Savings("Boat", 0.1));
+            BudgetCalculator.savings.Add(new Saving("Car", 0.1));
+            BudgetCalculator.savings.Add(new Saving("Boat",0.1));
 
         }
     }
