@@ -1,14 +1,13 @@
-﻿using Grupp9Hushallsekonomi.Account;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Grupp9Hushallsekonomi.Helpers
+﻿namespace Grupp9Hushallsekonomi.Helpers
 {
+    using Grupp9Hushallsekonomi.Account;
+    /// <summary>
+    /// Class that adds objects to lists.
+    /// </summary>
     public class Seeder
     {
         /// <summary>
-        /// Metod som lägger till inkomst till IAccountlistan listOfEconomy
+        /// Method that adds income to IAccount list listOfEconomy.
         /// </summary>
         public void FillListWithIncome()
         {
@@ -16,7 +15,7 @@ namespace Grupp9Hushallsekonomi.Helpers
 
         }
         /// <summary>
-        /// Metod som lägger till utgifter till IAccountlistan lListOfEconomy
+        /// Method that adds expenses to IAccount list listOfEconomy.
         /// </summary>
         public void FillListWithOutcome()
         {
@@ -31,10 +30,14 @@ namespace Grupp9Hushallsekonomi.Helpers
             BudgetCalculator.listOfEconomy.Add(new Expense { Money = 350, Name = "Gym" });
             BudgetCalculator.listOfEconomy.Add(new Expense { Money = 75, Name = "Home Insurance" });
         }
+
+        /// <summary>
+        /// Method that adds expenses to IAccount list listOfEconomy.
+        /// </summary>
         public void FillListWithSavings()
         {
             BudgetCalculator.savings.Add(new Savings("Car", 0.1));
-            BudgetCalculator.savings.Add(new Savings("Boat",0.1));
+            BudgetCalculator.savings.Add(new Savings("Boat", 0.1));
 
         }
     }

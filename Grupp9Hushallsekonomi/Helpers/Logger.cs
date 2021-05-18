@@ -1,17 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Grupp9Hushallsekonomi.Helpers
+﻿namespace Grupp9Hushallsekonomi.Helpers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+
+    /// <summary>
+    /// Class that sends positive and negative messages to a file at your dekstop.
+    /// </summary>
     public class Logger
     {
+        /// <summary>
+        /// List of expenses.
+        /// </summary>
         public List<string> boughtItems = new List<string>();
+
+        /// <summary>
+        /// List of error messages.
+        /// </summary>
         public List<string> errorMessages = new List<string>();
+
+        /// <summary>
+        /// Writes error messages to a file at your desktop.
+        /// </summary>
+        /// <param name="errorMessages"></param>
         public void ErrorLog(List<string> errorMessages)
         {
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -19,8 +31,22 @@ namespace Grupp9Hushallsekonomi.Helpers
             File.AppendAllText(errorLog, DateTime.Now + ":\r");
             File.AppendAllLines(errorLog, errorMessages);
             File.AppendAllText(errorLog, "\n");
+            WriteToDebug(errorLog);
+        }
+
+        /// <summary>
+        /// Sends errormessages to Debug.WriteLine.
+        /// </summary>
+        /// <param name="errorLog"></param>
+        private static void WriteToDebug(string errorLog)
+        {
             Debug.WriteLine(errorLog);
         }
+
+        /// <summary>
+        /// Writes succesful withdraw to a file at your desktop.
+        /// </summary>
+        /// <param name="boughtItems"></param>
         public void BudgetLog(List<string> boughtItems)
         {
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -45,7 +71,6 @@ namespace Grupp9Hushallsekonomi.Helpers
         {
             ErrorLog(errorMessages);
         }
-
 
         /// <summary>
         /// Method for adding a string to the boughtItems list,

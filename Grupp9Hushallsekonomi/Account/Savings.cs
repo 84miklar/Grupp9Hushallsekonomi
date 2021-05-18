@@ -1,10 +1,8 @@
-﻿using Grupp9Hushallsekonomi.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Grupp9Hushallsekonomi.Account
+﻿namespace Grupp9Hushallsekonomi.Account
 {
+    using Grupp9Hushallsekonomi.Helpers;
+    using System.Collections.Generic;
+
     /// <summary>
     /// Class to handle all the savings.
     /// </summary>
@@ -13,7 +11,7 @@ namespace Grupp9Hushallsekonomi.Account
         /// <summary>
         /// Savings maximum value possible.
         /// </summary>
-        public const double maxPercentage =1.0;
+        public const double maxPercentage = 1.0;
 
         /// <summary>
         /// The savings percentage to set.
@@ -132,7 +130,7 @@ namespace Grupp9Hushallsekonomi.Account
         /// Saving is possible due to enough money left.
         /// MoneyLeft is reduced.
         /// TotalSavings is increased.
-        /// Outcome is logged.
+        /// Outcome is logged to desktop file.
         /// </summary>
         /// <param name="totalSavings"></param>
         /// <param name="log"></param>

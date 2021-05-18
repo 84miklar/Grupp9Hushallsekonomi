@@ -1,17 +1,14 @@
-﻿using Grupp9Hushallsekonomi.Account;
-using Grupp9Hushallsekonomi.Interface;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using Grupp9Hushallsekonomi.Helpers;
-using System.Security.Cryptography;
-using System.Data.SqlTypes;
-
-namespace Grupp9Hushallsekonomi
+﻿namespace Grupp9Hushallsekonomi
 {
+    using Grupp9Hushallsekonomi.Account;
+    using Grupp9Hushallsekonomi.Interface;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Grupp9Hushallsekonomi.Helpers;
+
     /// <summary>
-    /// Calculator for handling Income and outcome
+    /// Calculator for handling Income and expenses
     /// </summary>
     public class BudgetCalculator
     {
@@ -21,7 +18,6 @@ namespace Grupp9Hushallsekonomi
         public static Expense totalExpense = new Expense();
         Logger log = new Logger();
        
-
         /// <summary>
         /// Metod som separerar Income och Outcome från en lista av IAccount.
         /// </summary>
@@ -107,6 +103,10 @@ namespace Grupp9Hushallsekonomi
             return totalIncome.Money;
         }
 
+        /// <summary>
+        /// Sets if expense withdraw is possible or not.
+        /// </summary>
+        /// <param name="listOfEconomy"></param>
         private void CheckIfExpenseWithdrawIsPossible(List<IAccount> listOfEconomy)
         {
             foreach (var bill in listOfEconomy)
@@ -121,8 +121,6 @@ namespace Grupp9Hushallsekonomi
                 }
             }
         }
-
-        
 
         /// <summary>
         /// Method for reducing the income with an outcome.
