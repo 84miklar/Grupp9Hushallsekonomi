@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HushallsEkonomiTest
 {
-    public class SavingTests
+    public class CheckSavingsTests
     {
         
         BudgetCalculator bc = new BudgetCalculator();
@@ -33,7 +33,7 @@ namespace HushallsEkonomiTest
             BudgetCalculator.totalExpense.Money = 0;
         }
         [Test]
-        public void Savings_01_ChecksSuccessfullWithdraw_ReturnTrue()
+        public void CheckSavings_01_ChecksSuccessfullWithdraw_ReturnTrue()
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
@@ -43,7 +43,7 @@ namespace HushallsEkonomiTest
         }
 
         [Test]
-        public void Savings_02_ChecksUnsuccessfullWithdraw_ReturnFalse()
+        public void CheckSavings_02_ChecksUnsuccessfullWithdraw_ReturnFalse()
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
@@ -54,7 +54,7 @@ namespace HushallsEkonomiTest
         }
 
         [Test]
-        public void Savings_03_ChecksIfPrecentageIsOverMaxPercentage_ReturnEqual()
+        public void CheckSavings_03_ChecksIfPrecentageIsOverMaxPercentage_ReturnEqual()
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
@@ -66,7 +66,7 @@ namespace HushallsEkonomiTest
         }
 
         [Test]
-        public void Savings_04_ChecksIfListIsNull_ReturnFalse()
+        public void CheckSavings_04_ChecksIfListIsNull_ReturnFalse()
         {
             List<Saving> nullList = new List<Saving>();
             nullList = null;

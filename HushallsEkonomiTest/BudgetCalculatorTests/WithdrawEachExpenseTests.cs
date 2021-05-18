@@ -32,7 +32,7 @@ namespace HushallsEkonomiTest
             BudgetCalculator.totalExpense.Money = 0;
         }
         [Test]
-        public void WithdrawEachExpense_01_CheckIf()
+        public void WithdrawEachExpense_01_CheckIfWithdrawIsSucessfull_ReturnsEqual()
         {
             var expected = Withdraw();
             var actual = bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);

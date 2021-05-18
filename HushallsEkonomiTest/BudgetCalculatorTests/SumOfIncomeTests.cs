@@ -38,7 +38,7 @@ namespace HushallsEkonomiTest
             Assert.IsFalse(actual);
         }
         [Test]
-        public void SumOfIncome_02_CheckIfNoIncomeExists_ReturnsZero()
+        public void SumOfIncome_02_CheckIfNoIncomeExists_ReturnsEqual()
         {
             var income = BudgetCalculator.listOfEconomy.FirstOrDefault(x => x is Income);
             BudgetCalculator.listOfEconomy.Remove(income);
