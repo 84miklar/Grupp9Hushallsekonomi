@@ -146,9 +146,19 @@ namespace HushallsEkonomiTest
         }
         [Test]
         [TestCase(1000, 500)]
-        [TestCase(0,0)]
-        [TestCase(-10,0)]
-        public void CalculatePercentageToMoney_CheckPercentageValue(double income, double expected)
+        [TestCase(500,250)]
+        [TestCase(100,50)]
+        public void CalculatePercentageToMoney_01_CheckPercentageValuePositiveInput_ReturnEqual(double income, double expected)
+        {
+            Savings savings = new Savings("test", 0.5);
+            var actual = savings.CalculatePercentageToMoney(income);
+            Assert.AreEqual(actual, expected);
+        }
+        [Test]
+        [TestCase(-546049, 0)]
+        [TestCase(0, 0)]
+        [TestCase(-10, 0)]
+        public void CalculatePercentageToMoney_02_CheckPercentageValueNegativeInput_ReturnEqual(double income, double expected)
         {
             Savings savings = new Savings("test", 0.5);
             var actual = savings.CalculatePercentageToMoney(income);
@@ -156,9 +166,19 @@ namespace HushallsEkonomiTest
         }
         [Test]
         [TestCase(1000, 500)]
-        [TestCase(0, 0)]
+        [TestCase(500, 250)]
+        [TestCase(100, 50)]
+        public void SumLeftAfterSaving_01_CheckSumLeftPositiveInput_ReturnEqual(double income, double expected)
+        {
+            Savings savings = new Savings("test", 0.5);
+            var actual = savings.SumLeftAfterSaving(income);
+            Assert.AreEqual(actual, expected);
+        }
+        [Test]
+        [TestCase(-54, 0)]
         [TestCase(-10, 0)]
-        public void SumLeftAfterSaving_CheckSumLeft(double income, double expected)
+        [TestCase(0, 0)]
+        public void SumLeftAfterSaving_02_CheckSumLeftNegativeInput_ReturnEqual(double income, double expected)
         {
             Savings savings = new Savings("test", 0.5);
             var actual = savings.SumLeftAfterSaving(income);
@@ -166,7 +186,9 @@ namespace HushallsEkonomiTest
         }
         [Test]
         [TestCase(1000)]
-        public void IsSavingPossible_Success(double income)
+        [TestCase(500)]
+        [TestCase(200)]
+        public void IsSavingPossible_01_CheckWithPositiveInput_ReturnTrue(double income)
         {
             var saving = new Savings("test", 0.5);
             var actual = saving.IsSavingPossible(income);
@@ -174,8 +196,9 @@ namespace HushallsEkonomiTest
         }
         [Test]
         [TestCase(-5)]
+        [TestCase(-40)]
         [TestCase(0)]
-        public void IsSavingPossible_Fail(double income)
+        public void IsSavingPossible_02_CheckWithNegativeInput_ReturnFalse(double income)
         {
             var saving = new Savings("test", 0.5);
             var actual = saving.IsSavingPossible(income);
