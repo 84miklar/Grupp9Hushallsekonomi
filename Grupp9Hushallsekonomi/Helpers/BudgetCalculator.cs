@@ -19,7 +19,7 @@
         Logger log = new Logger();
        
         /// <summary>
-        /// Metod som separerar Income och Outcome från en lista av IAccount.
+        /// Method that separates Income and Expense from a list of IAccount.
         /// </summary>
         /// <param name="listOfEconomy"></param>
         public List<IAccount> SeparateIncomeAndExpense(List<IAccount> listOfEconomy)
@@ -43,9 +43,9 @@
         }
 
         /// <summary>
-        /// Metod som räknar ihop summan av alla inkomster
+        /// Method that calculates the sum of all incomes.
         /// </summary>
-        /// <returns>summan av alla inkomster</returns>
+        /// <returns>Sum of all incomes.</returns>
         public double SumOfIncome(List<IAccount> listToSum)
         {
             try
@@ -61,9 +61,9 @@
         }
 
         /// <summary>
-        /// Metod som räknar ihop summan av alla utgifter
+        /// Method that calculates the sum of all Expenses
         /// </summary>
-        /// <returns>summan av alla utgifter</returns>
+        /// <returns>sum of all Expenses</returns>
         public double SumOfExpense(List<IAccount> listToSum)
         {
             try
