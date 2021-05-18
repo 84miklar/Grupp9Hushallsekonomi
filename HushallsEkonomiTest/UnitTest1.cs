@@ -24,7 +24,7 @@ namespace HushallsEkonomiTest
         [Test]
         public void SumOfIncome_01_ChecksIfIncomeIsLessOrEqualToZero_ReturnFalse()
         {
-            var income = bc.SumOfIncome();
+            var income = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
             var actual = income <= 0;
 
 
@@ -45,7 +45,33 @@ namespace HushallsEkonomiTest
             Assert.IsNull(result);
 
         }
-       
+        [Test]
+        public void SumOfIncome_NegativeResult_01_02()
+        {
+            var actual = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
+            var expected = double.MaxValue;
+            Assert.AreNotEqual(actual, expected);
+        }
+
+        [Test]
+        public void SumOfIncome_NullCheck_01_01()
+        {
+            var income = BudgetCalculator.listOfEconomy.FirstOrDefault(x => x is Income);
+            BudgetCalculator.listOfEconomy.Remove(income);
+            var actual = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
+            var expected = 0;
+            Assert.AreEqual(actual,expected);
+        }
+        
+        [Test]
+        public void SumOfIncome_NullCheck_01_02()
+        {
+            List <IAccount> nullList = new List<IAccount>();
+            nullList = null;
+            var actual = bc.SumOfIncome(nullList);
+            var expected = 0;
+            Assert.AreEqual(actual, expected);
+        }
 
 
         [Test]
@@ -116,11 +142,39 @@ namespace HushallsEkonomiTest
         [Test]
         [TestCase(1000, 500)]
         [TestCase(0,0)]
-        public void CalculatePercentageToMoney_01_CheckPercentageValue_ReturnEqual(double income, double expected)
+        [TestCase(-10,0)]
+        public void CalculatePercentageToMoney_CheckPercentageValue(double income, double expected)
         {
             Savings savings = new Savings("test", 0.5);
             var actual = savings.CalculatePercentageToMoney(income);
             Assert.AreEqual(actual, expected);
+        }
+        [Test]
+        [TestCase(1000, 500)]
+        [TestCase(0, 0)]
+        [TestCase(-10, 0)]
+        public void SumLeftAfterSaving_CheckSumLeft(double income, double expected)
+        {
+            Savings savings = new Savings("test", 0.5);
+            var actual = savings.SumLeftAfterSaving(income);
+            Assert.AreEqual(actual, expected);
+        }
+        [Test]
+        [TestCase(1000)]
+        public void IsSavingPossible_Success(double income)
+        {
+            var saving = new Savings("test", 0.5);
+            var actual = saving.IsSavingPossible(income);
+            Assert.IsTrue(actual);
+        }
+        [Test]
+        [TestCase(-5)]
+        [TestCase(0)]
+        public void IsSavingPossible_Fail(double income)
+        {
+            var saving = new Savings("test", 0.5);
+            var actual = saving.IsSavingPossible(income);
+            Assert.IsFalse(actual);
         }
 
         [TearDown]

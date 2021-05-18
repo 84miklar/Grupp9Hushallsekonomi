@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,7 @@ namespace Grupp9Hushallsekonomi.Helpers
             File.AppendAllText(errorLog, DateTime.Now + ":\r");
             File.AppendAllLines(errorLog, errorMessages);
             File.AppendAllText(errorLog, "\n");
+            Debug.WriteLine(errorLog);
         }
         public void BudgetLog(List<string> boughtItems)
         {

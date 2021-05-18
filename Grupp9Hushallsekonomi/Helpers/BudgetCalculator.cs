@@ -17,12 +17,45 @@ namespace Grupp9Hushallsekonomi
     {
         public static List<IAccount> listOfEconomy = new List<IAccount>();
         public static List<Savings> savings = new List<Savings>();
-        public Outcome totalOutcome = new Outcome();
-        public Income totalIncome = new Income();
-        Logger log = new Logger();
-        public List<string> errorMessages = new List<string>();
         public List<string> boughtItems = new List<string>();
+        public List<string> errorMessages = new List<string>();
+        public Income totalIncome = new Income();
+        public Outcome totalOutcome = new Outcome();
         public double totalSavings = 0;
+        Logger log = new Logger();
+        /// <summary>
+        /// Checks If saving withdraw is possible
+        /// </summary>
+        /// <param name="savingsList"></param>
+        /// <returns>True if savings is withdrawn
+        /// False if list is null</returns>
+        public bool Savings(List<Savings> savingsList)
+        {
+            var moneyLeft = totalIncome.Money;
+            if (moneyLeft > 0 && savingsList != null)
+            {
+                foreach (var saving in savingsList)
+                {
+
+                    if (saving.IsSavingPossible(moneyLeft))
+                    {
+                        moneyLeft -= saving.SumLeftAfterSaving(moneyLeft);
+                        totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
+                        AddStringToBoughtItemsList(saving.Name);
+                        AddStringToBoughtItemsList(saving.SumLeftAfterSaving(moneyLeft).ToString());
+                        AddBoughtItemsListToLogger();
+                    }
+                    else
+                    {
+                        AddStringToErrorMessagesList($"Not enough money for {saving.Name}");
+                        AddErrorMessagesListToLogger(); 
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Metod som separerar Income och Outcome från en lista av IAccount.
         /// </summary>
@@ -48,39 +81,45 @@ namespace Grupp9Hushallsekonomi
         }
 
         /// <summary>
-        /// Metod där varje utgift jämförs med kvarvarande inkomst innan den dras av.
-        /// True = Utgift dras av och loggas till budgetrapport.
-        /// False = Oavdragen utgift loggas till budgetrapport och felmeddelande.
+        /// Metod som räknar ihop summan av alla inkomster
         /// </summary>
-        /// <param name="listOfEconomy"></param>
-        public double WithdrawEachOutcome(List<IAccount> listOfEconomy)
+        /// <returns>summan av alla inkomster</returns>
+        public double SumOfIncome(List<IAccount> listToSum)
         {
-            if (listOfEconomy != null)
+            //var query = (from x 
+            //             in listOfEconomy 
+            //             where x is Income 
+            //             && x != null 
+            //             select x.Money ).Sum();
+            //
+            try
             {
-                foreach (var bill in listOfEconomy)
-                {
-                    if (bill is Outcome && bill.Money <= totalIncome.Money)
-                    {
-                        totalIncome.Money -= bill.Money;
-                        //TODO: Logga bill.Name och bill.Money i budgetrapport.
-                        boughtItems.Add(bill.Name);
-                        boughtItems.Add(bill.Money.ToString());
-                        log.BudgetLog(boughtItems);
-                        boughtItems.Clear();
-                    }
-                    else if (bill is Outcome && bill.Money > totalIncome.Money)
-                    {
-                        //TODO: Logga i felmeddelanden och i budgetrapporten att summa inte dragits.
-                        errorMessages.Add($"Not enough money on account to buy {bill.Name}");
-                        boughtItems.Add($"{bill.Name} {bill.Money} not successfull transaction!");
-                        log.ErrorLog(errorMessages);
-                        log.BudgetLog(boughtItems);
-                        errorMessages.Clear();
-                    }
-                }
-                return totalIncome.Money;
+                return listToSum.Where(x => x is Income).Sum(m => m.Money);
             }
-            return totalIncome.Money;
+            catch (Exception ex)
+            {
+                AddStringToErrorMessagesList(ex.ToString());
+                AddErrorMessagesListToLogger();
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Metod som räknar ihop summan av alla utgifter
+        /// </summary>
+        /// <returns>summan av alla utgifter</returns>
+        public double SumOfOutcome(List<IAccount> listToSum)
+        {
+            try
+            {
+                return listToSum.Where(x => x is Outcome).Sum(m => m.Money);
+            }
+            catch (Exception ex)
+            {
+                AddStringToErrorMessagesList(ex.ToString());
+                AddErrorMessagesListToLogger();
+                return 0;
+            }
         }
 
         /// <summary>
@@ -93,66 +132,94 @@ namespace Grupp9Hushallsekonomi
         }
 
         /// <summary>
-        /// Metod som räknar ihop summan av alla inkomster
+        /// Method where every outcome compares to if there is sufficiant income left, before it is deducted.
+        /// True = Outcome is deducted and logged to budget rapport.
+        /// False = Undeducted outcome is logged to budget rapport and error messages.
         /// </summary>
-        /// <returns>summan av alla inkomster</returns>
-        public double SumOfIncome()
+        /// <param name="listOfEconomy"></param>
+        public double WithdrawEachOutcome(List<IAccount> listOfEconomy)
         {
-            //var query = (from x 
-            //             in listOfEconomy 
-            //             where x is Income 
-            //             && x != null 
-            //             select x.Money ).Sum();
+            if (listOfEconomy != null)
+            {
+                foreach (var bill in listOfEconomy)
+                {
+                    if (bill is Outcome && bill.Money <= totalIncome.Money)
+                    {
+                        SuccessfulReduceIncomeWithOutcome(bill);
+                    }
+                    else if (bill is Outcome && bill.Money > totalIncome.Money)
+                    {
+                        UnsuccessfullReduceIncomeWithOutcome(bill);
+                    }
+                }
+                return totalIncome.Money;
+            }
+            return totalIncome.Money;
+        }
+
+        /// <summary>
+        /// Method for sending boughtItems list to logger.
+        /// </summary>
+        private void AddBoughtItemsListToLogger()
+        {
+            log.BudgetLog(boughtItems);
+        }
+
+        /// <summary>
+        /// Method for sending boughtItems list to logger.
+        /// </summary>
+        private void AddErrorMessagesListToLogger()
+        {
+            log.ErrorLog(errorMessages);
+        }
 
             var sum = listOfEconomy.Where(n => n != null).Where(x => x is Income).Sum(m => m.Money);
             return Math.Abs(sum);
         }
         /// <summary>
-        /// Metod som räknar ihop summan av alla utgifter
+        /// Method for adding a string to the boughtItems list,
+        /// like bill.Name and bill.Money.ToString()"
         /// </summary>
-        /// <returns>summan av alla utgifter</returns>
-        public double SumOfOutcome()
+        /// <param name="textToLog"></param>
+        private void AddStringToBoughtItemsList(string textToLog)
         {
-            return listOfEconomy.Where(n => n != null).Where(x => x is Outcome).Sum(m => m.Money);
+            boughtItems.Add(textToLog);
         }
+
         /// <summary>
-        /// Checks If saving withdraw is possible
+        /// Method for adding a string to the errorMessages list,
+        /// like bill.Name and bill.Money.ToString()"
         /// </summary>
-        /// <param name="savingsList"></param>
-        /// <returns>True if savings is withdrawn
-        /// False if list is null</returns>
-        public bool Savings(List<Savings>savingsList)
+        /// <param name="textToLog"></param>
+        private void AddStringToErrorMessagesList(string textToLog)
         {
+            errorMessages.Add(textToLog);
+        }
 
-            var moneyLeft = totalIncome.Money;
-            const double maxPercentage = 1;
-            if (moneyLeft > 0 && savingsList != null)
-            {
-                foreach (var saving in savingsList)
-                {
-                    var result = moneyLeft * saving.SavingsPercantage;
+        /// <summary>
+        /// Method for reducing the income with an outcome.
+        /// </summary>
+        /// <param name="bill"></param>
+        private void SuccessfulReduceIncomeWithOutcome(IAccount bill)
+        {
+            totalIncome.Money -= bill.Money;
+            AddStringToBoughtItemsList(bill.Name);
+            AddStringToBoughtItemsList(bill.Money.ToString());
+            AddBoughtItemsListToLogger();
+            boughtItems.Clear();
+        }
 
-                    if (moneyLeft > result && saving.SavingsPercantage <= maxPercentage)
-                    {
-
-                        moneyLeft -= result;
-                        totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
-                        boughtItems.Add(saving.Name);
-                        boughtItems.Add(result.ToString());
-                        log.BudgetLog(boughtItems);
-                        
-                    }
-                    else
-                    {
-                        errorMessages.Add($"Not enough money for {saving.Name}");
-                        log.ErrorLog(errorMessages);
-                    }
-                   
-                }
-                return true;
-            }
-            return false;
-
+        /// <summary>
+        /// Method that calls when there is insufficient income to withdraw an outcome.
+        /// </summary>
+        /// <param name="bill"></param>
+        private void UnsuccessfullReduceIncomeWithOutcome(IAccount bill)
+        {
+            AddStringToErrorMessagesList($"Not enough money on account to buy {bill.Name}");
+            AddStringToBoughtItemsList($"{bill.Name} {bill.Money} not successfull transaction!");
+            AddErrorMessagesListToLogger();
+            AddBoughtItemsListToLogger();
+            errorMessages.Clear();
         }
     }
 }
