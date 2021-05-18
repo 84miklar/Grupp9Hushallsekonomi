@@ -12,8 +12,26 @@ namespace HushallsEkonomiTest
 {
     public class SavingTests
     {
+        
         BudgetCalculator bc = new BudgetCalculator();
         Saving savings = new Saving();
+
+        [SetUp]
+        public void SetUp()
+        {
+            Seeder seeder = new Seeder();
+            seeder.FillListWithIncome();
+            seeder.FillListWithOutcome();
+            bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
+
+        }
+        [TearDown]
+        public void Clear()
+        {
+            BudgetCalculator.listOfEconomy.Clear();
+            BudgetCalculator.totalIncome.Money = 0;
+            BudgetCalculator.totalExpense.Money = 0;
+        }
         [Test]
         public void Savings_01_ChecksSuccessfullWithdraw_ReturnTrue()
         {

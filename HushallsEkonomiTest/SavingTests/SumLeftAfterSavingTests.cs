@@ -1,4 +1,6 @@
-﻿using Grupp9Hushallsekonomi.Account;
+﻿using Grupp9Hushallsekonomi;
+using Grupp9Hushallsekonomi.Account;
+using Grupp9Hushallsekonomi.Helpers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,23 @@ namespace HushallsEkonomiTest
 {
     public class SumLeftAfterSavingTests
     {
+        BudgetCalculator bc = new BudgetCalculator();
+        [SetUp]
+        public void SetUp()
+        {
+            Seeder seeder = new Seeder();
+            seeder.FillListWithIncome();
+            seeder.FillListWithOutcome();
+            bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
+
+        }
+        [TearDown]
+        public void Clear()
+        {
+            BudgetCalculator.listOfEconomy.Clear();
+            BudgetCalculator.totalIncome.Money = 0;
+            BudgetCalculator.totalExpense.Money = 0;
+        }
         [Test]
         [TestCase(1000, 500)]
         [TestCase(500, 250)]
