@@ -11,25 +11,75 @@ namespace HushallsEkonomiTest
 {
     public class Tests
     {
-        Savings savings = new Savings();
         BudgetCalculator bc = new BudgetCalculator();
-        [SetUp]
-        public void SetUp()
-        {
-            Seeder seeder = new Seeder();
-            seeder.FillListWithIncome();
-            seeder.FillListWithOutcome();
-            bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
+        Savings savings = new Savings();
+        
 
-        }
+
         [Test]
-        public void SumOfIncome_01_ChecksIfIncomeIsLessOrEqualToZero_ReturnFalse()
+        [TestCase(1000)]
+        [TestCase(500)]
+        [TestCase(200)]
+        public void IsSavingPossible_01_CheckWithPositiveInput_ReturnTrue(double income)
         {
-            BudgetCalculator.listOfEconomy.Add(new Income { Name = "Test", Money = double.MinValue });
-            var income = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
-            var actual = income <= 0;
+            var saving = new Savings("test", 0.5);
+            var actual = saving.IsSavingPossible(income);
+            Assert.IsTrue(actual);
+        }
+
+        [Test]
+        [TestCase(-5)]
+        [TestCase(-40)]
+        [TestCase(0)]
+        public void IsSavingPossible_02_CheckWithNegativeInput_ReturnFalse(double income)
+        {
+            var saving = new Savings("test", 0.5);
+            var actual = saving.IsSavingPossible(income);
             Assert.IsFalse(actual);
         }
+
+        [Test]
+        public void Savings_01_ChecksSuccessfullWithdraw_ReturnTrue()
+        {
+            Seeder seed = new Seeder();
+            seed.FillListWithSavings();
+            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
+            var actual = savings.CheckSavings(BudgetCalculator.savings);
+            Assert.IsTrue(actual);
+        }
+
+        [Test]
+        public void Savings_02_ChecksUnsuccessfullWithdraw_ReturnFalse()
+        {
+            Seeder seed = new Seeder();
+            seed.FillListWithSavings();
+            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
+            BudgetCalculator.totalIncome.Money = 0;
+            var actual = savings.CheckSavings(BudgetCalculator.savings);
+            Assert.IsFalse(actual);
+        }
+
+        [Test]
+        public void Savings_03_ChecksIfPrecentageIsOverMaxPercentage_ReturnEqual()
+        {
+            Seeder seed = new Seeder();
+            seed.FillListWithSavings();
+            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
+            BudgetCalculator.savings.Add(new Savings("Error", 1.1));
+            var actual = savings.CheckSavings(BudgetCalculator.savings);
+            var expected = BudgetCalculator.totalIncome.Money >= 0;
+            Assert.AreEqual(actual, expected);
+        }
+
+        [Test]
+        public void Savings_04_ChecksIfListIsNull_ReturnFalse()
+        {
+            List<Savings> nullList = new List<Savings>();
+            nullList = null;
+            var actual = savings.CheckSavings(nullList);
+            Assert.IsFalse(actual);
+        }
+
         [Test]
         public void SeparateIncomeAndOutcome_01_CheckIfListIsNull_ReturnNull()
         {
@@ -40,23 +90,34 @@ namespace HushallsEkonomiTest
 
         }
 
-        [Test]
-        public void SumOfIncome_02_CheckIfNoIncomeExists_ReturnsZero()
+        [SetUp]
+        public void SetUp()
         {
-            var income = BudgetCalculator.listOfEconomy.FirstOrDefault(x => x is Income);
-            BudgetCalculator.listOfEconomy.Remove(income);
-            var actual = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
-            var expected = 0;
-            Assert.AreEqual(actual,expected);
+            Seeder seeder = new Seeder();
+            seeder.FillListWithIncome();
+            seeder.FillListWithOutcome();
+            bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
+
         }
-        
         [Test]
-        public void SumOfIncome_NullCheck_01_02()
+        [TestCase(1000, 500)]
+        [TestCase(500, 250)]
+        [TestCase(100, 50)]
+        public void SumLeftAfterSaving_01_CheckSumLeftPositiveInput_ReturnEqual(double income, double expected)
         {
-            List <IAccount> nullList = new List<IAccount>();
-            nullList = null;
-            var actual = bc.SumOfIncome(nullList);
-            var expected = 0;
+            Savings savings = new Savings("test", 0.5);
+            var actual = savings.SumLeftAfterSaving(income);
+            Assert.AreEqual(actual, expected);
+        }
+
+        [Test]
+        [TestCase(-54, 0)]
+        [TestCase(-10, 0)]
+        [TestCase(0, 0)]
+        public void SumLeftAfterSaving_02_CheckSumLeftNegativeInput_ReturnEqual(double income, double expected)
+        {
+            Savings savings = new Savings("test", 0.5);
+            var actual = savings.SumLeftAfterSaving(income);
             Assert.AreEqual(actual, expected);
         }
 
@@ -88,105 +149,6 @@ namespace HushallsEkonomiTest
             var actual = bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(actual, expected);
         }
-        [Test]
-        public void Savings_01_ChecksSuccessfullWithdraw_ReturnTrue()
-        {
-            Seeder seed = new Seeder();
-            seed.FillListWithSavings();
-            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
-            var actual = savings.CheckSavings(BudgetCalculator.savings);
-            Assert.IsTrue(actual);
-        }
-        [Test]
-        public void Savings_02_ChecksUnsuccessfullWithdraw_ReturnFalse()
-        {
-            Seeder seed = new Seeder();
-            seed.FillListWithSavings();
-            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
-            BudgetCalculator.totalIncome.Money = 0;
-            var actual = savings.CheckSavings(BudgetCalculator.savings);
-            Assert.IsFalse(actual);
-        }
-        [Test]
-        public void Savings_03_ChecksIfPrecentageIsOverMaxPercentage_ReturnEqual()
-        {
-            Seeder seed = new Seeder();
-            seed.FillListWithSavings();
-            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
-            BudgetCalculator.savings.Add(new Savings("Error", 1.1));
-            var actual = savings.CheckSavings(BudgetCalculator.savings);
-            var expected = BudgetCalculator.totalIncome.Money >= 0;
-            Assert.AreEqual(actual, expected);
-        }
-        [Test]
-        public void Savings_04_ChecksIfListIsNull_ReturnFalse()
-        {
-            List<Savings> nullList = new List<Savings>();
-            nullList = null;
-            var actual = savings.CheckSavings(nullList);
-            Assert.IsFalse(actual);
-        }
-        [Test]
-        [TestCase(1000, 500)]
-        [TestCase(500,250)]
-        [TestCase(100,50)]
-        public void CalculatePercentageToMoney_01_CheckPercentageValuePositiveInput_ReturnEqual(double income, double expected)
-        {
-            Savings savings = new Savings("test", 0.5);
-            var actual = savings.CalculatePercentageToMoney(income);
-            Assert.AreEqual(actual, expected);
-        }
-        [Test]
-        [TestCase(-546049, 0)]
-        [TestCase(0, 0)]
-        [TestCase(-10, 0)]
-        public void CalculatePercentageToMoney_02_CheckPercentageValueNegativeInput_ReturnEqual(double income, double expected)
-        {
-            Savings savings = new Savings("test", 0.5);
-            var actual = savings.CalculatePercentageToMoney(income);
-            Assert.AreEqual(actual, expected);
-        }
-        [Test]
-        [TestCase(1000, 500)]
-        [TestCase(500, 250)]
-        [TestCase(100, 50)]
-        public void SumLeftAfterSaving_01_CheckSumLeftPositiveInput_ReturnEqual(double income, double expected)
-        {
-            Savings savings = new Savings("test", 0.5);
-            var actual = savings.SumLeftAfterSaving(income);
-            Assert.AreEqual(actual, expected);
-        }
-        [Test]
-        [TestCase(-54, 0)]
-        [TestCase(-10, 0)]
-        [TestCase(0, 0)]
-        public void SumLeftAfterSaving_02_CheckSumLeftNegativeInput_ReturnEqual(double income, double expected)
-        {
-            Savings savings = new Savings("test", 0.5);
-            var actual = savings.SumLeftAfterSaving(income);
-            Assert.AreEqual(actual, expected);
-        }
-        [Test]
-        [TestCase(1000)]
-        [TestCase(500)]
-        [TestCase(200)]
-        public void IsSavingPossible_01_CheckWithPositiveInput_ReturnTrue(double income)
-        {
-            var saving = new Savings("test", 0.5);
-            var actual = saving.IsSavingPossible(income);
-            Assert.IsTrue(actual);
-        }
-        [Test]
-        [TestCase(-5)]
-        [TestCase(-40)]
-        [TestCase(0)]
-        public void IsSavingPossible_02_CheckWithNegativeInput_ReturnFalse(double income)
-        {
-            var saving = new Savings("test", 0.5);
-            var actual = saving.IsSavingPossible(income);
-            Assert.IsFalse(actual);
-        }
-
         [TearDown]
         public void Clear()
         {
@@ -194,6 +156,5 @@ namespace HushallsEkonomiTest
             BudgetCalculator.totalIncome.Money = 0;
             BudgetCalculator.totalExpense.Money = 0;
         }
-
     }
 }
