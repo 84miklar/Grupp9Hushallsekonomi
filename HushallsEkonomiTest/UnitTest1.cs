@@ -22,7 +22,7 @@ namespace HushallsEkonomiTest
 
         }
         [Test]
-        public void SumOfIncome_NegativeResult_01_01()
+        public void SumOfIncome_01_ChecksIfIncomeIsLessOrEqualToZero_ReturnFalse()
         {
             var income = bc.SumOfIncome();
             var actual = income <= 0;
@@ -31,7 +31,13 @@ namespace HushallsEkonomiTest
             Assert.IsFalse(actual);
         }
         [Test]
-        public void SeparateIncomeAndOutcome_NegativeResult_01_02()
+        public void SumOfIncome_02_ChecksIfIncomeIsBiggerThanZero_ReturnTrue()
+        {
+            BudgetCalculator.listOfEconomy.Add( new Income() { Money = double.MaxValue + 1, Name = "test" });
+            Assert.IsTrue(bc.SumOfIncome() > 0);
+        }
+        [Test]
+        public void SeparateIncomeAndOutcome_01_CheckIfListIsNull_ReturnNull()
         {
             List<IAccount> nullList = new List<IAccount>();
             nullList = null;
@@ -39,17 +45,11 @@ namespace HushallsEkonomiTest
             Assert.IsNull(result);
 
         }
-        [Test]
-        public void SumOfIncome_NegativeResult_01_02()
-        {
-            var actual = bc.SumOfIncome();
-            var expected = double.MaxValue;
-            Assert.AreNotEqual(actual, expected);
-        }
+       
 
 
         [Test]
-        public void WithdrawEachOutcome_PositiveResult_01()
+        public void WithdrawEachOutcome_01_CheckIf()
         {
             var expected = bc.Withdraw();
             var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
@@ -57,7 +57,7 @@ namespace HushallsEkonomiTest
         }
 
         [Test]
-        public void WithdrawEachOutcome_CheckIfListIsNull()
+        public void WithdrawEachOutcome_02_CheckIfListIsNull_ReturnNotEqual()
         {
             var expected = bc.Withdraw();
             List<IAccount> nullList = new List<IAccount>();
@@ -68,7 +68,7 @@ namespace HushallsEkonomiTest
 
         [TestCase(double.MaxValue)]
         [Test]
-        public void WithdrawEachOutcome_CheckOutcomeLargerThanIncome(double outcome)
+        public void WithdrawEachOutcome_03_CheckOutcomeLargerThanIncome_ReturnEqual(double outcome)
         {
             var expected = bc.Withdraw();
             BudgetCalculator.listOfEconomy.Add(new Outcome() { Name = "VeryLargeBill", Money = outcome });
@@ -76,7 +76,7 @@ namespace HushallsEkonomiTest
             Assert.AreEqual(actual, expected);
         }
         [Test]
-        public void Savings_ChecksSuccessfullWithdraw()
+        public void Savings_01_ChecksSuccessfullWithdraw_ReturnTrue()
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
@@ -85,7 +85,7 @@ namespace HushallsEkonomiTest
             Assert.IsTrue(actual);
         }
         [Test]
-        public void Savings_ChecksUnsuccessfullWithdraw()
+        public void Savings_02_ChecksUnsuccessfullWithdraw_ReturnFalse()
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
@@ -95,7 +95,7 @@ namespace HushallsEkonomiTest
             Assert.IsFalse(actual);
         }
         [Test]
-        public void Savings_ChecksIfPrecentageIsOverMaxPercentage()
+        public void Savings_03_ChecksIfPrecentageIsOverMaxPercentage_ReturnEqual()
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
@@ -106,7 +106,7 @@ namespace HushallsEkonomiTest
             Assert.AreEqual(actual, expected);
         }
         [Test]
-        public void Savings_ChecksIfListIsNull()
+        public void Savings_04_ChecksIfListIsNull_ReturnFalse()
         {
             List<Savings> nullList = new List<Savings>();
             nullList = null;
@@ -116,7 +116,7 @@ namespace HushallsEkonomiTest
         [Test]
         [TestCase(1000, 500)]
         [TestCase(0,0)]
-        public void CalculatePercentageToMoney_CheckPercentageValue(double income, double expected)
+        public void CalculatePercentageToMoney_01_CheckPercentageValue_ReturnEqual(double income, double expected)
         {
             Savings savings = new Savings("test", 0.5);
             var actual = savings.CalculatePercentageToMoney(income);

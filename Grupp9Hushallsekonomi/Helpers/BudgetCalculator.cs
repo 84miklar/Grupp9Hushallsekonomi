@@ -104,7 +104,8 @@ namespace Grupp9Hushallsekonomi
             //             && x != null 
             //             select x.Money ).Sum();
 
-            return listOfEconomy.Where(n => n != null).Where(x => x is Income).Sum(m => m.Money);
+            var sum = listOfEconomy.Where(n => n != null).Where(x => x is Income).Sum(m => m.Money);
+            return Math.Abs(sum);
         }
         /// <summary>
         /// Metod som räknar ihop summan av alla utgifter
