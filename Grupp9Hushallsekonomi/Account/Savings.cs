@@ -87,26 +87,64 @@ namespace Grupp9Hushallsekonomi.Account
             var moneyLeft = BudgetCalculator.totalIncome.Money;
             if (moneyLeft > 0 && savingsList != null)
             {
-                foreach (var saving in savingsList)
-                {
-
-                    if (saving.IsSavingPossible(moneyLeft))
-                    {
-                        moneyLeft -= saving.SumLeftAfterSaving(moneyLeft);
-                        totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
-                        log.AddStringToBoughtItemsList(saving.Name);
-                        log.AddStringToBoughtItemsList(saving.SumLeftAfterSaving(moneyLeft).ToString());
-                        log.AddBoughtItemsListToLogger();
-                    }
-                    else
-                    {
-                        log.AddStringToErrorMessagesList($"Not enough money for {saving.Name}");
-                        log.AddErrorMessagesListToLogger();
-                    }
-                }
-                return true;
+                return CheckifSavingIsPossibleAndLog(savingsList, ref totalSavings, log, ref moneyLeft);
             }
             return false;
+        }
+
+        /// <summary>
+        /// Checks if a saving is possible to withdraw, and logs it.
+        /// </summary>
+        /// <param name="savingsList"></param>
+        /// <param name="totalSavings"></param>
+        /// <param name="log"></param>
+        /// <param name="moneyLeft"></param>
+        /// <returns>true if saving is withdrawn from expenses.</returns>
+        private static bool CheckifSavingIsPossibleAndLog(List<Savings> savingsList, ref double totalSavings, Logger log, ref double moneyLeft)
+        {
+            foreach (var saving in savingsList)
+            {
+                if (saving.IsSavingPossible(moneyLeft))
+                {
+                    SavingIsPossible(ref totalSavings, log, ref moneyLeft, saving);
+                }
+                else
+                {
+                    SavingIsNotPossible(log, saving);
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Saving is not possible due to lack of income.
+        /// Logs as an error.
+        /// </summary>
+        /// <param name="log"></param>
+        /// <param name="saving"></param>
+        private static void SavingIsNotPossible(Logger log, Savings saving)
+        {
+            log.AddStringToErrorMessagesList($"Not enough money for {saving.Name}");
+            log.AddErrorMessagesListToLogger();
+        }
+
+        /// <summary>
+        /// Saving is possible due to enough money left.
+        /// MoneyLeft is reduced.
+        /// TotalSavings is increased.
+        /// Outcome is logged.
+        /// </summary>
+        /// <param name="totalSavings"></param>
+        /// <param name="log"></param>
+        /// <param name="moneyLeft"></param>
+        /// <param name="saving"></param>
+        private static void SavingIsPossible(ref double totalSavings, Logger log, ref double moneyLeft, Savings saving)
+        {
+            moneyLeft -= saving.SumLeftAfterSaving(moneyLeft);
+            totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
+            log.AddStringToBoughtItemsList(saving.Name);
+            log.AddStringToBoughtItemsList(saving.SumLeftAfterSaving(moneyLeft).ToString());
+            log.AddBoughtItemsListToLogger();
         }
     }
 }
