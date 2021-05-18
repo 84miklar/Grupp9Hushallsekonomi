@@ -38,16 +38,22 @@ namespace Grupp9Hushallsekonomi.Helpers
         }
         public bool IsSavingPossible(double income)
         {
-            if (income > 0)
-            {
+            return income > 0 ? CheckSumAfterSavingAndSavingsPercentage(income) : false;
+            //if (income > 0)
+            //{
+            //    return CheckSumAfterSavingAndSavingsPercentage(income);
+            //    //if (sumAfterSaving >= 0 && SavingsPercantage <= MaxPercentage)
+            //    //{
+            //    //    return true;
+            //    //}
+            //}
+            //return false;
+        }
 
-                var sumAfterSaving = SumLeftAfterSaving(income);
-                if (sumAfterSaving >= 0 && SavingsPercantage <= MaxPercentage)
-                {
-                    return true;
-                }
-            }
-            return false;
+        private bool CheckSumAfterSavingAndSavingsPercentage(double income)
+        {
+            var sumAfterSaving = SumLeftAfterSaving(income);
+            return sumAfterSaving >= 0 && SavingsPercantage <= MaxPercentage ? true : false;
         }
     }
 }
