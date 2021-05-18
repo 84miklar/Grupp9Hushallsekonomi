@@ -10,6 +10,8 @@ namespace Grupp9Hushallsekonomi.Helpers
 {
     public class Logger
     {
+        public List<string> boughtItems = new List<string>();
+        public List<string> errorMessages = new List<string>();
         public void ErrorLog(List<string> errorMessages)
         {
             var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
@@ -26,6 +28,43 @@ namespace Grupp9Hushallsekonomi.Helpers
             File.AppendAllText(budgetLog, DateTime.Now + ":\r");
             File.AppendAllLines(budgetLog, boughtItems);
             File.AppendAllText(budgetLog, "\n");
+        }
+
+        /// <summary>
+        /// Method for sending boughtItems list to logger.
+        /// </summary>
+        public void AddBoughtItemsListToLogger()
+        {
+            BudgetLog(boughtItems);
+        }
+
+        /// <summary>
+        /// Method for sending boughtItems list to logger.
+        /// </summary>
+        public void AddErrorMessagesListToLogger()
+        {
+            ErrorLog(errorMessages);
+        }
+
+
+        /// <summary>
+        /// Method for adding a string to the boughtItems list,
+        /// like bill.Name and bill.Money.ToString()"
+        /// </summary>
+        /// <param name="textToLog"></param>
+        public void AddStringToBoughtItemsList(string textToLog)
+        {
+            boughtItems.Add(textToLog);
+        }
+
+        /// <summary>
+        /// Method for adding a string to the errorMessages list,
+        /// like bill.Name and bill.Money.ToString()"
+        /// </summary>
+        /// <param name="textToLog"></param>
+        public void AddStringToErrorMessagesList(string textToLog)
+        {
+            errorMessages.Add(textToLog);
         }
     }
 }

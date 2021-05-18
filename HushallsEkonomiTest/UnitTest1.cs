@@ -11,6 +11,7 @@ namespace HushallsEkonomiTest
 {
     public class Tests
     {
+        Savings savings = new Savings();
         BudgetCalculator bc = new BudgetCalculator();
         [SetUp]
         public void SetUp()
@@ -18,7 +19,7 @@ namespace HushallsEkonomiTest
             Seeder seeder = new Seeder();
             seeder.FillListWithIncome();
             seeder.FillListWithOutcome();
-            bc.SeparateIncomeAndOutcome(BudgetCalculator.listOfEconomy);
+            bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
 
         }
         [Test]
@@ -41,7 +42,7 @@ namespace HushallsEkonomiTest
         {
             List<IAccount> nullList = new List<IAccount>();
             nullList = null;
-            var result = bc.SeparateIncomeAndOutcome(nullList);
+            var result = bc.SeparateIncomeAndExpense(nullList);
             Assert.IsNull(result);
 
         }
@@ -82,7 +83,7 @@ namespace HushallsEkonomiTest
         public void WithdrawEachOutcome_01_CheckIf()
         {
             var expected = bc.Withdraw();
-            var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
+            var actual = bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(expected, actual);
         }
 
@@ -92,7 +93,7 @@ namespace HushallsEkonomiTest
             var expected = bc.Withdraw();
             List<IAccount> nullList = new List<IAccount>();
             nullList = null;
-            var actual = bc.WithdrawEachOutcome(nullList);
+            var actual = bc.WithdrawEachExpense(nullList);
             Assert.AreNotEqual(expected, actual);
         }
 
@@ -101,8 +102,8 @@ namespace HushallsEkonomiTest
         public void WithdrawEachOutcome_03_CheckOutcomeLargerThanIncome_ReturnEqual(double outcome)
         {
             var expected = bc.Withdraw();
-            BudgetCalculator.listOfEconomy.Add(new Outcome() { Name = "VeryLargeBill", Money = outcome });
-            var actual = bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
+            BudgetCalculator.listOfEconomy.Add(new Expense() { Name = "VeryLargeBill", Money = outcome });
+            var actual = bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(actual, expected);
         }
         [Test]
@@ -110,8 +111,8 @@ namespace HushallsEkonomiTest
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
-            bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
-            var actual = bc.Savings(BudgetCalculator.savings);
+            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
+            var actual = savings.CheckSavings(BudgetCalculator.savings);
             Assert.IsTrue(actual);
         }
         [Test]
@@ -119,9 +120,9 @@ namespace HushallsEkonomiTest
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
-            bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
-            bc.totalIncome.Money = 0;
-            var actual = bc.Savings(BudgetCalculator.savings);
+            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
+            BudgetCalculator.totalIncome.Money = 0;
+            var actual = savings.CheckSavings(BudgetCalculator.savings);
             Assert.IsFalse(actual);
         }
         [Test]
@@ -129,10 +130,10 @@ namespace HushallsEkonomiTest
         {
             Seeder seed = new Seeder();
             seed.FillListWithSavings();
-            bc.WithdrawEachOutcome(BudgetCalculator.listOfEconomy);
+            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             BudgetCalculator.savings.Add(new Savings("Error", 1.1));
-            var actual = bc.Savings(BudgetCalculator.savings);
-            var expected = bc.totalIncome.Money >= 0;
+            var actual = savings.CheckSavings(BudgetCalculator.savings);
+            var expected = BudgetCalculator.totalIncome.Money >= 0;
             Assert.AreEqual(actual, expected);
         }
         [Test]
@@ -140,7 +141,7 @@ namespace HushallsEkonomiTest
         {
             List<Savings> nullList = new List<Savings>();
             nullList = null;
-            var actual = bc.Savings(nullList);
+            var actual = savings.CheckSavings(nullList);
             Assert.IsFalse(actual);
         }
         [Test]
@@ -185,8 +186,8 @@ namespace HushallsEkonomiTest
         public void Clear()
         {
             BudgetCalculator.listOfEconomy.Clear();
-            bc.totalIncome.Money = 0;
-            bc.totalOutcome.Money = 0;
+            BudgetCalculator.totalIncome.Money = 0;
+            BudgetCalculator.totalExpense.Money = 0;
         }
 
     }
