@@ -25,17 +25,10 @@ namespace HushallsEkonomiTest
         [Test]
         public void SumOfIncome_01_ChecksIfIncomeIsLessOrEqualToZero_ReturnFalse()
         {
+            BudgetCalculator.listOfEconomy.Add(new Income { Name = "Test", Money = double.MinValue });
             var income = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
             var actual = income <= 0;
-
-
             Assert.IsFalse(actual);
-        }
-        [Test]
-        public void SumOfIncome_02_ChecksIfIncomeIsBiggerThanZero_ReturnTrue()
-        {
-            BudgetCalculator.listOfEconomy.Add( new Income() { Money = double.MaxValue + 1, Name = "test" });
-            Assert.IsTrue(bc.SumOfIncome(BudgetCalculator.listOfEconomy) > 0);
         }
         [Test]
         public void SeparateIncomeAndOutcome_01_CheckIfListIsNull_ReturnNull()
@@ -47,19 +40,8 @@ namespace HushallsEkonomiTest
 
         }
 
-       
-
         [Test]
-        public void SumOfIncome_NegativeResult_01_02()
-        {
-            var actual = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
-            var expected = double.MaxValue;
-            Assert.AreNotEqual(actual, expected);
-        }
-
-
-        [Test]
-        public void SumOfIncome_NullCheck_01_01()
+        public void SumOfIncome_02_CheckIfNoIncomeExists_ReturnsZero()
         {
             var income = BudgetCalculator.listOfEconomy.FirstOrDefault(x => x is Income);
             BudgetCalculator.listOfEconomy.Remove(income);

@@ -54,7 +54,7 @@ namespace Grupp9Hushallsekonomi
         {
             try
             {
-                return listToSum.Where(x => x is Income).Sum(m => m.Money);
+                return listToSum.Where(x => x is Income).Where(i => i.Money > 0).Sum(m => m.Money);
             }
             catch (Exception ex)
             {
