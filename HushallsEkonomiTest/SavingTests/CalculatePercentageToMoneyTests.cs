@@ -14,7 +14,7 @@ namespace HushallsEkonomiTest
         [TestCase(100, 50)]
         public void CalculatePercentageToMoney_01_CheckPercentageValuePositiveInput_ReturnEqual(double income, double expected)
         {
-            Savings savings = new Savings("test", 0.5);
+            Saving savings = new Saving("test", 0.5);
             var actual = savings.CalculatePercentageToMoney(income);
             Assert.AreEqual(actual, expected);
         }
@@ -25,7 +25,7 @@ namespace HushallsEkonomiTest
         [TestCase(-10, 0)]
         public void CalculatePercentageToMoney_02_CheckPercentageValueNegativeInput_ReturnEqual(double income, double expected)
         {
-            Savings savings = new Savings("test", 0.5);
+            Saving savings = new Saving("test", 0.5);
             var actual = savings.CalculatePercentageToMoney(income);
             Assert.AreEqual(actual, expected);
         }
