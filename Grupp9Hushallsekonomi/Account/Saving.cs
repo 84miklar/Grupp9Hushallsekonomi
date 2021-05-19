@@ -130,8 +130,7 @@
         {
             moneyLeft -= saving.SumLeftAfterSaving(moneyLeft);
             totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
-            log.AddStringToBoughtItemsList(saving.Name);
-            log.AddStringToBoughtItemsList(saving.SumLeftAfterSaving(moneyLeft).ToString());
+            log.AddStringToBoughtItemsList($"Saving: {saving.Name} {saving.SumLeftAfterSaving(moneyLeft)}\n");
         }
 
         /// <summary>

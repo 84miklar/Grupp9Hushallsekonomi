@@ -25,9 +25,10 @@
         /// like bill.Name and bill.Money.ToString()"
         /// </summary>
         /// <param name="textToLog"></param>
-        public void AddStringToBoughtItemsList(string textToLog)
+        public void AddStringToBoughtItemsList(string itemName, string itemValue = "")
         {
-            boughtItems.Add(textToLog);
+            boughtItems.Add(itemName);
+            boughtItems.Add(itemValue);
             AddBoughtItemsListToLogger();
         }
 
@@ -67,6 +68,7 @@
             File.AppendAllLines(errorLog, errorMessages);
             File.AppendAllText(errorLog, "\n");
             WriteToDebug(errorLog);
+            
         }
 
         /// <summary>

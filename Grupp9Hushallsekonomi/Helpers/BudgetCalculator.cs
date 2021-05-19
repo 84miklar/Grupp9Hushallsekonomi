@@ -117,8 +117,7 @@
         private void SuccessfulReduceIncomeWithExpense(IAccount bill)
         {
             totalIncome.Money -= bill.Money;
-            log.AddStringToBoughtItemsList(bill.Name);
-            log.AddStringToBoughtItemsList(bill.Money.ToString());
+            log.AddStringToBoughtItemsList(bill.Name, bill.Money.ToString());
             log.boughtItems.Clear();
         }
 
@@ -128,7 +127,7 @@
         /// <param name="bill"></param>
         private void UnsuccessfullReduceIncomeWithExpense(IAccount bill)
         {
-            log.AddStringToErrorMessagesList($"Not enough money on account to buy {bill.Name}");
+            log.AddStringToErrorMessagesList($"Not enough money on account to buy {bill.Name} {bill.Money}");
             log.AddStringToBoughtItemsList($"{bill.Name} {bill.Money} not successfull transaction!");
             log.errorMessages.Clear();
         }
