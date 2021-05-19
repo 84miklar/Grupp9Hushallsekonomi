@@ -55,8 +55,8 @@
 
             try
             {
-                return moneyLeft > 0 && savingsList != null &&
-                CheckifSavingIsPossibleAndLog(savingsList, ref totalSavings, log, ref moneyLeft);
+                return BudgetCalculator.totalIncome.Money > 0 && savingsList != null &&
+                CheckifSavingIsPossibleAndLog(savingsList, ref totalSavings, log);
             }
             catch (System.Exception ex)
             {
@@ -92,13 +92,13 @@
         /// <param name="log"></param>
         /// <param name="moneyLeft"></param>
         /// <returns>true if saving is withdrawn from expenses.</returns>
-        private static bool CheckifSavingIsPossibleAndLog(List<Saving> savingsList, ref double totalSavings, Logger log, ref double moneyLeft)
+        private static bool CheckifSavingIsPossibleAndLog(List<Saving> savingsList, ref double totalSavings, Logger log)
         {
             foreach (var saving in savingsList)
             {
-                if (saving.IsSavingPossible(moneyLeft))
+                if (saving.IsSavingPossible(BudgetCalculator.totalIncome.Money))
                 {
-                    SavingIsPossible(ref totalSavings, log, ref moneyLeft, saving);
+                    SavingIsPossible(ref totalSavings, log, saving);
                 }
                 SavingIsNotPossible(log, saving);
             }
@@ -126,11 +126,11 @@
         /// <param name="log"></param>
         /// <param name="moneyLeft"></param>
         /// <param name="saving"></param>
-        private static void SavingIsPossible(ref double totalSavings, Logger log, ref double moneyLeft, Saving saving)
+        private static void SavingIsPossible(ref double totalSavings, Logger log, Saving saving)
         {
-            moneyLeft -= saving.SumLeftAfterSaving(moneyLeft);
-            totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
-            log.AddStringToBoughtItemsList($"Saving: {saving.Name} {saving.SumLeftAfterSaving(moneyLeft)}\n");
+            BudgetCalculator.totalIncome.Money -= saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money);
+            totalSavings += saving.CalculatePercentageToMoney(BudgetCalculator.totalIncome.Money);
+            log.AddStringToBoughtItemsList($"Saving: {saving.Name}", $"{saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money)}");
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 ﻿namespace Grupp9Hushallsekonomi.Helpers
 {
+    using Grupp9Hushallsekonomi.Account;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -27,8 +28,11 @@
         /// <param name="textToLog"></param>
         public void AddStringToBoughtItemsList(string itemName, string itemValue = "")
         {
+            
             boughtItems.Add(itemName);
-            boughtItems.Add(itemValue);
+            boughtItems.Add(itemValue + " KR");
+            boughtItems.Add($"Money left: {BudgetCalculator.totalIncome.Money}");
+            boughtItems.Add("----------------------");
             AddBoughtItemsListToLogger();
         }
 
@@ -40,6 +44,7 @@
         public void AddStringToErrorMessagesList(string textToLog)
         {
             errorMessages.Add(textToLog);
+            errorMessages.Add("----------------------");
             AddErrorMessagesListToLogger();
         }
 

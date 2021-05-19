@@ -23,9 +23,9 @@ namespace HushallsEkonomiTest.SavingTests.LogTests
         [Test]
         public void AddStringToErrorMessageList_02_CheckIfListContainsErrorMessage_ReturnsNotEqual()
         {
-            log.AddStringToErrorMessagesList("Fail");
-            var actual = log.errorMessages.FirstOrDefault(e => e.Contains("Fail"));
-            var expected = "LoggerTests";
+            log.AddStringToErrorMessagesList("Test");
+            var actual = log.errorMessages.FirstOrDefault(e => e.Contains("Test"));
+            var expected = "Fail";
             Assert.AreNotEqual(actual, expected);
             log.errorMessages.Clear();
         }
