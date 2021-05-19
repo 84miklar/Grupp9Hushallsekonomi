@@ -24,20 +24,27 @@
         /// <param name="listOfEconomy"></param>
         public List<IAccount> SeparateIncomeAndExpense(List<IAccount> listOfEconomy)
         {
-            if (listOfEconomy != null)
+            try
             {
-                foreach (var item in listOfEconomy)
+                if (listOfEconomy != null)
                 {
-                    if (item is Expense)
+                    foreach (var item in listOfEconomy)
                     {
-                        totalExpense.Money += item.Money;
+                        if (item is Expense)
+                        {
+                            totalExpense.Money += item.Money;
+                        }
+                        if (item is Income)
+                        {
+                            totalIncome.Money += item.Money;
+                        }
                     }
-                    if (item is Income)
-                    {
-                        totalIncome.Money += item.Money;
-                    }
+                    return listOfEconomy;
                 }
-                return listOfEconomy;
+            }
+            catch (Exception ex)
+            {
+                log.AddStringToErrorMessagesList(ex.Message);
             }
             return null;
         }
@@ -55,8 +62,8 @@
             catch (Exception ex)
             {
                 log.AddStringToErrorMessagesList(ex.Message);
-                return 0;
             }
+            return 0;
         }
 
         /// <summary>
@@ -72,8 +79,8 @@
             catch (Exception ex)
             {
                 log.AddStringToErrorMessagesList(ex.Message);
-                return 0;
             }
+            return 0;
         }
         /// <summary>
         /// Method where every outcome compares to if there is sufficiant income left, before it is deducted.
@@ -83,10 +90,17 @@
         /// <param name="listOfEconomy"></param>
         public double WithdrawEachExpense(List<IAccount> listOfEconomy)
         {
-            if (listOfEconomy != null)
+            try
             {
-                CheckIfExpenseWithdrawIsPossible(listOfEconomy);
-                return totalIncome.Money;
+                if (listOfEconomy != null)
+                {
+                    CheckIfExpenseWithdrawIsPossible(listOfEconomy);
+                    return totalIncome.Money;
+                }
+            }
+            catch (Exception ex)
+            {
+                log.AddStringToErrorMessagesList(ex.Message);
             }
             return totalIncome.Money;
         }
