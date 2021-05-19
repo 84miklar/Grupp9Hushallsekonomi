@@ -6,28 +6,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HushallsEkonomiTest.SavingTests.LogTests
+namespace HushallsEkonomiTest.LoggerTests
 {
-    public class AddStringToErrorMessageListTests
+    public class AddStringToBoughtItemListTests
     {
         Logger log = new Logger();
         [Test]
         public void AddStringToErrorMessageList_01_CheckIfListContainsErrorMessage_ReturnsEqual()
         {
-            log.AddStringToErrorMessagesList("LoggerTests");
-            var actual = log.errorMessages.FirstOrDefault(e => e.Contains("LoggerTests"));
+            log.AddStringToBoughtItemsList("LoggerTests");
+            var actual = log.boughtItems.FirstOrDefault(e => e.Contains("LoggerTests"));
             var expected = "LoggerTests";
             Assert.AreEqual(actual, expected);
-            log.errorMessages.Clear();
+            log.boughtItems.Clear();
         }
         [Test]
         public void AddStringToErrorMessageList_02_CheckIfListContainsErrorMessage_ReturnsNotEqual()
         {
-            log.AddStringToErrorMessagesList("Test");
-            var actual = log.errorMessages.FirstOrDefault(e => e.Contains("Test"));
+            log.AddStringToBoughtItemsList("Test");
+            var actual = log.boughtItems.FirstOrDefault(e => e.Contains("Test"));
             var expected = "Fail";
             Assert.AreNotEqual(actual, expected);
-            log.errorMessages.Clear();
+            log.boughtItems.Clear();
         }
     }
 }

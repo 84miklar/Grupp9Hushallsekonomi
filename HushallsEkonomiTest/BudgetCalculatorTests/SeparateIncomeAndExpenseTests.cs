@@ -19,7 +19,7 @@ namespace HushallsEkonomiTest
         {
             Seeder seeder = new Seeder();
             seeder.FillListWithIncome();
-            seeder.FillListWithOutcome();
+            seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
         }
         [TearDown]

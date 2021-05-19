@@ -20,7 +20,7 @@ namespace HushallsEkonomiTest
         {
             Seeder seeder = new Seeder();
             seeder.FillListWithIncome();
-            seeder.FillListWithOutcome();
+            seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
 
         }
@@ -58,11 +58,19 @@ namespace HushallsEkonomiTest
             var actual = bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(actual, expected);
         }
+        [Test]
+        public void WithdrawEachExpense_04_CheckIfListIsEmpty_ReturnEqual()
+        {
+            var emptyList = new List<IAccount>();
+            var actual = bc.WithdrawEachExpense(emptyList);
+            var expected = BudgetCalculator.totalIncome.Money;
+            Assert.AreEqual(actual, expected);
+        }
         /// <summary>
         /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
         /// </summary>
         /// <returns>pengar kvar på kontot</returns>
-        public double Withdraw()
+        private double Withdraw()
         {
             return BudgetCalculator.totalIncome.Money - BudgetCalculator.totalExpense.Money;
         }

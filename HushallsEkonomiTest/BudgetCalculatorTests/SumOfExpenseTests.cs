@@ -20,7 +20,7 @@ namespace HushallsEkonomiTest.BudgetCalculatorTests
         {
             Seeder seeder = new Seeder();
             seeder.FillListWithIncome();
-            seeder.FillListWithOutcome();
+            seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
 
         }
@@ -31,16 +31,9 @@ namespace HushallsEkonomiTest.BudgetCalculatorTests
             BudgetCalculator.totalIncome.Money = 0;
             BudgetCalculator.totalExpense.Money = 0;
         }
+        
         [Test]
-        public void SumOfIncome_01_ChecksIfIncomeIsLessOrEqualToZero_ReturnFalse()
-        {
-            BudgetCalculator.listOfEconomy.Add(new Income { Name = "Test", Money = double.MinValue });
-            var income = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
-            var actual = income <= 0;
-            Assert.IsFalse(actual);
-        }
-        [Test]
-        public void SumOfExpense_02_CheckIfNoExpensesExists_ReturnsEqual()
+        public void SumOfExpense_01_CheckIfNoExpensesExists_ReturnsEqual()
         {
 
             var listWithOnlyIncome = new List<IAccount>() { new Income { Name = "Test", Money = 500 } };
@@ -50,7 +43,7 @@ namespace HushallsEkonomiTest.BudgetCalculatorTests
         }
 
         [Test]
-        public void SumOfExpense_03_CheckIfListIsNull_ReturnsEqual()
+        public void SumOfExpense_02_CheckIfListIsNull_ReturnsEqual()
         {
             List<IAccount> nullList = new List<IAccount>();
             nullList = null;

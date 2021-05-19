@@ -25,7 +25,7 @@
         /// <summary>
         /// Method that adds expenses to IAccount list listOfEconomy.
         /// </summary>
-        public void FillListWithOutcome()
+        public void FillListWithExpenses()
         {
             try
             {
