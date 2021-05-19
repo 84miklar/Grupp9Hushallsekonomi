@@ -51,7 +51,6 @@
         {
             double totalSavings = 0;
             var log = new Logger();
-            var moneyLeft = BudgetCalculator.totalIncome.Money;
 
             try
             {

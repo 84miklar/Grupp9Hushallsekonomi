@@ -73,5 +73,13 @@ namespace HushallsEkonomiTest
             var actual = savings.CheckSavings(nullList);
             Assert.IsFalse(actual);
         }
+        [Test]
+        public void CheckSavings_05_ChecksIfListIsEmpty_ReturnFalse()
+        {
+            BudgetCalculator.totalIncome.Money = 0;
+            List<Saving> emptyList = new List<Saving>();
+            var actual = savings.CheckSavings(emptyList);
+            Assert.IsFalse(actual);
+        }
     }
 }
