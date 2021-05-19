@@ -16,8 +16,8 @@
         public static List<Saving> savings = new List<Saving>();
         public static Income totalIncome = new Income();
         public static Expense totalExpense = new Expense();
-        Logger log = new Logger();
-       
+        private Logger log = new Logger();
+
         /// <summary>
         /// Method that separates Income and Expense from a list of IAccount.
         /// </summary>
@@ -54,7 +54,7 @@
             }
             catch (Exception ex)
             {
-                log.AddStringToErrorMessagesList(ex.ToString());
+                log.AddStringToErrorMessagesList(ex.Message);
                 return 0;
             }
         }
@@ -71,7 +71,7 @@
             }
             catch (Exception ex)
             {
-                log.AddStringToErrorMessagesList(ex.ToString());
+                log.AddStringToErrorMessagesList(ex.Message);
                 return 0;
             }
         }

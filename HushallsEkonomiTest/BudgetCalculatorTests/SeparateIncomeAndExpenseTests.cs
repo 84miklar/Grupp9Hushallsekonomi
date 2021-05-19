@@ -12,7 +12,7 @@ namespace HushallsEkonomiTest
 {
     public class SeparateIncomeAndExpenseTests
     {
-        BudgetCalculator bc = new BudgetCalculator();
+        private BudgetCalculator bc = new BudgetCalculator();
 
         [SetUp]
         public void SetUp()
@@ -21,7 +21,6 @@ namespace HushallsEkonomiTest
             seeder.FillListWithIncome();
             seeder.FillListWithOutcome();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
-
         }
         [TearDown]
         public void Clear()
@@ -37,7 +36,6 @@ namespace HushallsEkonomiTest
             nullList = null;
             var result = bc.SeparateIncomeAndExpense(nullList);
             Assert.IsNull(result);
-
         }
     }
 }

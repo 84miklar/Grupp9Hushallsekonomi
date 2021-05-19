@@ -1,17 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Grupp9Hushallsekonomi.Interface
+﻿namespace Grupp9Hushallsekonomi.Interface
 {
+    /// <summary>
+    /// Interface for all accounts. Holds properties Money and Name.
+    /// </summary>
     public interface IAccount
     {
         /// <summary>
-        /// värde i kronor
+        /// Property to set the value of the transaction.
         /// </summary>
         public double Money { get; set; }
         /// <summary>
-        /// Namnet på transaktionen(?)
+        /// Property to set the name of the transaction.
         /// </summary>
         public string Name { get; set; }
     }

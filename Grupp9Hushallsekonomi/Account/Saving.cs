@@ -58,7 +58,7 @@
         /// <returns>True if possible</returns>
         public bool IsSavingPossible(double income)
         {
-            return income > 0 ? CheckSumAfterSavingAndSavingsPercentage(income) : false;
+            return income > 0 && CheckSumAfterSavingAndSavingsPercentage(income);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@
         private bool CheckSumAfterSavingAndSavingsPercentage(double income)
         {
             var sumAfterSaving = SumLeftAfterSaving(income);
-            return sumAfterSaving >= 0 && SavingsPercantage <= maxPercentage ? true : false;
+            return sumAfterSaving >= 0 && SavingsPercantage <= maxPercentage;
         }
 
         /// <summary>
@@ -83,11 +83,9 @@
             double totalSavings = 0;
             var log = new Logger();
             var moneyLeft = BudgetCalculator.totalIncome.Money;
-            if (moneyLeft > 0 && savingsList != null)
-            {
-                return CheckifSavingIsPossibleAndLog(savingsList, ref totalSavings, log, ref moneyLeft);
-            }
-            return false;
+
+            return moneyLeft > 0 && savingsList != null &&
+                CheckifSavingIsPossibleAndLog(savingsList, ref totalSavings, log, ref moneyLeft);
         }
 
         /// <summary>
@@ -106,10 +104,7 @@
                 {
                     SavingIsPossible(ref totalSavings, log, ref moneyLeft, saving);
                 }
-                else
-                {
-                    SavingIsNotPossible(log, saving);
-                }
+                SavingIsNotPossible(log, saving);
             }
             return true;
         }
@@ -123,7 +118,6 @@
         private static void SavingIsNotPossible(Logger log, Saving saving)
         {
             log.AddStringToErrorMessagesList($"Not enough money for {saving.Name}");
-            
         }
 
         /// <summary>
@@ -142,7 +136,6 @@
             totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
             log.AddStringToBoughtItemsList(saving.Name);
             log.AddStringToBoughtItemsList(saving.SumLeftAfterSaving(moneyLeft).ToString());
-            
         }
     }
 }

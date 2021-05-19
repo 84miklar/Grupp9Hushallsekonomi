@@ -12,8 +12,8 @@
         public void FillListWithIncome()
         {
             BudgetCalculator.listOfEconomy.Add(new Income { Money = 14500, Name = "Salary" });
-
         }
+
         /// <summary>
         /// Method that adds expenses to IAccount list listOfEconomy.
         /// </summary>
@@ -38,7 +38,6 @@
         {
             BudgetCalculator.savings.Add(new Saving("Car", 0.1));
             BudgetCalculator.savings.Add(new Saving("Boat",0.1));
-
         }
     }
 }
