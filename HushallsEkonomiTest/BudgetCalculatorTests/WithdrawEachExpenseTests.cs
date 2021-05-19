@@ -51,7 +51,7 @@ namespace HushallsEkonomiTest
 
         [TestCase(double.MaxValue)]
         [Test]
-        public void WithdrawEachExpense_03_CheckOutcomeLargerThanIncome_ReturnEqual(double outcome)
+        public void WithdrawEachExpense_03_CheckExpenseLargerThanIncome_ReturnEqual(double outcome)
         {
             var expected = Withdraw();
             BudgetCalculator.listOfEconomy.Add(new Expense() { Name = "VeryLargeBill", Money = outcome });
