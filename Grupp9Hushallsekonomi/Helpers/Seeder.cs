@@ -39,6 +39,7 @@
                 BudgetCalculator.listOfEconomy.Add(new Expense { Money = 1000, Name = "Pension" });
                 BudgetCalculator.listOfEconomy.Add(new Expense { Money = 350, Name = "Gym" });
                 BudgetCalculator.listOfEconomy.Add(new Expense { Money = 75, Name = "Home Insurance" });
+                BudgetCalculator.listOfEconomy.Add(new Expense { Money = -350, Name = "Gym Refund" });
             }
             catch (System.Exception ex)
             {

@@ -34,8 +34,15 @@ namespace HushallsEkonomiTest
         {
             List<IAccount> nullList = new List<IAccount>();
             nullList = null;
-            var result = bc.SeparateIncomeAndExpense(nullList);
-            Assert.IsNull(result);
+            var actual = bc.SeparateIncomeAndExpense(nullList);
+            Assert.IsNull(actual);
+        }
+        [Test]
+        public void SeparateIncomeAndExpense_02_CheckIfListIsEmpty_ReturnIsEmpty()
+        {
+            List<IAccount> emptyList = new List<IAccount>();
+            var actual = bc.SeparateIncomeAndExpense(emptyList);
+            Assert.IsEmpty(actual);
         }
     }
 }
