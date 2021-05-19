@@ -13,23 +13,23 @@
         /// </summary>
         public const double maxPercentage = 1.0;
 
-        /// <summary>
-        /// The savings percentage to set.
-        /// </summary>
-        public double SavingsPercantage { get; set; }
+        public Saving(string name, double percantage)
+        {
+            Name = name;
+            SavingsPercantage = percantage;
+        }
+
+        public Saving() { }
 
         /// <summary>
         /// The name of the saving.
         /// </summary>
         public string Name { get; set; }
 
-        public Saving(string name, double percantage)
-        {
-            Name = name;
-            SavingsPercantage = percantage;
-        }
-        public Saving() { }
-
+        /// <summary>
+        /// The savings percentage to set.
+        /// </summary>
+        public double SavingsPercantage { get; set; }
         /// <summary>
         /// Turns the percentage value of a saving into money value.
         /// </summary>
@@ -39,37 +39,6 @@
         {
             var actualPrecentage = maxPercentage - SavingsPercantage;
             return income > 0 ? income * actualPrecentage : 0;
-        }
-
-        /// <summary>
-        /// Reduces the savings from the income.
-        /// </summary>
-        /// <param name="income"></param>
-        /// <returns>Income - saving in double.</returns>
-        public double SumLeftAfterSaving(double income)
-        {
-            return income > 0 ? income - CalculatePercentageToMoney(income) : 0;
-        }
-
-        /// <summary>
-        /// Checks if income is more than zero and saving is possible.
-        /// </summary>
-        /// <param name="income"></param>
-        /// <returns>True if possible</returns>
-        public bool IsSavingPossible(double income)
-        {
-            return income > 0 && CheckSumAfterSavingAndSavingsPercentage(income);
-        }
-
-        /// <summary>
-        /// Checks if a saving is possible to do.
-        /// </summary>
-        /// <param name="income"></param>
-        /// <returns>True if sum of income left after saving is done is more then 0.</returns>
-        private bool CheckSumAfterSavingAndSavingsPercentage(double income)
-        {
-            var sumAfterSaving = SumLeftAfterSaving(income);
-            return sumAfterSaving >= 0 && SavingsPercantage <= maxPercentage;
         }
 
         /// <summary>
@@ -84,10 +53,37 @@
             var log = new Logger();
             var moneyLeft = BudgetCalculator.totalIncome.Money;
 
-            return moneyLeft > 0 && savingsList != null &&
+            try
+            {
+                return moneyLeft > 0 && savingsList != null &&
                 CheckifSavingIsPossibleAndLog(savingsList, ref totalSavings, log, ref moneyLeft);
+            }
+            catch (System.Exception ex)
+            {
+                log.AddStringToErrorMessagesList(ex.Message);
+                return false;
+            }
         }
 
+        /// <summary>
+        /// Checks if income is more than zero and saving is possible.
+        /// </summary>
+        /// <param name="income"></param>
+        /// <returns>True if possible</returns>
+        public bool IsSavingPossible(double income)
+        {
+            return income > 0 && CheckSumAfterSavingAndSavingsPercentage(income);
+        }
+
+        /// <summary>
+        /// Reduces the savings from the income.
+        /// </summary>
+        /// <param name="income"></param>
+        /// <returns>Income - saving in double.</returns>
+        public double SumLeftAfterSaving(double income)
+        {
+            return income > 0 ? income - CalculatePercentageToMoney(income) : 0;
+        }
         /// <summary>
         /// Checks if a saving is possible to withdraw, and logs it.
         /// </summary>
@@ -136,6 +132,17 @@
             totalSavings += saving.CalculatePercentageToMoney(moneyLeft);
             log.AddStringToBoughtItemsList(saving.Name);
             log.AddStringToBoughtItemsList(saving.SumLeftAfterSaving(moneyLeft).ToString());
+        }
+
+        /// <summary>
+        /// Checks if a saving is possible to do.
+        /// </summary>
+        /// <param name="income"></param>
+        /// <returns>True if sum of income left after saving is done is more then 0.</returns>
+        private bool CheckSumAfterSavingAndSavingsPercentage(double income)
+        {
+            var sumAfterSaving = SumLeftAfterSaving(income);
+            return sumAfterSaving >= 0 && SavingsPercantage <= maxPercentage;
         }
     }
 }

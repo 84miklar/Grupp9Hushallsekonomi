@@ -14,8 +14,8 @@
     {
         public static List<IAccount> listOfEconomy = new List<IAccount>();
         public static List<Saving> savings = new List<Saving>();
-        public static Income totalIncome = new Income();
         public static Expense totalExpense = new Expense();
+        public static Income totalIncome = new Income();
         private Logger log = new Logger();
 
         /// <summary>
@@ -43,23 +43,6 @@
         }
 
         /// <summary>
-        /// Method that calculates the sum of all incomes.
-        /// </summary>
-        /// <returns>Sum of all incomes.</returns>
-        public double SumOfIncome(List<IAccount> listToSum)
-        {
-            try
-            {
-                return listToSum.Where(x => x is Income).Where(i => i.Money > 0).Sum(m => m.Money);
-            }
-            catch (Exception ex)
-            {
-                log.AddStringToErrorMessagesList(ex.Message);
-                return 0;
-            }
-        }
-
-        /// <summary>
         /// Method that calculates the sum of all Expenses
         /// </summary>
         /// <returns>sum of all Expenses</returns>
@@ -76,6 +59,22 @@
             }
         }
 
+        /// <summary>
+        /// Method that calculates the sum of all incomes.
+        /// </summary>
+        /// <returns>Sum of all incomes.</returns>
+        public double SumOfIncome(List<IAccount> listToSum)
+        {
+            try
+            {
+                return listToSum.Where(x => x is Income).Where(i => i.Money > 0).Sum(m => m.Money);
+            }
+            catch (Exception ex)
+            {
+                log.AddStringToErrorMessagesList(ex.Message);
+                return 0;
+            }
+        }
         /// <summary>
         /// Method where every outcome compares to if there is sufficiant income left, before it is deducted.
         /// True = Outcome is deducted and logged to budget rapport.

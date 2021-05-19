@@ -21,6 +21,41 @@
         public List<string> errorMessages = new List<string>();
 
         /// <summary>
+        /// Method for adding a string to the boughtItems list,
+        /// like bill.Name and bill.Money.ToString()"
+        /// </summary>
+        /// <param name="textToLog"></param>
+        public void AddStringToBoughtItemsList(string textToLog)
+        {
+            boughtItems.Add(textToLog);
+            AddBoughtItemsListToLogger();
+        }
+
+        /// <summary>
+        /// Method for adding a string to the errorMessages list,
+        /// like bill.Name and bill.Money.ToString()"
+        /// </summary>
+        /// <param name="textToLog"></param>
+        public void AddStringToErrorMessagesList(string textToLog)
+        {
+            errorMessages.Add(textToLog);
+            AddErrorMessagesListToLogger();
+        }
+
+        /// <summary>
+        /// Writes succesful withdraw to a file at your desktop.
+        /// </summary>
+        /// <param name="boughtItems"></param>
+        public void BudgetLog(List<string> boughtItems)
+        {
+            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            var budgetLog = Path.Combine(desktop, "BudgetLog.log");
+            File.AppendAllText(budgetLog, DateTime.Now + ":\r");
+            File.AppendAllLines(budgetLog, boughtItems);
+            File.AppendAllText(budgetLog, "\n");
+        }
+
+        /// <summary>
         /// Writes error messages to a file at your desktop.
         /// </summary>
         /// <param name="errorMessages"></param>
@@ -42,20 +77,6 @@
         {
             Debug.WriteLine(errorLog);
         }
-
-        /// <summary>
-        /// Writes succesful withdraw to a file at your desktop.
-        /// </summary>
-        /// <param name="boughtItems"></param>
-        public void BudgetLog(List<string> boughtItems)
-        {
-            var desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            var budgetLog = Path.Combine(desktop, "BudgetLog.log");
-            File.AppendAllText(budgetLog, DateTime.Now + ":\r");
-            File.AppendAllLines(budgetLog, boughtItems);
-            File.AppendAllText(budgetLog, "\n");
-        }
-
         /// <summary>
         /// Method for sending boughtItems list to logger.
         /// </summary>
@@ -70,28 +91,6 @@
         private void AddErrorMessagesListToLogger()
         {
             ErrorLog(errorMessages);
-        }
-
-        /// <summary>
-        /// Method for adding a string to the boughtItems list,
-        /// like bill.Name and bill.Money.ToString()"
-        /// </summary>
-        /// <param name="textToLog"></param>
-        public void AddStringToBoughtItemsList(string textToLog)
-        {
-            boughtItems.Add(textToLog);
-            AddBoughtItemsListToLogger();
-        }
-
-        /// <summary>
-        /// Method for adding a string to the errorMessages list,
-        /// like bill.Name and bill.Money.ToString()"
-        /// </summary>
-        /// <param name="textToLog"></param>
-        public void AddStringToErrorMessagesList(string textToLog)
-        {
-            errorMessages.Add(textToLog);
-            AddErrorMessagesListToLogger();
         }
     }
 }
