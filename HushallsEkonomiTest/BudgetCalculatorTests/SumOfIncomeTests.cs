@@ -9,18 +9,17 @@ using System.Text;
 
 namespace HushallsEkonomiTest
 {
-    class SumOfIncomeTests
+    public class SumOfIncomeTests
     {
-        BudgetCalculator bc = new BudgetCalculator();
-
+       private readonly BudgetCalculator bc = new BudgetCalculator();
+        private const double expected = 0;
         [SetUp]
         public void SetUp()
         {
-            Seeder seeder = new Seeder();
+            var seeder = new Seeder();
             seeder.FillListWithIncome();
             seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
-
         }
         [TearDown]
         public void Clear()
@@ -40,20 +39,18 @@ namespace HushallsEkonomiTest
         [Test]
         public void SumOfIncome_02_CheckIfNoIncomeExists_ReturnsEqual()
         {
-            var income = BudgetCalculator.listOfEconomy.FirstOrDefault(x => x is Income);
+            var income = BudgetCalculator.listOfEconomy.Find(x => x is Income);
             BudgetCalculator.listOfEconomy.Remove(income);
             var actual = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
-            var expected = 0;
             Assert.AreEqual(actual, expected);
         }
 
         [Test]
         public void SumOfIncome_03_CheckIfListIsNull_ReturnsEqual()
         {
-            List<IAccount> nullList = new List<IAccount>();
+            var nullList = new List<IAccount>();
             nullList = null;
             var actual = bc.SumOfIncome(nullList);
-            var expected = 0;
             Assert.AreEqual(actual, expected);
         }
     }

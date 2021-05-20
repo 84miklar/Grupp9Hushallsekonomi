@@ -12,12 +12,12 @@ namespace HushallsEkonomiTest
 {
     public class SeparateIncomeAndExpenseTests
     {
-        private BudgetCalculator bc = new BudgetCalculator();
+        private readonly BudgetCalculator bc = new BudgetCalculator();
 
         [SetUp]
         public void SetUp()
         {
-            Seeder seeder = new Seeder();
+            var seeder = new Seeder();
             seeder.FillListWithIncome();
             seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
@@ -32,7 +32,7 @@ namespace HushallsEkonomiTest
         [Test]
         public void SeparateIncomeAndExpense_01_CheckIfListIsNull_ReturnNull()
         {
-            List<IAccount> nullList = new List<IAccount>();
+           var nullList = new List<IAccount>();
             nullList = null;
             var actual = bc.SeparateIncomeAndExpense(nullList);
             Assert.IsNull(actual);
@@ -40,7 +40,7 @@ namespace HushallsEkonomiTest
         [Test]
         public void SeparateIncomeAndExpense_02_CheckIfListIsEmpty_ReturnIsEmpty()
         {
-            List<IAccount> emptyList = new List<IAccount>();
+           var emptyList = new List<IAccount>();
             var actual = bc.SeparateIncomeAndExpense(emptyList);
             Assert.IsEmpty(actual);
         }

@@ -6,7 +6,7 @@
     /// </summary>
     public class Seeder
     {
-        Logger logger = new Logger();
+        private readonly Logger logger = new Logger();
         /// <summary>
         /// Method that adds income to IAccount list listOfEconomy.
         /// </summary>

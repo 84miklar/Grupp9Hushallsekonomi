@@ -16,7 +16,7 @@
         public static List<Saving> savings = new List<Saving>();
         public static Expense totalExpense = new Expense();
         public static Income totalIncome = new Income();
-        private Logger log = new Logger();
+        private readonly Logger log = new Logger();
 
         /// <summary>
         /// Method that separates Income and Expense from a list of IAccount.
@@ -52,6 +52,7 @@
         /// <summary>
         /// Method that calculates the sum of all Expenses
         /// </summary>
+        /// <param name="listToSum"></param>
         /// <returns>sum of all Expenses</returns>
         public double SumOfExpense(List<IAccount> listToSum)
         {
@@ -69,7 +70,8 @@
         /// <summary>
         /// Method that calculates the sum of all incomes.
         /// </summary>
-        /// <returns>Sum of all incomes.</returns>
+        /// <param name="listToSum"></param>
+        /// <returns>The sum of all incomes</returns>
         public double SumOfIncome(List<IAccount> listToSum)
         {
             try

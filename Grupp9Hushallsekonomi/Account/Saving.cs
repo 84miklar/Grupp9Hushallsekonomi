@@ -47,7 +47,7 @@
         /// <param name="savingsList"></param>
         /// <returns>True if savings is withdrawn
         /// False if list is null</returns>
-        public bool CheckSavings(List<Saving> savingsList)
+        public static bool CheckSavings(List<Saving> savingsList)
         {
             double totalSavings = 0;
             var log = new Logger();
@@ -89,7 +89,6 @@
         /// <param name="savingsList"></param>
         /// <param name="totalSavings"></param>
         /// <param name="log"></param>
-        /// <param name="moneyLeft"></param>
         /// <returns>true if saving is withdrawn from expenses.</returns>
         private static bool CheckifSavingIsPossibleAndLog(List<Saving> savingsList, ref double totalSavings, Logger log)
         {
@@ -123,7 +122,6 @@
         /// </summary>
         /// <param name="totalSavings"></param>
         /// <param name="log"></param>
-        /// <param name="moneyLeft"></param>
         /// <param name="saving"></param>
         private static void SavingIsPossible(ref double totalSavings, Logger log, Saving saving)
         {
