@@ -1,36 +1,24 @@
-﻿using Grupp9Hushallsekonomi;
-using Grupp9Hushallsekonomi.Account;
-using Grupp9Hushallsekonomi.Helpers;
-using Grupp9Hushallsekonomi.Interface;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HushallsEkonomiTest
+﻿namespace HushallsEkonomiTest
 {
+    using Grupp9Hushallsekonomi;
+    using Grupp9Hushallsekonomi.Account;
+    using Grupp9Hushallsekonomi.Helpers;
+    using Grupp9Hushallsekonomi.Interface;
+    using NUnit.Framework;
+    using System.Collections.Generic;
     public class WithdrawEachExpenseTests
     {
-        BudgetCalculator bc = new BudgetCalculator();
+        private readonly BudgetCalculator bc = new BudgetCalculator();
 
         [SetUp]
         public void SetUp()
         {
-            Seeder seeder = new Seeder();
+            var seeder = new Seeder();
             seeder.FillListWithIncome();
             seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
+        }
 
-        }
-        [TearDown]
-        public void Clear()
-        {
-            BudgetCalculator.listOfEconomy.Clear();
-            BudgetCalculator.totalIncome.Money = 0;
-            BudgetCalculator.totalExpense.Money = 0;
-        }
         [Test]
         public void WithdrawEachExpense_01_CheckIfWithdrawIsSucessfull_ReturnsEqual()
         {
@@ -43,7 +31,7 @@ namespace HushallsEkonomiTest
         public void WithdrawEachExpense_02_CheckIfListIsNull_ReturnNotEqual()
         {
             var expected = Withdraw();
-            List<IAccount> nullList = new List<IAccount>();
+            var nullList = new List<IAccount>();
             nullList = null;
             var actual = bc.WithdrawEachExpense(nullList);
             Assert.AreNotEqual(expected, actual);
@@ -54,10 +42,11 @@ namespace HushallsEkonomiTest
         public void WithdrawEachExpense_03_CheckExpenseLargerThanIncome_ReturnEqual(double outcome)
         {
             var expected = Withdraw();
-            BudgetCalculator.listOfEconomy.Add(new Expense() { Name = "VeryLargeBill", Money = outcome });
+            BudgetCalculator.listOfEconomy.Add(new Expense { Name = "VeryLargeBill", Money = outcome });
             var actual = bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             Assert.AreEqual(actual, expected);
         }
+
         [Test]
         public void WithdrawEachExpense_04_CheckIfListIsEmpty_ReturnEqual()
         {
@@ -66,6 +55,7 @@ namespace HushallsEkonomiTest
             var expected = BudgetCalculator.totalIncome.Money;
             Assert.AreEqual(actual, expected);
         }
+
         /// <summary>
         /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
         /// </summary>
@@ -73,6 +63,14 @@ namespace HushallsEkonomiTest
         private double Withdraw()
         {
             return BudgetCalculator.totalIncome.Money - BudgetCalculator.totalExpense.Money;
+        }
+
+        [TearDown]
+        public void Clear()
+        {
+            BudgetCalculator.listOfEconomy.Clear();
+            BudgetCalculator.totalIncome.Money = 0;
+            BudgetCalculator.totalExpense.Money = 0;
         }
     }
 }

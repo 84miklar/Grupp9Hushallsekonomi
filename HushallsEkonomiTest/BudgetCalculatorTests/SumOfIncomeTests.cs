@@ -1,17 +1,13 @@
-﻿using Grupp9Hushallsekonomi;
-using Grupp9Hushallsekonomi.Helpers;
-using Grupp9Hushallsekonomi.Interface;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace HushallsEkonomiTest
+﻿namespace HushallsEkonomiTest
 {
+    using Grupp9Hushallsekonomi;
+    using Grupp9Hushallsekonomi.Helpers;
+    using Grupp9Hushallsekonomi.Interface;
+    using NUnit.Framework;
+    using System.Collections.Generic;
     public class SumOfIncomeTests
     {
-       private readonly BudgetCalculator bc = new BudgetCalculator();
+        private readonly BudgetCalculator bc = new BudgetCalculator();
         private const double expected = 0;
         [SetUp]
         public void SetUp()
@@ -21,13 +17,7 @@ namespace HushallsEkonomiTest
             seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
         }
-        [TearDown]
-        public void Clear()
-        {
-            BudgetCalculator.listOfEconomy.Clear();
-            BudgetCalculator.totalIncome.Money = 0;
-            BudgetCalculator.totalExpense.Money = 0;
-        }
+
         [Test]
         public void SumOfIncome_01_ChecksIfIncomeIsLessOrEqualToZero_ReturnFalse()
         {
@@ -52,6 +42,14 @@ namespace HushallsEkonomiTest
             nullList = null;
             var actual = bc.SumOfIncome(nullList);
             Assert.AreEqual(actual, expected);
+        }
+
+        [TearDown]
+        public void Clear()
+        {
+            BudgetCalculator.listOfEconomy.Clear();
+            BudgetCalculator.totalIncome.Money = 0;
+            BudgetCalculator.totalExpense.Money = 0;
         }
     }
 }

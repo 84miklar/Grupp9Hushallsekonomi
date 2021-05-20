@@ -1,34 +1,21 @@
-﻿using Grupp9Hushallsekonomi;
-using Grupp9Hushallsekonomi.Account;
-using Grupp9Hushallsekonomi.Helpers;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HushallsEkonomiTest
+﻿namespace HushallsEkonomiTest
 {
+    using Grupp9Hushallsekonomi;
+    using Grupp9Hushallsekonomi.Account;
+    using Grupp9Hushallsekonomi.Helpers;
+    using NUnit.Framework;
     public class IsSavingPossible
     {
-        BudgetCalculator bc = new BudgetCalculator();
+        private readonly BudgetCalculator bc = new BudgetCalculator();
         [SetUp]
         public void SetUp()
         {
-            Seeder seeder = new Seeder();
+            var seeder = new Seeder();
             seeder.FillListWithIncome();
             seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
+        }
 
-        }
-        [TearDown]
-        public void Clear()
-        {
-            BudgetCalculator.listOfEconomy.Clear();
-            BudgetCalculator.totalIncome.Money = 0;
-            BudgetCalculator.totalExpense.Money = 0;
-        }
         [Test]
         [TestCase(1000)]
         [TestCase(500)]
@@ -49,6 +36,14 @@ namespace HushallsEkonomiTest
             var saving = new Saving("test", 0.5);
             var actual = saving.IsSavingPossible(income);
             Assert.IsFalse(actual);
+        }
+
+        [TearDown]
+        public void Clear()
+        {
+            BudgetCalculator.listOfEconomy.Clear();
+            BudgetCalculator.totalIncome.Money = 0;
+            BudgetCalculator.totalExpense.Money = 0;
         }
     }
 }
