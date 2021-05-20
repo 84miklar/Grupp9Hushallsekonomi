@@ -48,7 +48,7 @@
         }
 
         /// <summary>
-        /// Method that adds expenses to IAccount list listOfEconomy.
+        /// Method that adds savings to savings list.
         /// </summary>
         public void FillListWithSavings()
         {
