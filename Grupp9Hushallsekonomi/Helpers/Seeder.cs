@@ -54,6 +54,7 @@
         {
             try
             {
+                BudgetCalculator.savings.Add(new Saving { SavingsPercantage = 0.1, Name = "Bicyckle" });
                 BudgetCalculator.savings.Add(new Saving { SavingsPercantage = 0.1, Name = "Car"});
                 BudgetCalculator.savings.Add(new Saving { SavingsPercantage = 0.1, Name = "Boat"});
             }

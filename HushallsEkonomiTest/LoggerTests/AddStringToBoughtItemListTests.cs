@@ -10,8 +10,8 @@
         public void AddStringToErrorMessageList_01_CheckIfListContainsErrorMessage_ReturnsEqual()
         {
             log.AddStringToBoughtItemsList("LoggerTests", "0");
-            var actual = log.boughtItems.Find(e => e.Contains("LoggerTests"));
-            var expected = "LoggerTests";
+            var actual = log.boughtItems.Find(e => e.Contains("LoggerTests: 0 KR"));
+            var expected = "LoggerTests: 0 KR";
             Assert.AreEqual(actual, expected);
             log.boughtItems.Clear();
         }

@@ -105,6 +105,7 @@
         private static void SavingIsNotPossible(Logger log, Saving saving)
         {
             log.AddStringToErrorMessagesList($"Not enough money for {saving.Name}");
+            log.errorMessages.Clear();
         }
 
         /// <summary>
@@ -120,7 +121,8 @@
         {
             BudgetCalculator.totalIncome.Money -= saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money);
             totalSavings += saving.CalculatePercentageToMoney(BudgetCalculator.totalIncome.Money);
-            log.AddStringToBoughtItemsList($"Saving: {saving.Name} {saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money)} KR" , $"Total savings {totalSavings}");
+            log.AddStringToBoughtItemsList(saving.Name , saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money).ToString() , totalSavings.ToString());
+            log.boughtItems.Clear();
             
         }
 
