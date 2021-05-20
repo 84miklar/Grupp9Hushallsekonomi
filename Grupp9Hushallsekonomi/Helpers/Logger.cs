@@ -31,7 +31,7 @@
         {
             boughtItems.Add(itemName);
             boughtItems.Add(itemValue + " KR");
-            boughtItems.Add($"Money left: {BudgetCalculator.totalIncome.Money}");
+            boughtItems.Add($"Money left: {Math.Round(BudgetCalculator.totalIncome.Money, 2)} KR");
             boughtItems.Add("----------------------");
             AddBoughtItemsListToLogger();
         }

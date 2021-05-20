@@ -1,6 +1,7 @@
 ﻿namespace Grupp9Hushallsekonomi.Account
 {
     using Grupp9Hushallsekonomi.Helpers;
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -30,7 +31,7 @@
         public double CalculatePercentageToMoney(double income)
         {
             var actualPrecentage = maxPercentage - SavingsPercantage;
-            return income > 0 ? income * actualPrecentage : 0;
+            return Math.Round(income > 0 ? income * actualPrecentage : 0, 2);
         }
 
         /// <summary>
@@ -73,7 +74,7 @@
         /// <returns>Income - saving in double.</returns>
         public double SumLeftAfterSaving(double income)
         {
-            return income > 0 ? income - CalculatePercentageToMoney(income) : 0;
+            return Math.Round(income > 0 ? income - CalculatePercentageToMoney(income) : 0, 2);
         }
         /// <summary>
         /// Checks if a saving is possible to withdraw, and logs it.
@@ -119,7 +120,8 @@
         {
             BudgetCalculator.totalIncome.Money -= saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money);
             totalSavings += saving.CalculatePercentageToMoney(BudgetCalculator.totalIncome.Money);
-            log.AddStringToBoughtItemsList($"Saving: {saving.Name}", $"{saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money)}");
+            log.AddStringToBoughtItemsList($"Saving: {saving.Name} {saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money)} KR" , $"Total savings {totalSavings}");
+            
         }
 
         /// <summary>

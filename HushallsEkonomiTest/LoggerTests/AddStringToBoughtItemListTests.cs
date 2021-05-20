@@ -9,7 +9,7 @@
         [Test]
         public void AddStringToErrorMessageList_01_CheckIfListContainsErrorMessage_ReturnsEqual()
         {
-            log.AddStringToBoughtItemsList("LoggerTests");
+            log.AddStringToBoughtItemsList("LoggerTests", "0");
             var actual = log.boughtItems.Find(e => e.Contains("LoggerTests"));
             var expected = "LoggerTests";
             Assert.AreEqual(actual, expected);
@@ -18,7 +18,7 @@
         [Test]
         public void AddStringToErrorMessageList_02_CheckIfListContainsErrorMessage_ReturnsNotEqual()
         {
-            log.AddStringToBoughtItemsList("Test");
+            log.AddStringToBoughtItemsList("Test", "0");
             var actual = log.boughtItems.Find(e => e.Contains("Test"));
             var expected = "Fail";
             Assert.AreNotEqual(actual, expected);
