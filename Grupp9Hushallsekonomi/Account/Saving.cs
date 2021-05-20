@@ -13,14 +13,6 @@
         /// </summary>
         public const double maxPercentage = 1.0;
 
-        public Saving(string name, double percantage)
-        {
-            Name = name;
-            SavingsPercantage = percantage;
-        }
-
-        public Saving() { }
-
         /// <summary>
         /// The name of the saving.
         /// </summary>

@@ -6,6 +6,7 @@
     using NUnit.Framework;
     internal class CalculatePercentageToMoneyTests
     {
+        private readonly Saving saving = new Saving { Name = "Test", SavingsPercantage = 0.5 };
         private readonly BudgetCalculator bc = new BudgetCalculator();
 
         [SetUp]
@@ -23,8 +24,7 @@
         [TestCase(100, 50)]
         public void CalculatePercentageToMoney_01_CheckPercentageValuePositiveInput_ReturnEqual(double income, double expected)
         {
-            var savings = new Saving("test", 0.5);
-            var actual = savings.CalculatePercentageToMoney(income);
+            var actual = saving.CalculatePercentageToMoney(income);
             Assert.AreEqual(actual, expected);
         }
 
@@ -34,8 +34,7 @@
         [TestCase(-10, 0)]
         public void CalculatePercentageToMoney_02_CheckPercentageValueNegativeInput_ReturnEqual(double income, double expected)
         {
-            var savings = new Saving("test", 0.5);
-            var actual = savings.CalculatePercentageToMoney(income);
+            var actual = saving.CalculatePercentageToMoney(income);
             Assert.AreEqual(actual, expected);
         }
 

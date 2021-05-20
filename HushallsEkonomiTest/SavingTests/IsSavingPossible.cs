@@ -6,6 +6,7 @@
     using NUnit.Framework;
     public class IsSavingPossible
     {
+        private readonly Saving saving = new Saving { Name = "Test", SavingsPercantage = 0.5 };
         private readonly BudgetCalculator bc = new BudgetCalculator();
         [SetUp]
         public void SetUp()
@@ -22,7 +23,6 @@
         [TestCase(200)]
         public void IsSavingPossible_01_CheckWithPositiveInput_ReturnTrue(double income)
         {
-            var saving = new Saving("test", 0.5);
             var actual = saving.IsSavingPossible(income);
             Assert.IsTrue(actual);
         }
@@ -33,7 +33,6 @@
         [TestCase(0)]
         public void IsSavingPossible_02_CheckWithNegativeInput_ReturnFalse(double income)
         {
-            var saving = new Saving("test", 0.5);
             var actual = saving.IsSavingPossible(income);
             Assert.IsFalse(actual);
         }

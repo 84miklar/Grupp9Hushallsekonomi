@@ -45,7 +45,7 @@
             var seed = new Seeder();
             seed.FillListWithSavings();
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
-            BudgetCalculator.savings.Add(new Saving("Error", 1.1));
+            BudgetCalculator.savings.Add(new Saving { Name = "Error", SavingsPercantage = 1.1 });
             var actual = Saving.CheckSavings(BudgetCalculator.savings);
             var expected = BudgetCalculator.totalIncome.Money >= 0;
             Assert.AreEqual(actual, expected);

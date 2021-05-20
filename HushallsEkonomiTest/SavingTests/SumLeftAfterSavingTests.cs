@@ -6,6 +6,7 @@
     using NUnit.Framework;
     public class SumLeftAfterSavingTests
     {
+        private readonly Saving saving = new Saving { Name = "Test", SavingsPercantage = 0.5 };
         private readonly BudgetCalculator bc = new BudgetCalculator();
         [SetUp]
         public void SetUp()
@@ -22,8 +23,7 @@
         [TestCase(100, 50)]
         public void SumLeftAfterSaving_01_CheckSumLeftPositiveInput_ReturnEqual(double income, double expected)
         {
-            var savings = new Saving("test", 0.5);
-            var actual = savings.SumLeftAfterSaving(income);
+            var actual = saving.SumLeftAfterSaving(income);
             Assert.AreEqual(actual, expected);
         }
 
@@ -33,8 +33,7 @@
         [TestCase(0, 0)]
         public void SumLeftAfterSaving_02_CheckSumLeftNegativeInput_ReturnEqual(double income, double expected)
         {
-            var savings = new Saving("test", 0.5);
-            var actual = savings.SumLeftAfterSaving(income);
+            var actual = saving.SumLeftAfterSaving(income);
             Assert.AreEqual(actual, expected);
         }
 

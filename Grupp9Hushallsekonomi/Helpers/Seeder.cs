@@ -54,8 +54,8 @@
         {
             try
             {
-                BudgetCalculator.savings.Add(new Saving("Car", 0.1));
-                BudgetCalculator.savings.Add(new Saving("Boat", 0.1));
+                BudgetCalculator.savings.Add(new Saving { SavingsPercantage = 0.1, Name = "Car"});
+                BudgetCalculator.savings.Add(new Saving { SavingsPercantage = 0.1, Name = "Boat"});
             }
             catch (System.Exception ex)
             {
