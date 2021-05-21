@@ -1,6 +1,6 @@
 ﻿namespace Grupp9Hushallsekonomi.Account
 {
-    using Grupp9Hushallsekonomi.Helpers;
+    using Helpers;
     using System;
     using System.Collections.Generic;
 
@@ -12,7 +12,15 @@
         /// <summary>
         /// Savings maximum value possible.
         /// </summary>
-        public const double maxPercentage = 1.0;
+        public const double MaxPercentage = 1.0;
+
+        public Saving(string name, double percantage)
+        {
+            Name = name;
+            SavingsPercentage = percantage;
+        }
+
+        public Saving() { }
 
         /// <summary>
         /// The name of the saving.
@@ -22,7 +30,7 @@
         /// <summary>
         /// The savings percentage to set.
         /// </summary>
-        public double SavingsPercantage { get; set; }
+        public double SavingsPercentage { get; set; }
         /// <summary>
         /// Turns the percentage value of a saving into money value.
         /// </summary>
@@ -30,8 +38,8 @@
         /// <returns>The savings value in double.</returns>
         public double CalculatePercentageToMoney(double income)
         {
-            var actualPrecentage = maxPercentage - SavingsPercantage;
-            return Math.Round(income > 0 ? income * actualPrecentage : 0, 2);
+            var actualPercentage = MaxPercentage - SavingsPercentage;
+            return Math.Round( income > 0 ? income * actualPercentage : 0, 2);
         }
 
         /// <summary>
@@ -74,7 +82,7 @@
         /// <returns>Income - saving in double.</returns>
         public double SumLeftAfterSaving(double income)
         {
-            return Math.Round(income > 0 ? income - CalculatePercentageToMoney(income) : 0, 2);
+            return income > 0 ? income - CalculatePercentageToMoney(income) : 0;
         }
         /// <summary>
         /// Checks if a saving is possible to withdraw, and logs it.
@@ -120,8 +128,7 @@
         {
             BudgetCalculator.totalIncome.Money -= saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money);
             totalSavings += saving.CalculatePercentageToMoney(BudgetCalculator.totalIncome.Money);
-            log.AddStringToBoughtItemsList($"Saving: {saving.Name} {saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money)} KR" , $"Total savings {totalSavings}");
-            
+            log.AddStringToBoughtItemsList($"Saving: {saving.Name}", $"{saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money)}");
         }
 
         /// <summary>
@@ -132,7 +139,7 @@
         private bool CheckSumAfterSavingAndSavingsPercentage(double income)
         {
             var sumAfterSaving = SumLeftAfterSaving(income);
-            return sumAfterSaving >= 0 && SavingsPercantage <= maxPercentage;
+            return sumAfterSaving >= 0 && SavingsPercentage <= MaxPercentage;
         }
     }
 }

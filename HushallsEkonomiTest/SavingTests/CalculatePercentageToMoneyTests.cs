@@ -6,7 +6,7 @@
     using NUnit.Framework;
     internal class CalculatePercentageToMoneyTests
     {
-        private readonly Saving saving = new Saving { Name = "Test", SavingsPercantage = 0.5 };
+        private readonly Saving saving = new Saving { Name = "Test", SavingsPercentage = 0.5 };
         private readonly BudgetCalculator bc = new BudgetCalculator();
 
         [SetUp]

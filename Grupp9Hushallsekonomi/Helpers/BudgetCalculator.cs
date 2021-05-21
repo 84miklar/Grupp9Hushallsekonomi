@@ -12,7 +12,7 @@
     /// </summary>
     public class BudgetCalculator
     {
-        public static List<IAccount> listOfEconomy = new List<IAccount>();
+        public static readonly List<IAccount> listOfEconomy = new List<IAccount>();
         public static List<Saving> savings = new List<Saving>();
         public static Expense totalExpense = new Expense();
         public static Income totalIncome = new Income();

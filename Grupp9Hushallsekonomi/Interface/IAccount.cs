@@ -6,11 +6,11 @@
     public interface IAccount
     {
         /// <summary>
-        /// Property to set the value of the transaction.
+        /// Property to set the value of a transaction.
         /// </summary>
         public double Money { get; set; }
         /// <summary>
-        /// Property to set the name of the transaction.
+        /// Property to set the name of a transaction.
         /// </summary>
         public string Name { get; set; }
     }

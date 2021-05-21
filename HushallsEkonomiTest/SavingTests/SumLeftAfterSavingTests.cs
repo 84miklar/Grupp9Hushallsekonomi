@@ -6,7 +6,7 @@
     using NUnit.Framework;
     public class SumLeftAfterSavingTests
     {
-        private readonly Saving saving = new Saving { Name = "Test", SavingsPercantage = 0.5 };
+        private readonly Saving saving = new Saving { Name = "Test", SavingsPercentage = 0.5 };
         private readonly BudgetCalculator bc = new BudgetCalculator();
         [SetUp]
         public void SetUp()
