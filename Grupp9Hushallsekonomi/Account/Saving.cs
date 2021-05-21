@@ -129,7 +129,7 @@
         {
             BudgetCalculator.totalIncome.Money -= saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money);
             totalSavings += saving.CalculatePercentageToMoney(BudgetCalculator.totalIncome.Money);
-            log.AddStringToBoughtItemsList(saving.Name , saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money).ToString() , totalSavings.ToString());
+            log.AddStringToBoughtItemsList(saving.Name , Math.Round(saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money),2).ToString() , totalSavings.ToString());
             log.boughtItems.Clear();
             
         }
