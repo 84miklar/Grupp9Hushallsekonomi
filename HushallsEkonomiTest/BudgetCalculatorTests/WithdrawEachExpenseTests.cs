@@ -57,9 +57,9 @@
         }
 
         /// <summary>
-        /// Metod som returnerar pengar man har kvar på kontot genom att beräkna inkomsterna minus utgifterna
+        /// Method that returns money left on account by calculate incomes minus expenses.
         /// </summary>
-        /// <returns>pengar kvar på kontot</returns>
+        /// <returns>money left on account</returns>
         private double Withdraw()
         {
             return BudgetCalculator.totalIncome.Money - BudgetCalculator.totalExpense.Money;

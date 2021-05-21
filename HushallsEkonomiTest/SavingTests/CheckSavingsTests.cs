@@ -20,7 +20,7 @@
         }
 
         [Test]
-        public void CheckSavings_01_ChecksSuccessfullWithdraw_ReturnTrue()
+        public void CheckSavings_01_ChecksSuccessfulWithdraw_ReturnTrue()
         {
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             var actual = Saving.CheckSavings(BudgetCalculator.savings);
@@ -28,7 +28,7 @@
         }
 
         [Test]
-        public void CheckSavings_02_ChecksUnsuccessfullWithdraw_ReturnFalse()
+        public void CheckSavings_02_ChecksUnsuccessfulWithdraw_ReturnFalse()
         {
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             BudgetCalculator.totalIncome.Money = 0;
@@ -37,7 +37,7 @@
         }
 
         [Test]
-        public void CheckSavings_03_ChecksIfPrecentageIsOverMaxPercentage_ReturnEqual()
+        public void CheckSavings_03_ChecksIfPercentageIsOverMaxPercentage_ReturnEqual()
         {
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             BudgetCalculator.savings.Add(new Saving { Name = "Error", SavingsPercentage = 1.1 });

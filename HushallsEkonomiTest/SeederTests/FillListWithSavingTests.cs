@@ -4,7 +4,6 @@
     using Grupp9Hushallsekonomi.Account;
     using Grupp9Hushallsekonomi.Helpers;
     using NUnit.Framework;
-    using System.Linq;
     public class FillListWithSavingTests
     {
         [Test]

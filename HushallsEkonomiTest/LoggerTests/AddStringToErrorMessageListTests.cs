@@ -2,7 +2,6 @@
 {
     using Grupp9Hushallsekonomi.Helpers;
     using NUnit.Framework;
-    using System.Linq;
     public class AddStringToErrorMessageListTests
     {
         private readonly Logger log = new Logger();

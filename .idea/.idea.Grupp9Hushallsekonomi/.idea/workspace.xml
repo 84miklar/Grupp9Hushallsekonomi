@@ -2,15 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b9eaf4a9-875a-42a3-b619-033c8fb5d266" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Account/Saving.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Account/Saving.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Helpers/BudgetCalculator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Helpers/BudgetCalculator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Helpers/Logger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Helpers/Logger.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Helpers/Seeder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Helpers/Seeder.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Interface/IAccount.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Grupp9Hushallsekonomi/Interface/IAccount.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/SumOfExpenseTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/SumOfExpenseTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/SumOfIncomeTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/SumOfIncomeTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/WithdrawEachExpenseTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/WithdrawEachExpenseTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/LoggerTests/AddStringToBoughtItemListTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/LoggerTests/AddStringToBoughtItemListTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/LoggerTests/AddStringToErrorMessageListTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/LoggerTests/AddStringToErrorMessageListTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/CalculatePercentageToMoneyTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/CalculatePercentageToMoneyTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/CheckSavingsTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/CheckSavingsTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/IsSavingPossible.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/IsSavingPossible.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/SumLeftAfterSavingTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/SumLeftAfterSavingTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithExpenseTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithExpenseTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithIncomeTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithIncomeTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithSavingTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithSavingTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +30,15 @@
       <option value="$PROJECT_DIR$/Grupp9Hushallsekonomi/Interface/IAccount.cs" />
       <option value="$PROJECT_DIR$/Grupp9Hushallsekonomi/Helpers/Logger.cs" />
       <option value="$PROJECT_DIR$/Grupp9Hushallsekonomi/Helpers/BudgetCalculator.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/SumOfIncomeTests.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/SumOfExpenseTests.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/BudgetCalculatorTests/WithdrawEachExpenseTests.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/LoggerTests/AddStringToBoughtItemListTests.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/LoggerTests/AddStringToErrorMessageListTests.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/SavingTests/CheckSavingsTests.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithExpenseTests.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithIncomeTests.cs" />
+      <option value="$PROJECT_DIR$/HushallsEkonomiTest/SeederTests/FillListWithSavingTests.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1sq9tx7z9RIUnJ6QXqTAve1c5bm" />
@@ -48,7 +61,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1621589471887</updated>
-      <workItem from="1621589475770" duration="2730000" />
+      <workItem from="1621589475770" duration="3748000" />
     </task>
     <servers />
   </component>
@@ -62,7 +75,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

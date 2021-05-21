@@ -8,7 +8,7 @@
     public class SumOfIncomeTests
     {
         private readonly BudgetCalculator bc = new BudgetCalculator();
-        private const double expected = 0;
+        private const double Expected = 0;
         [SetUp]
         public void SetUp()
         {
@@ -32,7 +32,7 @@
             var income = BudgetCalculator.listOfEconomy.Find(x => x is Income);
             BudgetCalculator.listOfEconomy.Remove(income);
             var actual = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual, Expected);
         }
 
         [Test]
@@ -41,7 +41,7 @@
             var nullList = new List<IAccount>();
             nullList = null;
             var actual = bc.SumOfIncome(nullList);
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual, Expected);
         }
 
         [TearDown]
