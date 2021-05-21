@@ -16,13 +16,12 @@
             seeder.FillListWithIncome();
             seeder.FillListWithExpenses();
             bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
+            seeder.FillListWithSavings();
         }
 
         [Test]
         public void CheckSavings_01_ChecksSuccessfullWithdraw_ReturnTrue()
         {
-            var seed = new Seeder();
-            seed.FillListWithSavings();
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             var actual = Saving.CheckSavings(BudgetCalculator.savings);
             Assert.IsTrue(actual);
@@ -31,8 +30,6 @@
         [Test]
         public void CheckSavings_02_ChecksUnsuccessfullWithdraw_ReturnFalse()
         {
-            var seed = new Seeder();
-            seed.FillListWithSavings();
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             BudgetCalculator.totalIncome.Money = 0;
             var actual = Saving.CheckSavings(BudgetCalculator.savings);
@@ -42,8 +39,6 @@
         [Test]
         public void CheckSavings_03_ChecksIfPrecentageIsOverMaxPercentage_ReturnEqual()
         {
-            var seed = new Seeder();
-            seed.FillListWithSavings();
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             BudgetCalculator.savings.Add(new Saving { Name = "Error", SavingsPercentage = 1.1 });
             var actual = Saving.CheckSavings(BudgetCalculator.savings);
@@ -72,6 +67,7 @@
         public void Clear()
         {
             BudgetCalculator.listOfEconomy.Clear();
+            BudgetCalculator.savings.Clear();
             BudgetCalculator.totalIncome.Money = 0;
             BudgetCalculator.totalExpense.Money = 0;
         }

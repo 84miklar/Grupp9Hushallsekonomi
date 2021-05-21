@@ -144,7 +144,7 @@
         private void UnsuccessfullReduceIncomeWithExpense(IAccount bill)
         {
             log.AddStringToErrorMessagesList($"Not enough money on account to buy {bill.Name} {bill.Money}");
-            log.AddStringToBoughtItemsList($"{bill.Name} {bill.Money} not successfull transaction!");
+            log.AddStringToBoughtItemsList(bill.Name, $"{bill.Money} not successfull transaction!");
             log.errorMessages.Clear();
         }
     }

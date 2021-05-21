@@ -28,8 +28,15 @@
         /// <param name="itemValue"></param>
         public void AddStringToBoughtItemsList(string itemName, string itemValue = "")
         {
-            boughtItems.Add(itemName);
-            boughtItems.Add(itemValue + " KR");
+            boughtItems.Add($"{itemName}: {itemValue} KR");
+            boughtItems.Add($"Money left: {Math.Round(BudgetCalculator.totalIncome.Money, 2)} KR");
+            boughtItems.Add("----------------------");
+            AddBoughtItemsListToLogger();
+        }
+        public void AddStringToBoughtItemsList(string itemName, string itemValue = "", string totalSaving = "")
+        {
+            boughtItems.Add($"Saving: {itemName}: {itemValue} KR");
+            boughtItems.Add($"Total savings: {totalSaving} KR");
             boughtItems.Add($"Money left: {Math.Round(BudgetCalculator.totalIncome.Money, 2)} KR");
             boughtItems.Add("----------------------");
             AddBoughtItemsListToLogger();
