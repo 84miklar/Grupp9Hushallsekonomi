@@ -12,10 +12,29 @@
     /// </summary>
     public class BudgetCalculator
     {
+        /// <summary>
+        /// List that handles objects of IAccount, like Expense and Income.
+        /// </summary>
         public static readonly List<IAccount> listOfEconomy = new List<IAccount>();
+
+        /// <summary>
+        /// List that handles objects of Saving.
+        /// </summary>
         public static List<Saving> savings = new List<Saving>();
+
+        /// <summary>
+        /// Instance of Expense that holds the sum of all expenses.
+        /// </summary>
         public static Expense totalExpense = new Expense();
+
+        /// <summary>
+        /// Instance of Income that holds the sum of all incomes.
+        /// </summary>
         public static Income totalIncome = new Income();
+
+        /// <summary>
+        /// Instance of the Logger class to handle all messages to be logged.
+        /// </summary>
         private readonly Logger log = new Logger();
 
         /// <summary>
