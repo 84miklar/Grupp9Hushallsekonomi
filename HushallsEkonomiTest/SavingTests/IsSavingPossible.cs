@@ -19,8 +19,6 @@
 
         [Test]
         [TestCase(1000)]
-        [TestCase(500)]
-        [TestCase(200)]
         public void IsSavingPossible_01_CheckWithPositiveInput_ReturnTrue(double income)
         {
             var actual = saving.IsSavingPossible(income);
@@ -29,7 +27,6 @@
 
         [Test]
         [TestCase(-5)]
-        [TestCase(-40)]
         [TestCase(0)]
         public void IsSavingPossible_02_CheckWithNegativeInput_ReturnFalse(double income)
         {

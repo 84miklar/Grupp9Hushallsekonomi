@@ -57,7 +57,6 @@
         [Test]
         public void CheckSavings_05_ChecksIfListIsEmpty_ReturnFalse()
         {
-            BudgetCalculator.totalIncome.Money = 0;
             var emptyList = new List<Saving>();
             var actual = Saving.CheckSavings(emptyList);
             Assert.IsFalse(actual);

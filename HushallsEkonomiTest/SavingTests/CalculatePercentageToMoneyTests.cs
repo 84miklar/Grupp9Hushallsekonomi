@@ -19,9 +19,7 @@
         }
 
         [Test]
-        [TestCase(1000, 500)]
-        [TestCase(500, 250)]
-        [TestCase(100, 50)]
+        [TestCase(500.25, 250.12)]
         public void CalculatePercentageToMoney_01_CheckPercentageValuePositiveInput_ReturnEqual(double income, double expected)
         {
             var actual = saving.CalculatePercentageToMoney(income);
@@ -29,7 +27,6 @@
         }
 
         [Test]
-        [TestCase(-546049, 0)]
         [TestCase(0, 0)]
         [TestCase(-10, 0)]
         public void CalculatePercentageToMoney_02_CheckPercentageValueNegativeInput_ReturnEqual(double income, double expected)

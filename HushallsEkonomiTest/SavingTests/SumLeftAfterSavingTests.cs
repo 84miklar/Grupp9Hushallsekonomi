@@ -19,21 +19,18 @@
 
         [Test]
         [TestCase(1000, 500)]
-        [TestCase(500, 250)]
-        [TestCase(100, 50)]
-        public void SumLeftAfterSaving_01_CheckSumLeftPositiveInput_ReturnEqual(double income, double expected)
+        public void SumLeftAfterSaving_01_CheckSumLeftPositiveInput_ReturnEqual(double incomeLeft, double expected)
         {
-            var actual = saving.SumLeftAfterSaving(income);
+            var actual = saving.SumLeftAfterSaving(incomeLeft);
             Assert.AreEqual(actual, expected);
         }
 
         [Test]
-        [TestCase(-54, 0)]
         [TestCase(-10, 0)]
         [TestCase(0, 0)]
-        public void SumLeftAfterSaving_02_CheckSumLeftNegativeInput_ReturnEqual(double income, double expected)
+        public void SumLeftAfterSaving_02_CheckSumLeftNegativeInput_ReturnEqual(double incomeLeft, double expected)
         {
-            var actual = saving.SumLeftAfterSaving(income);
+            var actual = saving.SumLeftAfterSaving(incomeLeft);
             Assert.AreEqual(actual, expected);
         }
 

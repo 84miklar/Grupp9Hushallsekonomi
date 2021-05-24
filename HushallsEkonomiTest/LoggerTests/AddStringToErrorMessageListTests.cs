@@ -14,15 +14,5 @@
             Assert.AreEqual(actual, expected);
             log.errorMessages.Clear();
         }
-
-        [Test]
-        public void AddStringToErrorMessageList_02_CheckIfListContainsErrorMessage_ReturnsNotEqual()
-        {
-            log.AddStringToErrorMessagesList("Test");
-            var actual = log.errorMessages.Find(e => e.Contains("Test"));
-            var expected = "Fail";
-            Assert.AreNotEqual(actual, expected);
-            log.errorMessages.Clear();
-        }
     }
 }

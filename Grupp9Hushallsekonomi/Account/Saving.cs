@@ -55,7 +55,7 @@
 
             try
             {
-                return BudgetCalculator.totalIncome.Money > 0 && savingsList != null &&
+                return CheckIfSavingListIsNullOrEmpty(savingsList) && BudgetCalculator.totalIncome.Money > 0 &&
                 CheckifSavingIsPossibleAndLog(savingsList, ref totalSavings, log);
             }
             catch (System.Exception ex)
@@ -63,6 +63,11 @@
                 log.AddStringToErrorMessagesList(ex.Message);
                 return false;
             }
+        }
+
+        private static bool CheckIfSavingListIsNullOrEmpty(List<Saving> savingsList)
+        {
+            return savingsList != null && savingsList.Count > 0;
         }
 
         /// <summary>
