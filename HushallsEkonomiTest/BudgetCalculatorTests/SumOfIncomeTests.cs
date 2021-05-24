@@ -1,6 +1,7 @@
 ﻿namespace HushallsEkonomiTest
 {
     using Grupp9Hushallsekonomi;
+    using Grupp9Hushallsekonomi.Account;
     using Grupp9Hushallsekonomi.Helpers;
     using Grupp9Hushallsekonomi.Interface;
     using NUnit.Framework;
@@ -23,15 +24,14 @@
         {
             BudgetCalculator.listOfEconomy.Add(new Income { Name = "Test", Money = double.MinValue });
             var income = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
-            var actual = income <= 0;
+            var actual = income < 0;
             Assert.IsFalse(actual);
         }
         [Test]
         public void SumOfIncome_02_CheckIfNoIncomeExists_ReturnsEqual()
         {
-            var income = BudgetCalculator.listOfEconomy.Find(x => x is Income);
-            BudgetCalculator.listOfEconomy.Remove(income);
-            var actual = bc.SumOfIncome(BudgetCalculator.listOfEconomy);
+            var listOfExpenses = new List<IAccount> { new Expense { Name = "TestExpense", Money = 500 } };
+            var actual = bc.SumOfIncome(listOfExpenses);
             Assert.AreEqual(actual, Expected);
         }
 

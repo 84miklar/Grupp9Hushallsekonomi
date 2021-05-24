@@ -94,7 +94,7 @@
         {
             try
             {
-                if (listOfEconomy != null)
+                if (listOfEconomy != null || listOfEconomy.Count > 0)
                 {
                     CheckIfExpenseWithdrawIsPossible(listOfEconomy);
                     return totalIncome.Money;
@@ -104,7 +104,7 @@
             {
                 log.AddStringToErrorMessagesList(ex.Message);
             }
-            return totalIncome.Money;
+            return 0;
         }
 
         /// <summary>

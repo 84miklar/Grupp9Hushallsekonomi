@@ -28,13 +28,13 @@
         }
 
         [Test]
-        public void WithdrawEachExpense_02_CheckIfListIsNull_ReturnNotEqual()
+        public void WithdrawEachExpense_02_CheckIfListIsNull_ReturnEqual()
         {
-            var expected = Withdraw();
+            var expected = 0;
             var nullList = new List<IAccount>();
             nullList = null;
             var actual = bc.WithdrawEachExpense(nullList);
-            Assert.AreNotEqual(expected, actual);
+            Assert.AreEqual(expected, actual);
         }
 
         [TestCase(double.MaxValue)]
