@@ -65,6 +65,11 @@
             }
         }
 
+        /// <summary>
+        /// Checks if a list is empty or null.
+        /// </summary>
+        /// <param name="savingsList"></param>
+        /// <returns>True if list is not null or empty.</returns>
         private static bool CheckIfSavingListIsNullOrEmpty(List<Saving> savingsList)
         {
             return savingsList != null && savingsList.Count > 0;
@@ -81,7 +86,7 @@
         }
 
         /// <summary>
-        /// Reduces the savings from the income.
+        /// Reduces the saving from the income.
         /// </summary>
         /// <param name="income"></param>
         /// <returns>Income - saving in double.</returns>
@@ -143,7 +148,7 @@
         /// Checks if a saving is possible to do.
         /// </summary>
         /// <param name="income"></param>
-        /// <returns>True if sum of income left after saving is done is more then 0.</returns>
+        /// <returns>True if sum of income left after saving is done is more than 0.</returns>
         private bool CheckSumAfterSavingAndSavingsPercentage(double income)
         {
             var sumAfterSaving = SumLeftAfterSaving(income);
