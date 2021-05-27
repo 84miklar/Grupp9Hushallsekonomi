@@ -48,7 +48,7 @@
         }
 
         /// <summary>
-        /// Method that adds savings to savings list.
+        /// Method that adds savings to savingsList.
         /// </summary>
         public void FillListWithSavings()
         {
