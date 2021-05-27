@@ -23,7 +23,7 @@
         public void CheckSavings_01_ChecksSuccessfulWithdraw_ReturnTrue()
         {
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
-            var actual = Saving.CheckSavings(BudgetCalculator.savings);
+            var actual = Saving.CheckSavings(BudgetCalculator.savingsList);
             Assert.IsTrue(actual);
         }
 
@@ -32,7 +32,7 @@
         {
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
             BudgetCalculator.totalIncome.Money = 0;
-            var actual = Saving.CheckSavings(BudgetCalculator.savings);
+            var actual = Saving.CheckSavings(BudgetCalculator.savingsList);
             Assert.IsFalse(actual);
         }
 
@@ -40,8 +40,8 @@
         public void CheckSavings_03_ChecksIfPercentageIsOverMaxPercentage_ReturnEqual()
         {
             bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
-            BudgetCalculator.savings.Add(new Saving { Name = "Error", SavingsPercentage = 1.1 });
-            var actual = Saving.CheckSavings(BudgetCalculator.savings);
+            BudgetCalculator.savingsList.Add(new Saving { Name = "Error", SavingsPercentage = 1.1 });
+            var actual = Saving.CheckSavings(BudgetCalculator.savingsList);
             var expected = BudgetCalculator.totalIncome.Money >= 0;
             Assert.AreEqual(actual, expected);
         }
@@ -66,7 +66,7 @@
         public void Clear()
         {
             BudgetCalculator.listOfEconomy.Clear();
-            BudgetCalculator.savings.Clear();
+            BudgetCalculator.savingsList.Clear();
             BudgetCalculator.totalIncome.Money = 0;
             BudgetCalculator.totalExpense.Money = 0;
         }

@@ -11,7 +11,7 @@
         {
             var seeder = new Seeder();
             seeder.FillListWithSavings();
-            var saving = BudgetCalculator.savings.Find(x => x is Saving);
+            var saving = BudgetCalculator.savingsList.Find(x => x is Saving);
             var actual = saving is Saving;
             Assert.IsTrue(actual);
         }

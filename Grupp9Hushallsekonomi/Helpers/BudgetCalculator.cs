@@ -20,7 +20,7 @@
         /// <summary>
         /// List that handles objects of Saving.
         /// </summary>
-        public static List<Saving> savings = new List<Saving>();
+        public static List<Saving> savingsList = new List<Saving>();
 
         /// <summary>
         /// Instance of Expense that holds the sum of all expenses.
