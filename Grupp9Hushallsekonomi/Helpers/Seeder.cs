@@ -1,26 +1,13 @@
 ﻿namespace Grupp9Hushallsekonomi.Helpers
 {
     using Grupp9Hushallsekonomi.Account;
+
     /// <summary>
     /// Class that adds objects to lists.
     /// </summary>
     public class Seeder
     {
         private readonly Logger logger = new Logger();
-        /// <summary>
-        /// Method that adds income to IAccount list listOfEconomy.
-        /// </summary>
-        public void FillListWithIncome()
-        {
-            try
-            {
-                BudgetCalculator.listOfEconomy.Add(new Income { Money = 14500, Name = "Salary" });
-            }
-            catch (System.Exception ex)
-            {
-                logger.AddStringToErrorMessagesList(ex.Message);
-            }
-        }
 
         /// <summary>
         /// Method that adds expenses to IAccount list listOfEconomy.
@@ -48,6 +35,20 @@
         }
 
         /// <summary>
+        /// Method that adds income to IAccount list listOfEconomy.
+        /// </summary>
+        public void FillListWithIncome()
+        {
+            try
+            {
+                BudgetCalculator.listOfEconomy.Add(new Income { Money = 14500, Name = "Salary" });
+            }
+            catch (System.Exception ex)
+            {
+                logger.AddStringToErrorMessagesList(ex.Message);
+            }
+        }
+        /// <summary>
         /// Method that adds savings to savingsList.
         /// </summary>
         public void FillListWithSavings()
@@ -55,8 +56,8 @@
             try
             {
                 BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Bicyckle" });
-                BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Car"});
-                BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Boat"});
+                BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Car" });
+                BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Boat" });
             }
             catch (System.Exception ex)
             {

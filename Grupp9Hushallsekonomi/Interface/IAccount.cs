@@ -9,6 +9,7 @@
         /// Property to set the value of a transaction.
         /// </summary>
         public double Money { get; set; }
+
         /// <summary>
         /// Property to set the name of a transaction.
         /// </summary>

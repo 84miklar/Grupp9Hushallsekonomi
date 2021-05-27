@@ -5,6 +5,7 @@
     using Grupp9Hushallsekonomi.Interface;
     using NUnit.Framework;
     using System.Collections.Generic;
+
     public class SeparateIncomeAndExpenseTests
     {
         private readonly BudgetCalculator bc = new BudgetCalculator();

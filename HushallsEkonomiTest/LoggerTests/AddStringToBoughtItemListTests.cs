@@ -2,9 +2,11 @@
 {
     using Grupp9Hushallsekonomi.Helpers;
     using NUnit.Framework;
+
     public class AddStringToBoughtItemListTests
     {
         private readonly Logger log = new Logger();
+
         [Test]
         public void AddStringToBoughtItemsList_01_CheckIfListContainsBoughtItemMessage_ReturnsEqual()
         {

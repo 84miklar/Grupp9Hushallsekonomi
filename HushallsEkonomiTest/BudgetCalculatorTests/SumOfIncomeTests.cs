@@ -6,10 +6,12 @@
     using Grupp9Hushallsekonomi.Interface;
     using NUnit.Framework;
     using System.Collections.Generic;
+
     public class SumOfIncomeTests
     {
         private readonly BudgetCalculator bc = new BudgetCalculator();
         private const double Expected = 0;
+
         [SetUp]
         public void SetUp()
         {
@@ -27,6 +29,7 @@
             var actual = income < 0;
             Assert.IsFalse(actual);
         }
+
         [Test]
         public void SumOfIncome_02_CheckIfNoIncomeExists_ReturnsEqual()
         {

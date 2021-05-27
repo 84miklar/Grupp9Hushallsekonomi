@@ -4,6 +4,7 @@
     using Grupp9Hushallsekonomi.Account;
     using Grupp9Hushallsekonomi.Helpers;
     using NUnit.Framework;
+
     internal class CalculatePercentageToMoneyTests
     {
         private readonly Saving saving = new Saving { Name = "Test", SavingsPercentage = 0.5 };

@@ -20,7 +20,9 @@
             SavingsPercentage = percantage;
         }
 
-        public Saving() { }
+        public Saving()
+        {
+        }
 
         /// <summary>
         /// The name of the saving.
@@ -31,16 +33,6 @@
         /// The savings percentage to set.
         /// </summary>
         public double SavingsPercentage { get; set; }
-        /// <summary>
-        /// Turns the percentage value of a saving into money value.
-        /// </summary>
-        /// <param name="income"></param>
-        /// <returns>The savings value in double.</returns>
-        public double CalculatePercentageToMoney(double income)
-        {
-            var actualPercentage = MaxPercentage - SavingsPercentage;
-            return Math.Round( income > 0 ? income * actualPercentage : 0, 2);
-        }
 
         /// <summary>
         /// Checks If saving withdraw is possible
@@ -66,15 +58,15 @@
         }
 
         /// <summary>
-        /// Checks if a list is empty or null.
+        /// Turns the percentage value of a saving into money value.
         /// </summary>
-        /// <param name="savingsList"></param>
-        /// <returns>True if list is not null or empty.</returns>
-        private static bool CheckIfSavingListIsNullOrEmpty(List<Saving> savingsList)
+        /// <param name="income"></param>
+        /// <returns>The savings value in double.</returns>
+        public double CalculatePercentageToMoney(double income)
         {
-            return savingsList != null && savingsList.Count > 0;
+            var actualPercentage = MaxPercentage - SavingsPercentage;
+            return Math.Round(income > 0 ? income * actualPercentage : 0, 2);
         }
-
         /// <summary>
         /// Checks if income is more than zero and saving is possible.
         /// </summary>
@@ -94,6 +86,7 @@
         {
             return income > 0 ? income - CalculatePercentageToMoney(income) : 0;
         }
+
         /// <summary>
         /// Checks if a saving is possible to withdraw, and logs it.
         /// </summary>
@@ -114,6 +107,15 @@
             return true;
         }
 
+        /// <summary>
+        /// Checks if a list is empty or null.
+        /// </summary>
+        /// <param name="savingsList"></param>
+        /// <returns>True if list is not null or empty.</returns>
+        private static bool CheckIfSavingListIsNullOrEmpty(List<Saving> savingsList)
+        {
+            return savingsList != null && savingsList.Count > 0;
+        }
         /// <summary>
         /// Saving is not possible due to lack of income.
         /// Logs as an error.
@@ -139,9 +141,8 @@
         {
             BudgetCalculator.totalIncome.Money -= saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money);
             totalSavings += saving.CalculatePercentageToMoney(BudgetCalculator.totalIncome.Money);
-            log.AddStringToBoughtItemsList(saving.Name , Math.Round(saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money),2).ToString() , totalSavings.ToString());
+            log.AddStringToBoughtItemsList(saving.Name, Math.Round(saving.SumLeftAfterSaving(BudgetCalculator.totalIncome.Money), 2).ToString(), totalSavings.ToString());
             log.boughtItems.Clear();
-            
         }
 
         /// <summary>

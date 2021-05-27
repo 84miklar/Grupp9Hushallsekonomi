@@ -1,11 +1,11 @@
 ﻿namespace Grupp9Hushallsekonomi
 {
     using Grupp9Hushallsekonomi.Account;
+    using Grupp9Hushallsekonomi.Helpers;
     using Grupp9Hushallsekonomi.Interface;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Grupp9Hushallsekonomi.Helpers;
 
     /// <summary>
     /// Calculator for handling Income and expenses
@@ -103,6 +103,7 @@
             }
             return 0;
         }
+
         /// <summary>
         /// Method where every outcome compares to if there is sufficiant income left, before it is deducted.
         /// True = Outcome is deducted and logged to budget rapport.

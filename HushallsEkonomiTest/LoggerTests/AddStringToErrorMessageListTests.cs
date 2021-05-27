@@ -2,9 +2,11 @@
 {
     using Grupp9Hushallsekonomi.Helpers;
     using NUnit.Framework;
+
     public class AddStringToErrorMessageListTests
     {
         private readonly Logger log = new Logger();
+
         [Test]
         public void AddStringToErrorMessageList_01_CheckIfListContainsErrorMessage_ReturnsEqual()
         {

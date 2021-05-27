@@ -6,6 +6,7 @@
     using Grupp9Hushallsekonomi.Interface;
     using NUnit.Framework;
     using System.Collections.Generic;
+
     public class WithdrawEachExpenseTests
     {
         private readonly BudgetCalculator bc = new BudgetCalculator();

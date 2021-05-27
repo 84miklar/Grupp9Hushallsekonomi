@@ -3,6 +3,7 @@
     using Grupp9Hushallsekonomi;
     using Grupp9Hushallsekonomi.Helpers;
     using NUnit.Framework;
+
     public class FillListWithIncomeTests
     {
         [Test]

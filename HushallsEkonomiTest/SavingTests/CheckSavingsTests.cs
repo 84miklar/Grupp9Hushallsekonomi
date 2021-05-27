@@ -5,6 +5,7 @@
     using Grupp9Hushallsekonomi.Helpers;
     using NUnit.Framework;
     using System.Collections.Generic;
+
     public class CheckSavingsTests
     {
         private readonly BudgetCalculator bc = new BudgetCalculator();
@@ -54,6 +55,7 @@
             var actual = Saving.CheckSavings(nullList);
             Assert.IsFalse(actual);
         }
+
         [Test]
         public void CheckSavings_05_ChecksIfListIsEmpty_ReturnFalse()
         {

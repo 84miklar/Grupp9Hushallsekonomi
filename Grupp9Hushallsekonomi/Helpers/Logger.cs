@@ -33,6 +33,7 @@
             boughtItems.Add("----------------------");
             AddBoughtItemsListToLogger();
         }
+
         public void AddStringToBoughtItemsList(string itemName, string itemValue = "", string totalSaving = "")
         {
             boughtItems.Add($"Saving: {itemName}: {itemValue} KR");

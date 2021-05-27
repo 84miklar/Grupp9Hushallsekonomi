@@ -5,10 +5,12 @@
     using Grupp9Hushallsekonomi.Interface;
     using NUnit.Framework;
     using System.Collections.Generic;
+
     public class SumOfExpenseTests
     {
         private readonly BudgetCalculator bc = new BudgetCalculator();
         private const double Expected = 0;
+
         [SetUp]
         public void SetUp()
         {
