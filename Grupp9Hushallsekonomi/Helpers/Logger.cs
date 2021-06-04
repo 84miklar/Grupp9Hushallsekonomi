@@ -1,9 +1,12 @@
 ﻿namespace Grupp9Hushallsekonomi.Helpers
 {
+    using Grupp9Hushallsekonomi.Account;
+    using Grupp9Hushallsekonomi.Interface;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Linq;
 
     /// <summary>
     /// Class that sends positive and negative messages to a file at your desktop.
@@ -14,11 +17,35 @@
         /// List of expenses.
         /// </summary>
         public readonly List<string> boughtItems = new List<string>();
-
+        public readonly List<string> listToPrint = new List<string>();
         /// <summary>
         /// List of error messages.
         /// </summary>
         public readonly List<string> errorMessages = new List<string>();
+
+        public void LogAll()
+        {
+            listToPrint.Add("\nINCOMES\n");
+            var incomes = BudgetCalculator.listOfEconomy.Where(i => i is Income).ToList();
+            foreach(var item in incomes)
+            {
+                listToPrint.Add($"{item.Name}: {item.Money}:-");
+            }
+            listToPrint.Add("\nEXPENSES\n");
+            var expenses = BudgetCalculator.listOfEconomy.Where(e => e is Expense).ToList();
+            foreach (var item in expenses)
+            {
+                listToPrint.Add($"{item.Name}: {item.Money}:-");
+            }
+            listToPrint.Add("\nSAVINGS\n");
+            foreach (var item in BudgetCalculator.savingsList)
+            {
+                listToPrint.Add($"{item.Name}: {item.SavingsPercentage*100}%");
+            }
+            listToPrint.Add("------------------");
+            listToPrint.Add($"\nMoney left: {Math.Round(BudgetCalculator.totalIncome.Money, 2)}:-");
+            BudgetLog(listToPrint);
+        }
 
         /// <summary>
         /// Method for adding a string to the boughtItems list,
