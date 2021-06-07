@@ -13,6 +13,11 @@
     public class BudgetCalculator
     {
         /// <summary>
+        /// List to store all successful withdraws, for use in Logger class.
+        /// </summary>
+        public static readonly List<IAccount> succesfulWithdrawns = new List<IAccount>();
+
+        /// <summary>
         /// List that handles objects of IAccount, like Expense and Income.
         /// </summary>
         public static readonly List<IAccount> listOfEconomy = new List<IAccount>();
@@ -49,13 +54,13 @@
                 {
                     foreach (var item in listOfEconomy)
                     {
-                        if (item is Expense)
-                        {
-                            totalExpense.Money += item.Money;
-                        }
                         if (item is Income)
                         {
                             totalIncome.Money += item.Money;
+                        }
+                        if (item is Expense)
+                        {
+                            totalExpense.Money += item.Money;
                         }
                     }
                     return listOfEconomy;
@@ -153,8 +158,7 @@
         private void SuccessfulReduceIncomeWithExpense(IAccount bill)
         {
             totalIncome.Money -= bill.Money;
-            log.AddStringToBoughtItemsList(bill.Name, bill.Money.ToString());
-            log.boughtItems.Clear();
+            succesfulWithdrawns.Add(bill);
         }
 
         /// <summary>
@@ -164,7 +168,6 @@
         private void UnsuccessfullReduceIncomeWithExpense(IAccount bill)
         {
             log.AddStringToErrorMessagesList($"Not enough money on account to buy {bill.Name} {bill.Money}");
-            log.AddStringToBoughtItemsList(bill.Name, $"{bill.Money} not successfull transaction!");
             log.errorMessages.Clear();
         }
     }

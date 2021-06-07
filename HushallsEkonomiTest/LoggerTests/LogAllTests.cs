@@ -1,4 +1,6 @@
-﻿using Grupp9Hushallsekonomi.Helpers;
+﻿using Grupp9Hushallsekonomi;
+using Grupp9Hushallsekonomi.Account;
+using Grupp9Hushallsekonomi.Helpers;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -18,10 +20,16 @@ namespace HushallsEkonomiTest.LoggerTests
             seeder.FillListWithIncome();
             seeder.FillListWithExpenses();
             seeder.FillListWithSavings();
+            BudgetCalculator.succesfulWithdrawns.Clear();
+            Saving.successfulSavingsWithdrawn.Clear();
         }
         [Test]
-        public void LogAll_01_()
+        public void LogAll_01_CheckIfItemAddsToList()
         {
+            var bc = new BudgetCalculator();
+            bc.SeparateIncomeAndExpense(BudgetCalculator.listOfEconomy);
+            bc.WithdrawEachExpense(BudgetCalculator.listOfEconomy);
+            Saving.CheckSavings(BudgetCalculator.savingsList);
             log.listToPrint.Add("(test)");
             log.LogAll();
             var actual = log.listToPrint.Find(e => e.Contains("(test)"));

@@ -39,6 +39,7 @@
         [TearDown]
         public void Clear()
         {
+            BudgetCalculator.succesfulWithdrawns.Clear();
             BudgetCalculator.listOfEconomy.Clear();
             BudgetCalculator.totalIncome.Money = 0;
             BudgetCalculator.totalExpense.Money = 0;

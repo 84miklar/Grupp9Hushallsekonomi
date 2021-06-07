@@ -14,62 +14,19 @@
     public class Logger
     {
         /// <summary>
-        /// List of expenses.
-        /// </summary>
-        public readonly List<string> boughtItems = new List<string>();
-        public readonly List<string> listToPrint = new List<string>();
-        /// <summary>
         /// List of error messages.
         /// </summary>
         public readonly List<string> errorMessages = new List<string>();
 
-        public void LogAll()
-        {
-            listToPrint.Add("\nINCOMES\n");
-            var incomes = BudgetCalculator.listOfEconomy.Where(i => i is Income).ToList();
-            foreach(var item in incomes)
-            {
-                listToPrint.Add($"{item.Name}: {item.Money}:-");
-            }
-            listToPrint.Add("\nEXPENSES\n");
-            var expenses = BudgetCalculator.listOfEconomy.Where(e => e is Expense).ToList();
-            foreach (var item in expenses)
-            {
-                listToPrint.Add($"{item.Name}: {item.Money}:-");
-            }
-            listToPrint.Add("\nSAVINGS\n");
-            foreach (var item in BudgetCalculator.savingsList)
-            {
-                listToPrint.Add($"{item.Name}: {item.SavingsPercentage*100}%");
-            }
-            listToPrint.Add("------------------");
-            listToPrint.Add($"\nMoney left: {Math.Round(BudgetCalculator.totalIncome.Money, 2)}:-");
-            BudgetLog(listToPrint);
-        }
+        /// <summary>
+        /// List of items to print to budget log.
+        /// </summary>
+        public readonly List<string> listToPrint = new List<string>();
 
         /// <summary>
-        /// Method for adding a string to the boughtItems list,
-        /// like bill.Name and bill.Money.ToString()"
+        /// Holds the sum of Income left, to print to logger.
         /// </summary>
-        /// <param name="itemName"></param>
-        /// <param name="itemValue"></param>
-        public void AddStringToBoughtItemsList(string itemName, string itemValue = "")
-        {
-            boughtItems.Add($"{itemName}: {itemValue} KR");
-            boughtItems.Add($"Money left: {Math.Round(BudgetCalculator.totalIncome.Money, 2)} KR");
-            boughtItems.Add("----------------------");
-            AddBoughtItemsListToLogger();
-        }
-
-        public void AddStringToBoughtItemsList(string itemName, string itemValue = "", string totalSaving = "")
-        {
-            boughtItems.Add($"Saving: {itemName}: {itemValue} KR");
-            boughtItems.Add($"Total savings: {totalSaving} KR");
-            boughtItems.Add($"Money left: {Math.Round(BudgetCalculator.totalIncome.Money, 2)} KR");
-            boughtItems.Add("----------------------");
-            AddBoughtItemsListToLogger();
-        }
-
+        public double totalMoney;
         /// <summary>
         /// Method for adding a string to the errorMessages list,
         /// like bill.Name and bill.Money.ToString()"
@@ -80,6 +37,23 @@
             errorMessages.Add(textToLog);
             errorMessages.Add("----------------------");
             AddErrorMessagesListToLogger();
+        }
+
+        /// <summary>
+        /// Adds all items to listToPrint and sends to BudgetLog().
+        /// </summary>
+        public void LogAll()
+        {
+            if (listToPrint != null)
+            {
+                AddIncomeToList();
+                AddExpensesToList();
+                AddSavingsToList();
+
+                listToPrint.Add("------------------");
+                listToPrint.Add($"\nMoney left: {Math.Round(totalMoney, 2)}:-");
+                BudgetLog(listToPrint);
+            }
         }
 
         /// <summary>
@@ -121,17 +95,59 @@
         /// <summary>
         /// Method for sending boughtItems list to logger.
         /// </summary>
-        private void AddBoughtItemsListToLogger()
-        {
-            BudgetLog(boughtItems);
-        }
-
-        /// <summary>
-        /// Method for sending boughtItems list to logger.
-        /// </summary>
         private void AddErrorMessagesListToLogger()
         {
             ErrorLog(errorMessages);
+        }
+
+        /// <summary>
+        /// Adds all expenses to listToPrint.
+        /// </summary>
+        private void AddExpensesToList()
+        {
+            listToPrint.Add("\nEXPENSES\n");
+            if (BudgetCalculator.succesfulWithdrawns != null)
+            {
+                foreach (var item in BudgetCalculator.succesfulWithdrawns)
+                {
+                    totalMoney -= item.Money;
+                    listToPrint.Add($"{item.Name}: {item?.Money}:-");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds all incomes to listToPrint.
+        /// </summary>
+        private void AddIncomeToList()
+        {
+            listToPrint.Add("\nINCOMES\n");
+            var incomes = BudgetCalculator.listOfEconomy.Where(i => i is Income).ToList();
+            if (incomes != null)
+            {
+                foreach (var item in incomes)
+                {
+                    totalMoney += item.Money;
+                    listToPrint.Add($"{item.Name}: {item.Money}:-");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adds all savings to listToPrint.
+        /// </summary>
+        private void AddSavingsToList()
+        {
+            var saving = new Saving();
+            listToPrint.Add("\nSAVINGS\n");
+            if (Saving.successfulSavingsWithdrawn != null)
+            {
+                foreach (var item in Saving.successfulSavingsWithdrawn)
+                {
+                    totalMoney = saving.CalculatePercentageToMoney(totalMoney, item.SavingsPercentage);
+                    listToPrint.Add($"{item.Name}: {item.SavingsPercentage*100}%");
+                }
+            }
         }
     }
 }

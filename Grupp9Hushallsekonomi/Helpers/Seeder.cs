@@ -55,7 +55,7 @@
         {
             try
             {
-                BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Bicyckle" });
+                BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Bicycle" });
                 BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Car" });
                 BudgetCalculator.savingsList.Add(new Saving { SavingsPercentage = 0.1, Name = "Boat" });
             }

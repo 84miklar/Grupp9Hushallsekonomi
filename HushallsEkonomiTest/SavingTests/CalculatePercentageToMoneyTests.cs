@@ -23,7 +23,7 @@
         [TestCase(500.25, 250.12)]
         public void CalculatePercentageToMoney_01_CheckPercentageValuePositiveInput_ReturnEqual(double income, double expected)
         {
-            var actual = saving.CalculatePercentageToMoney(income);
+            var actual = saving.CalculatePercentageToMoney(income, saving.SavingsPercentage);
             Assert.AreEqual(actual, expected);
         }
 
@@ -32,7 +32,7 @@
         [TestCase(-10, 0)]
         public void CalculatePercentageToMoney_02_CheckPercentageValueNegativeInput_ReturnEqual(double income, double expected)
         {
-            var actual = saving.CalculatePercentageToMoney(income);
+            var actual = saving.CalculatePercentageToMoney(income, saving.SavingsPercentage);
             Assert.AreEqual(actual, expected);
         }
 
