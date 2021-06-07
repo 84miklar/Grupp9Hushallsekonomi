@@ -10,7 +10,6 @@
     public class WithdrawEachExpenseTests
     {
         private readonly BudgetCalculator bc = new BudgetCalculator();
-        private readonly Logger log = new Logger();
 
         [SetUp]
         public void SetUp()
