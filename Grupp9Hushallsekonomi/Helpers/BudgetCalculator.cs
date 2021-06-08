@@ -82,7 +82,10 @@
         {
             try
             {
-                return listToSum.Where(x => x is Expense).Sum(m => m.Money);
+                if (listToSum != null)
+                {
+                    return listToSum.Where(x => x is Expense).Sum(m => m.Money);
+                }
             }
             catch (Exception ex)
             {
@@ -100,7 +103,10 @@
         {
             try
             {
-                return listToSum.Where(x => x is Income).Where(i => i.Money > 0).Sum(m => m.Money);
+                if (listToSum != null)
+                {
+                    return listToSum.Where(x => x is Income).Where(i => i.Money > 0).Sum(m => m.Money);
+                }
             }
             catch (Exception ex)
             {
@@ -167,7 +173,7 @@
         /// <param name="bill"></param>
         private void UnsuccessfullReduceIncomeWithExpense(IAccount bill)
         {
-            log.AddStringToErrorMessagesList($"Not enough money on account to buy {bill.Name} {bill.Money}");
+            log.AddStringToErrorMessagesList($"Not enough money on account to buy {bill?.Name ?? "Unknown"} {bill.Money}");
             log.errorMessages.Clear();
         }
     }

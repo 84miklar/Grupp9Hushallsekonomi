@@ -3,6 +3,7 @@
     using Helpers;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Class to handle all the savings.
@@ -17,7 +18,7 @@
         /// <summary>
         /// The name of the saving.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = "Unknown";
 
         /// <summary>
         /// The savings percentage to set.
@@ -56,8 +57,15 @@
         /// <returns>The value of a saving in double</returns>
         public double CalculatePercentageToMoney(double income, double savingsPercentage)
         {
-            var actualPercentage = MaxPercentage - savingsPercentage;
-            return Math.Round(income > 0 ? income * actualPercentage : 0, 2);
+            var log = new Logger();
+            if (savingsPercentage > 0 && savingsPercentage <= 1.0)
+            {
+                var actualPercentage = MaxPercentage - savingsPercentage;
+                return Math.Round(income > 0 ? income * actualPercentage : 0, 2);
+            }
+            log.AddStringToErrorMessagesList($"Savings percentage must be between 0 and 1.");
+            log.errorMessages.Clear();
+            return income;
         }
         /// <summary>
         /// Checks if income is more than zero and saving is possible.
@@ -106,7 +114,8 @@
         /// <returns>True if list is not null or empty.</returns>
         private static bool CheckIfSavingListIsNullOrEmpty(List<Saving> savingsList)
         {
-            return savingsList?.Count > 0;
+              var saving = savingsList.Where(s =>s is Saving).ToList();
+            return saving?.Count > 0 && saving != null;
         }
         /// <summary>
         /// Saving is not possible due to lack of income.

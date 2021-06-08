@@ -1,6 +1,7 @@
 ﻿namespace HushallsEkonomiTest.BudgetCalculatorTests
 {
     using Grupp9Hushallsekonomi;
+    using Grupp9Hushallsekonomi.Account;
     using Grupp9Hushallsekonomi.Helpers;
     using Grupp9Hushallsekonomi.Interface;
     using NUnit.Framework;
@@ -36,7 +37,13 @@
             var actual = bc.SumOfExpense(nullList);
             Assert.AreEqual(actual, Expected);
         }
-
+        [Test]
+        public void SumOfExpense_03_CheckIfListPropertyIsNull_ReturnsEqual()
+        {
+            var nullPropertyList = new List<IAccount> {new Expense()};
+            var actual = bc.SumOfExpense(nullPropertyList);
+            Assert.AreEqual(actual, Expected);
+        }
         [TearDown]
         public void Clear()
         {

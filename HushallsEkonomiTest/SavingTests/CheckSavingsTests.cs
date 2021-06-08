@@ -63,7 +63,20 @@
             var actual = Saving.CheckSavings(emptyList);
             Assert.IsFalse(actual);
         }
-
+        [Test]
+        public void CheckSavings_06_ChecksIfListPropertyIsEmpty_ReturnTrue()
+        {
+            var emptyList = new List<Saving> { new Saving {Name = null, SavingsPercentage = 0.1} };
+            var actual = Saving.CheckSavings(emptyList);
+            Assert.IsTrue(actual);
+        }
+        [Test]
+        public void CheckSavings_07_ChecksIfListPropertyIsEmpty_ReturnTrue()
+        {
+            var emptyList = new List<Saving> { null } ;
+            var actual = Saving.CheckSavings(emptyList);
+            Assert.IsFalse(actual);
+        }
         [TearDown]
         public void Clear()
         {

@@ -16,5 +16,16 @@
             var actual = expense is Expense;
             Assert.IsTrue(actual);
         }
+
+        [Test]
+        public void FillListWithExpense_02_CheckIfExpensePropertySetsValue_ReturnsEqual()
+        {
+            var seeder = new Seeder();
+            seeder.FillListWithExpenses();
+            BudgetCalculator.listOfEconomy.Add(new Expense());
+            var expense = BudgetCalculator.listOfEconomy.Find(x => x.Name == "Unknown");
+            var actual = "Unknown";
+            Assert.AreEqual(actual, expense.Name);
+        }
     }
 }

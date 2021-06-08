@@ -57,6 +57,18 @@
             Assert.AreEqual(actual, expected);
         }
 
+        [Test]
+        public void WithdrawEachExpense_05_CheckIfListPropertyIsEmpty_ReturnEqual()
+        {
+            var testList = new List<IAccount>{ new Expense(), new Income() };
+            var bc = new BudgetCalculator();
+            BudgetCalculator.totalIncome.Money = 0;
+            var actual = bc.WithdrawEachExpense(testList);
+            var expected = 0;
+            Assert.AreEqual(expected, actual);
+
+        }
+
         /// <summary>
         /// Method that returns money left on account by calculate incomes minus expenses.
         /// </summary>

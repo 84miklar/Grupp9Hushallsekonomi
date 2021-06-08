@@ -47,6 +47,14 @@
             Assert.AreEqual(actual, Expected);
         }
 
+        [Test]
+        public void SumOfIncome_04_CheckIfListPropertyIsNull_ReturnsEqual()
+        {
+            var nullProperyList = new List<IAccount>{ new Income() };
+            var actual = bc.SumOfIncome(nullProperyList);
+            Assert.AreEqual(actual, Expected);
+        }
+
         [TearDown]
         public void Clear()
         {
