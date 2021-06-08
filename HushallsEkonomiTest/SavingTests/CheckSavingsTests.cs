@@ -71,7 +71,7 @@
             Assert.IsTrue(actual);
         }
         [Test]
-        public void CheckSavings_07_ChecksIfListPropertyIsEmpty_ReturnTrue()
+        public void CheckSavings_07_ChecksIfListPropertyIsEmpty_ReturnFalse()
         {
             var emptyList = new List<Saving> { null } ;
             var actual = Saving.CheckSavings(emptyList);

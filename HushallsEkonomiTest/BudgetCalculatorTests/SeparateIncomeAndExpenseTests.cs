@@ -37,7 +37,7 @@
             Assert.IsEmpty(actual);
         }
         [Test]
-        public void SeparateIncomeAndExpense_03_CheckIfListIsEmpty_ReturnEqual()
+        public void SeparateIncomeAndExpense_03_CheckIfListPropertyIsEmpty_ReturnEqual()
         {
             var emptyList = new List<IAccount> {null};
             BudgetCalculator.totalExpense.Money = 0;

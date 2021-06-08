@@ -23,9 +23,9 @@
             var seeder = new Seeder();
             seeder.FillListWithExpenses();
             BudgetCalculator.listOfEconomy.Add(new Expense());
-            var expense = BudgetCalculator.listOfEconomy.Find(x => x.Name == "Unknown");
+            var expected = BudgetCalculator.listOfEconomy.Find(x => x.Name == "Unknown");
             var actual = "Unknown";
-            Assert.AreEqual(actual, expense.Name);
+            Assert.AreEqual(actual, expected.Name);
         }
     }
 }
